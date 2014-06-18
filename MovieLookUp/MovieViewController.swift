@@ -15,6 +15,7 @@ class MovieViewController: UIViewController, APIControllerProtocol {
     var api: APIController?
     var netActivityCounter = 0
     
+    // Outlets
     @IBOutlet var userRatingLabel : UILabel
     @IBOutlet var criticsRatingLabel : UILabel
     @IBOutlet var userRatingBar : UIProgressView
