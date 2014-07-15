@@ -19,9 +19,8 @@ class Movie {
     // load this data from another call
     var runtime: NSNumber?
     var synopsis: String?
-    var genre: [String]?
+    var genre: [String] = []
     var userRating: NSNumber?
-    var criticsRating: NSNumber?
     
     //for random selection
     var selected: Bool = false
@@ -42,12 +41,11 @@ class Movie {
         self.bgURL = bgURL
     }
     
-    func setMoreInfo(runtime: NSNumber?, synopsis: String?, genre: [String]?, userRating: NSNumber, criticsRating: NSNumber){
+    func setMoreInfo(runtime: NSNumber?, synopsis: String?, genre: [String], userRating: NSNumber){
         self.runtime = runtime
         self.synopsis = synopsis
         self.genre = genre
         self.userRating = userRating
-        self.criticsRating = criticsRating
     }
     
     func descriptionText()->String{
@@ -58,20 +56,21 @@ class Movie {
         }
         
         if let year = self.year{
-            description += "Year: \(year)\n"
+            description += "Released: \(year)\n"
         }
         
         if let runtime = self.runtime {
             description += "Runtime: \(runtime) min\n"
         }
         
-        if let genre = self.genre {
-            description += "\nGenre:\n"
-            for (var i = 0; i < genre.count; ++i) {
-                description += genre[i] + "\n"
+        description += "Genre: "
+        for (var i = 0; i < genre.count; ++i) {
+            description += genre[i]
+            if(i+1 < genre.count){
+                description += ", "
             }
         }
-        
+        description += "\n"
 
         
         if let synopsis = self.synopsis {
@@ -83,13 +82,6 @@ class Movie {
     
     func userRatingAsFloat()->Float?{
         if let rating = self.userRating{
-            return rating.floatValue/10.0
-        }
-        return nil
-    }
-    
-    func criticsRatingAsFloat()->Float?{
-        if let rating = self.criticsRating{
             return rating.floatValue/10.0
         }
         return nil

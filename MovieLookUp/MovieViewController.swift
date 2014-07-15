@@ -116,8 +116,16 @@ class MovieViewController: UIViewController, APIControllerProtocol {
     func didRecieveAPIResults(results: NSDictionary) {
         let synopsis: String? = results["overview"] as? String
         let rating: NSNumber? = results["vote_average"] as? NSNumber
+        let genres: NSArray? = results["genres"] as? NSArray
+        let runtime: NSNumber? = results["runtime"] as? NSNumber
+        for genre in genres! {
+            println(genre["name"])
+            self.movie!.genre.append(genre["name"] as String)
+        }
+        
         self.movie!.synopsis = synopsis
         self.movie!.userRating = rating
+        self.movie!.runtime = runtime
         self.infoTextView.text = self.movie!.descriptionText()
         writeRatings()
 

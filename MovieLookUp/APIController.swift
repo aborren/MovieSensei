@@ -42,29 +42,6 @@ class APIController {
         println("Search TMDB movie using ID \(id) at URL \(url)")
     }
     
-    /*func searchRTFor(searchTerm: String) {
-        var escapedSearchTerm = modifySearchTerm(searchTerm)
-        var urlPath = "http://api.rottentomatoes.com/api/public/v1.0/movies.json?apikey=\(key)&q=\(escapedSearchTerm)"
-        var url: NSURL = NSURL(string: urlPath)
-        var request: NSURLRequest = NSURLRequest(URL: url)
-        
-        asyncRequest(request)
-
-        println("Search RT API (movie) at URL \(url)")
-    }
-    
-    func searchRTMovieWithID(id: String) {
-        var escapedSearchTerm = modifySearchTerm(id)
-        var urlPath = "http://api.rottentomatoes.com/api/public/v1.0/movies/\(escapedSearchTerm).json?apikey=\(key)"
-
-        var url: NSURL = NSURL(string: urlPath)
-        var request: NSURLRequest = NSURLRequest(URL: url)
-        
-        asyncRequest(request)
-        
-        println("Search RT movie using ID \(id) at URL \(url)")
-    }*/
-    
     func modifySearchTerm(searchTerm: String) -> String{
         // The RT API wants multiple terms separated by + symbols, so replace spaces with + signs
         let RTSearchTerm = searchTerm.stringByReplacingOccurrencesOfString(" ", withString: "+", options: NSStringCompareOptions.CaseInsensitiveSearch, range: nil)
