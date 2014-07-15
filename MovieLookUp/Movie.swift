@@ -7,26 +7,33 @@
 //
 
 import Foundation
+import UIKit
 
 class Movie {
     var title: String?
     var year: String?
-    var id: String?
+    var id: NSNumber?
     var imgURL: String?
     var bgURL: String?
     
     // load this data from another call
     var runtime: NSNumber?
     var synopsis: String?
-    var genre: String[]?
+    var genre: [String]?
     var userRating: NSNumber?
     var criticsRating: NSNumber?
     
+    //for random selection
     var selected: Bool = false
     // Maybe acters?
     
     
-    init(title: String?, year: NSNumber?, id:String?, imgURL:String?, bgURL:String?){
+    init()
+    {
+        
+    }
+    
+    init(title: String?, year: NSNumber?, id:NSNumber?, imgURL:String?, bgURL:String?){
         self.title = title
         var nf: NSNumberFormatter = NSNumberFormatter()
         self.year = nf.stringFromNumber(year)
@@ -35,7 +42,7 @@ class Movie {
         self.bgURL = bgURL
     }
     
-    func setMoreInfo(runtime: NSNumber?, synopsis: String?, genre: String[]?, userRating: NSNumber, criticsRating: NSNumber){
+    func setMoreInfo(runtime: NSNumber?, synopsis: String?, genre: [String]?, userRating: NSNumber, criticsRating: NSNumber){
         self.runtime = runtime
         self.synopsis = synopsis
         self.genre = genre
@@ -76,14 +83,14 @@ class Movie {
     
     func userRatingAsFloat()->Float?{
         if let rating = self.userRating{
-            return rating.floatValue/100.0
+            return rating.floatValue/10.0
         }
         return nil
     }
     
     func criticsRatingAsFloat()->Float?{
         if let rating = self.criticsRating{
-            return rating.floatValue/100.0
+            return rating.floatValue/10.0
         }
         return nil
     }

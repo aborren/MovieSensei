@@ -6,7 +6,9 @@
 //  Copyright (c) 2014 dna. All rights reserved.
 //
 
+import Foundation
 import UIKit
+
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {

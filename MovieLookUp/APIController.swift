@@ -15,12 +15,34 @@ class APIController {
     var delegate: APIControllerProtocol?
     // API KEY For Rotten Tomatoes
     let key: NSString = "xgcfgg3pen4k6nvpq2y9haej"
-    
+    //GET config data!
+    let TMDBkey: NSString = "9e4746b32f8e924b795985cc297a518f"
     init(delegate: APIControllerProtocol?) {
         self.delegate = delegate
     }
     
-    func searchRTFor(searchTerm: String) {
+    func searchTMDBFor(searchTerm: String) {
+        var escapedSearchTerm = modifySearchTerm(searchTerm)
+        var urlPath: String = "http://api.themoviedb.org/3/search/movie?api_key=\(TMDBkey)&query=\(escapedSearchTerm)&search_type=ngram"
+        var url: NSURL = NSURL(string: urlPath)
+        var request: NSURLRequest = NSURLRequest(URL: url)
+        
+        asyncRequest(request)
+        
+        println("Search TMDB API (movie) at URL \(url)")
+    }
+    
+    func searchTMDBMovieWithID(id: NSNumber) {
+        var escapedSearchTerm = modifySearchTerm(id.stringValue)
+        var urlPath = "http://api.themoviedb.org/3/movie/\(escapedSearchTerm)?api_key=\(TMDBkey)"
+        var url: NSURL = NSURL(string: urlPath)
+        var request: NSURLRequest = NSURLRequest(URL: url)
+        asyncRequest(request)
+        
+        println("Search TMDB movie using ID \(id) at URL \(url)")
+    }
+    
+    /*func searchRTFor(searchTerm: String) {
         var escapedSearchTerm = modifySearchTerm(searchTerm)
         var urlPath = "http://api.rottentomatoes.com/api/public/v1.0/movies.json?apikey=\(key)&q=\(escapedSearchTerm)"
         var url: NSURL = NSURL(string: urlPath)
@@ -41,7 +63,7 @@ class APIController {
         asyncRequest(request)
         
         println("Search RT movie using ID \(id) at URL \(url)")
-    }
+    }*/
     
     func modifySearchTerm(searchTerm: String) -> String{
         // The RT API wants multiple terms separated by + symbols, so replace spaces with + signs

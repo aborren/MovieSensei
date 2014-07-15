@@ -15,9 +15,10 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
     @IBOutlet var searchBar : UISearchBar
 
     // Variables
-    var movies: Movie[] = Movie[]()
+    var movies: [Movie] = [Movie]()
     var api: APIController?
     var imageCache = NSMutableDictionary()
+    var netActivityCounter: Int = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,15 +31,36 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
         // Dispose of any resources that can be recreated.
     }
     
+    //NetActivity Functions
+    func netActivityUp(){
+        self.netActivityCounter++
+        UIApplication.sharedApplication().networkActivityIndicatorVisible = true
+    }
+    
+    func netActivityDown(){
+        self.netActivityCounter--
+        if self.netActivityCounter == 0 {
+            UIApplication.sharedApplication().networkActivityIndicatorVisible = false
+        }
+    }
+    
     // Searchbar delegate functions
     func searchBarSearchButtonClicked(searchBar: UISearchBar!){
-
-        
-        UIApplication.sharedApplication().networkActivityIndicatorVisible = true
-        self.api!.searchRTFor(searchBar.text)
+        netActivityUp()
+        self.api!.searchTMDBFor(searchBar.text)
         self.view.endEditing(true)
         
 
+    }
+    
+    func searchBar(searchBar: UISearchBar!, textDidChange searchText: String!){
+        if(searchText != ""){
+            netActivityUp()
+            self.api!.searchTMDBFor(searchBar.text)
+        }else{
+            movies = []
+            self.searchResultTableView.reloadData()
+        }
     }
     
     
@@ -56,6 +78,7 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
         return movies.count
     }
     
+    
     func tableView(tableView: UITableView!, cellForRowAtIndexPath indexPath: NSIndexPath!) -> UITableViewCell! {
         let kCellIdentifier: String = "SearchResultCell"
         var cell: UITableViewCell = tableView.dequeueReusableCellWithIdentifier(kCellIdentifier) as UITableViewCell
@@ -63,88 +86,54 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
             cell = UITableViewCell(style: UITableViewCellStyle.Subtitle, reuseIdentifier: kCellIdentifier)
         }
         let movie = self.movies[indexPath.row]
-        cell.text = movie.title
-        cell.detailTextLabel.text = movie.year
+        let movieImage: UIImageView = cell.viewWithTag(100) as UIImageView
+        let movieLabel: UILabel = cell.viewWithTag(130) as UILabel
+        let yearLabel: UILabel = cell.viewWithTag(120) as UILabel
         
-        let imgURLString: String? = movie.imgURL
-        if let urlString = imgURLString{
-            var image: UIImage? = self.imageCache.valueForKey(urlString) as? UIImage
-        
-            if( !image? ) {
-                cell.image = UIImage(named: "default.jpg")
-            }else{
-                cell.image=image
-            }
+        movieLabel.text = movie.title
+        yearLabel.text = movie.year
+        movieImage.image = UIImage(named: "default.jpeg")
+        if(movie.imgURL != nil){
+            movieImage.sd_setImageWithURL(NSURL(string: movie.imgURL), placeholderImage: UIImage(named: "default.jpeg"))
         }
-        
-        dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
-            // Jump in to a background thread to get the image for this item
-            
-
-            if let urlString = imgURLString{
-                // Check our image cache for the existing key. This is just a dictionary of UIImages
-                var image: UIImage? = self.imageCache.valueForKey(urlString) as? UIImage
-                
-                if(!image?) {
-                    // If the image does not exist, we need to download it
-                    var imgURL: NSURL = NSURL(string: urlString)
-                    
-                    // Download an NSData representation of the image at the URL
-                    var request: NSURLRequest = NSURLRequest(URL: imgURL)
-                    var urlConnection: NSURLConnection = NSURLConnection(request: request, delegate: self)
-                    NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue.mainQueue(), completionHandler: {(response: NSURLResponse!,data: NSData!,error: NSError!) -> Void in
-                        if !error? {
-                            image = UIImage(data: data)
-                            
-                            // Store the image in to our cache
-                            self.imageCache.setValue(image, forKey: urlString)
-                            cell.image = image
-                        }
-                        else {
-                            println("Error: \(error.localizedDescription)")
-                        }
-                        })
-                    
-                }
-                else {
-                    cell.image = image
-                }
-            }
-
-            
-            
-        })
-        
-        tableView.indexPathForCell(cell)
         return cell
     }
 
     func didRecieveAPIResults(results: NSDictionary) {
         // Store the results in our table data array
         if results.count>0 {
-            //delete old albums shown
-            movies.removeAll(keepCapacity: true)
-            let allResults: NSDictionary[] = results["movies"] as NSDictionary[]
+            //delete old movies shown
+            movies = []
+            let allResults: [NSDictionary] = results["results"] as [NSDictionary]
             
             // Load in result into movie datastructure
             for result: NSDictionary in allResults {
                 
                 let name: String? = result["title"] as? String
+                let year: String? = result["release_date"] as? String
+                var imageURL: String? = result["poster_path"] as? String
+                var bgURL: String? = imageURL
+                if(imageURL){
+                    var ugly: String = imageURL!
+                    imageURL = "http://image.tmdb.org/t/p/w92/" + ugly
+                    bgURL = "http://image.tmdb.org/t/p/w300/" + ugly
+                }
+                //
                 
-                let year: NSNumber? = result["year"] as? NSNumber
+                let id: NSNumber? = result["id"] as? NSNumber
                 
-                let posters: NSDictionary = result["posters"] as NSDictionary
-                let imageURL: String? = posters["thumbnail"] as? String
-                let bgURL: String? = posters["detailed"] as? String
-                
-                let id: String? = result["id"] as? String
-
-                let newMovie: Movie = Movie(title: name, year: year, id: id, imgURL: imageURL, bgURL: bgURL)
+                let newMovie = Movie()
+                newMovie.title = name
+                newMovie.id = id
+                newMovie.imgURL = imageURL
+                newMovie.bgURL = bgURL
+                newMovie.year = year
                 movies.append(newMovie)
                 
             }
             self.searchResultTableView.reloadData()
-            UIApplication.sharedApplication().networkActivityIndicatorVisible = false
+            self.searchResultTableView.setNeedsLayout()
+            netActivityDown()
         }
     }
 
