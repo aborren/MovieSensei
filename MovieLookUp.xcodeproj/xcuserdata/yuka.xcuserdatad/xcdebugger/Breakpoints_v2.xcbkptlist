@@ -10,12 +10,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MovieLookUp/SearchViewController.swift"
-            timestampString = "427147861.951943"
+            timestampString = "427242332.146853"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "121"
-            endingLineNumber = "121"
-            landmarkName = "didRecieveAPIResults(_:)"
+            startingLineNumber = "120"
+            endingLineNumber = "120"
+            landmarkName = "didRecieveAPIResults(_:apiType:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -26,12 +26,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MovieLookUp/SearchViewController.swift"
-            timestampString = "427147861.951943"
+            timestampString = "427242332.146853"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "133"
-            endingLineNumber = "133"
-            landmarkName = "didRecieveAPIResults(_:)"
+            startingLineNumber = "132"
+            endingLineNumber = "132"
+            landmarkName = "didRecieveAPIResults(_:apiType:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -42,12 +42,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MovieLookUp/APIController.swift"
-            timestampString = "427152697.476516"
+            timestampString = "427203389.967189"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "66"
-            endingLineNumber = "66"
-            landmarkName = "asyncRequest(_:)"
+            startingLineNumber = "78"
+            endingLineNumber = "78"
+            landmarkName = "asyncRequest(_:apiType:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -58,12 +58,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MovieLookUp/SearchViewController.swift"
-            timestampString = "427147861.951943"
+            timestampString = "427242332.146853"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "123"
-            endingLineNumber = "123"
-            landmarkName = "didRecieveAPIResults(_:)"
+            startingLineNumber = "122"
+            endingLineNumber = "122"
+            landmarkName = "didRecieveAPIResults(_:apiType:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -74,12 +74,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MovieLookUp/SearchViewController.swift"
-            timestampString = "427147861.951943"
+            timestampString = "427242332.146853"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "131"
-            endingLineNumber = "131"
-            landmarkName = "didRecieveAPIResults(_:)"
+            startingLineNumber = "130"
+            endingLineNumber = "130"
+            landmarkName = "didRecieveAPIResults(_:apiType:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -90,11 +90,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MovieLookUp/MovieViewController.swift"
-            timestampString = "427145371.992035"
+            timestampString = "427918587.656324"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "98"
-            endingLineNumber = "98"
+            startingLineNumber = "153"
+            endingLineNumber = "153"
             landmarkName = "loadBackground()"
             landmarkType = "5">
             <Locations>
@@ -150,11 +150,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MovieLookUp/MovieViewController.swift"
-            timestampString = "426752614.390585"
+            timestampString = "427918587.656324"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "84"
-            endingLineNumber = "84"
+            startingLineNumber = "139"
+            endingLineNumber = "139"
             landmarkName = "loadBackground()"
             landmarkType = "5">
          </BreakpointContent>
@@ -166,11 +166,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MovieLookUp/MovieViewController.swift"
-            timestampString = "427145371.992035"
+            timestampString = "427918587.656324"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "85"
-            endingLineNumber = "85"
+            startingLineNumber = "140"
+            endingLineNumber = "140"
             landmarkName = "loadBackground()"
             landmarkType = "5">
          </BreakpointContent>
@@ -182,12 +182,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MovieLookUp/SearchViewController.swift"
-            timestampString = "427147861.951943"
+            timestampString = "427242332.146853"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "107"
-            endingLineNumber = "107"
-            landmarkName = "didRecieveAPIResults(_:)"
+            startingLineNumber = "106"
+            endingLineNumber = "106"
+            landmarkName = "didRecieveAPIResults(_:apiType:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -198,11 +198,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MovieLookUp/MovieViewController.swift"
-            timestampString = "427147730.190848"
+            timestampString = "427918587.656324"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "34"
-            endingLineNumber = "34"
+            startingLineNumber = "85"
+            endingLineNumber = "85"
             landmarkName = "viewDidLoad()"
             landmarkType = "5">
          </BreakpointContent>
@@ -214,28 +214,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MovieLookUp/APIController.swift"
-            timestampString = "427152697.476516"
+            timestampString = "427203389.967189"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "65"
-            endingLineNumber = "65"
-            landmarkName = "asyncRequest(_:)"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "MovieLookUp/MovieViewController.swift"
-            timestampString = "427153930.715045"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "123"
-            endingLineNumber = "123"
-            landmarkName = "didRecieveAPIResults(_:)"
+            startingLineNumber = "77"
+            endingLineNumber = "77"
+            landmarkName = "asyncRequest(_:apiType:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -246,12 +230,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MovieLookUp/APIController.swift"
-            timestampString = "427152697.476516"
+            timestampString = "427203389.967189"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "67"
-            endingLineNumber = "67"
-            landmarkName = "asyncRequest(_:)"
+            startingLineNumber = "79"
+            endingLineNumber = "79"
+            landmarkName = "asyncRequest(_:apiType:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -262,12 +246,152 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MovieLookUp/MovieViewController.swift"
-            timestampString = "427153930.715045"
+            timestampString = "427226698.656379"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "123"
-            endingLineNumber = "123"
-            landmarkName = "didRecieveAPIResults(_:)"
+            startingLineNumber = "20"
+            endingLineNumber = "20"
+            landmarkName = "MovieViewController"
+            landmarkType = "3">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "MovieLookUp.MovieViewController.userRatingLabel.getter : @weak Swift.ImplicitlyUnwrappedOptional&lt;ObjectiveC.UILabel&gt;"
+                  moduleName = "MovieLookUp"
+                  urlString = "file:///Users/yuka/Documents/iPhone%20Projects/MovieLookUp/MovieLookUp/MovieViewController.swift"
+                  timestampString = "427201387.324345"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "19"
+                  endingLineNumber = "19"
+                  offsetFromSymbolStart = "0">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "MovieLookUp.MovieViewController.userRatingLabel.setter : @weak Swift.ImplicitlyUnwrappedOptional&lt;ObjectiveC.UILabel&gt;"
+                  moduleName = "MovieLookUp"
+                  urlString = "file:///Users/yuka/Documents/iPhone%20Projects/MovieLookUp/MovieLookUp/MovieViewController.swift"
+                  timestampString = "427201387.324645"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "56">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "MovieLookUp.MovieViewController.init (MovieLookUp.MovieViewController.Type)(coder : Swift.ImplicitlyUnwrappedOptional&lt;ObjectiveC.NSCoder&gt;) -&gt; MovieLookUp.MovieViewController"
+                  moduleName = "MovieLookUp"
+                  urlString = "file:///Users/yuka/Documents/iPhone%20Projects/MovieLookUp/MovieLookUp/MovieViewController.swift"
+                  timestampString = "427201387.324838"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "19"
+                  endingLineNumber = "19"
+                  offsetFromSymbolStart = "320">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MovieLookUp/APIController.swift"
+            timestampString = "427203376.332188"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "31"
+            endingLineNumber = "31"
+            landmarkName = "searchTMDBFor(_:)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MovieLookUp/MovieViewController.swift"
+            timestampString = "427918587.656324"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "223"
+            endingLineNumber = "223"
+            landmarkName = "didRecieveAPIResults(_:apiType:)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MovieLookUp/MovieViewController.swift"
+            timestampString = "427918587.656324"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "227"
+            endingLineNumber = "227"
+            landmarkName = "didRecieveAPIResults(_:apiType:)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MovieLookUp/MovieViewController.swift"
+            timestampString = "427918587.656324"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "225"
+            endingLineNumber = "225"
+            landmarkName = "didRecieveAPIResults(_:apiType:)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MovieLookUp/MovieViewController.swift"
+            timestampString = "427918587.656324"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "228"
+            endingLineNumber = "228"
+            landmarkName = "didRecieveAPIResults(_:apiType:)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MovieLookUp/MovieViewController.swift"
+            timestampString = "427918587.656324"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "106"
+            endingLineNumber = "106"
+            landmarkName = "prepareForSegue(_:sender:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

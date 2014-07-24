@@ -7,13 +7,15 @@
 //
 
 import UIKit
+import CoreData
 
-class MovieViewController: UIViewController, APIControllerProtocol {
+class MovieViewController: UIViewController,UICollectionViewDataSource, UICollectionViewDelegate, APIControllerProtocol {
     // Variables
     var movie: Movie?
     var backgroundImage: UIImage?
     var api: APIController?
     var netActivityCounter = 0
+    var castMembers: [Cast] = []
     
     // Outlets
     @IBOutlet var userRatingLabel : UILabel
@@ -21,6 +23,55 @@ class MovieViewController: UIViewController, APIControllerProtocol {
     @IBOutlet var backgroundView : UIImageView
     @IBOutlet var infoTextView : UITextView
     @IBOutlet var ratingView : UIView
+    @IBOutlet var crewCollectionView: UICollectionView
+    @IBOutlet var selectionButton: UIBarButtonItem
+    
+    @IBAction func selectionMovie(sender: AnyObject) {
+        let appDel : AppDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+        let context : NSManagedObjectContext = appDel.managedObjectContext
+        
+        if(selectionButton.title == "Add"){
+            let entity = NSEntityDescription.entityForName("MovieSelection", inManagedObjectContext: context)
+            var movieSelection = MovieSelection(entity: entity, insertIntoManagedObjectContext: context)
+            //risky maybe?
+            if let mov = movie {
+                movieSelection.id = mov.id.description
+                movieSelection.name = mov.title!
+                if let bg = mov.bgURL{
+                    movieSelection.posterurl = bg
+                }else{
+                    movieSelection.posterurl = ""
+                }
+            }
+            selectionButton.title = "Remove"
+        }else if(selectionButton.title == "Remove"){
+            let request = NSFetchRequest(entityName: "MovieSelection")
+            request.returnsObjectsAsFaults = false
+            request.predicate = NSPredicate(format: "id = %@", movie!.id.description)             //risky?
+            var results : NSArray = context.executeFetchRequest(request, error: nil)
+            if( results.count > 0){
+                context.deleteObject(results[0] as NSManagedObject)
+            }
+            selectionButton.title = "Add"
+        }
+        context.save(nil)
+    }
+    
+    func setSelectionButton() {
+        let appDel : AppDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+        let context : NSManagedObjectContext = appDel.managedObjectContext
+        
+        let request = NSFetchRequest(entityName: "MovieSelection")
+        request.returnsObjectsAsFaults = false
+        request.predicate = NSPredicate(format: "id == %@", movie!.id.description)
+        
+        var results : NSArray = context.executeFetchRequest(request, error: nil)
+        if( results.count > 0){
+            selectionButton.title = "Remove"
+        }else{
+            selectionButton.title = "Add"
+        }
+    }
     
     init(coder aDecoder: NSCoder!) {
         super.init(coder: aDecoder)
@@ -29,16 +80,18 @@ class MovieViewController: UIViewController, APIControllerProtocol {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        setSelectionButton()
         loadBackground()
-        roundCorners()
-        
+        self.title = movie?.title
         self.api = APIController(delegate: self)
         
         //temp
         
         self.netActivityCounter++
+        self.netActivityCounter++
         UIApplication.sharedApplication().networkActivityIndicatorVisible = true
         self.api!.searchTMDBMovieWithID(movie!.id!)
+        self.api!.searchTMDBCastWithMovieID(movie!.id!)
         
     }
     
@@ -46,14 +99,16 @@ class MovieViewController: UIViewController, APIControllerProtocol {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-    // design view
-    func roundCorners(){
-        infoTextView.layer.cornerRadius = 5.0
-        ratingView.layer.cornerRadius = 5.0
+
+    // send new data to next view
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject) {
+        var castViewController: CastViewController = segue.destinationViewController as CastViewController
+        let castIndex = crewCollectionView.indexPathForCell(sender as UICollectionViewCell).row
+        var selectedCast = self.castMembers[castIndex]
+        castViewController.cast = selectedCast
     }
-    
-    // set up ratingView
+  /*
+    // set up ratingView not used anymore..
    func writeRatings(){
         if let userR = self.movie!.userRating{
             userRatingLabel.text = "Rating: \(userR)"
@@ -77,7 +132,7 @@ class MovieViewController: UIViewController, APIControllerProtocol {
             self.userRatingBar.hidden = true
         }
         
-    }
+    }*/
     
     // setup background
     func loadBackground(){
@@ -113,26 +168,69 @@ class MovieViewController: UIViewController, APIControllerProtocol {
         }
     }
     
-    func didRecieveAPIResults(results: NSDictionary) {
-        let synopsis: String? = results["overview"] as? String
-        let rating: NSNumber? = results["vote_average"] as? NSNumber
-        let genres: NSArray? = results["genres"] as? NSArray
-        let runtime: NSNumber? = results["runtime"] as? NSNumber
-        for genre in genres! {
-            println(genre["name"])
-            self.movie!.genre.append(genre["name"] as String)
+    //CollectionView
+    func collectionView(collectionView: UICollectionView!, numberOfItemsInSection section: Int) -> Int
+    {
+        return castMembers.count
+    }
+    
+    func collectionView(collectionView: UICollectionView!, cellForItemAtIndexPath indexPath: NSIndexPath!) -> UICollectionViewCell!
+    {
+        var cell = collectionView.dequeueReusableCellWithReuseIdentifier("CrewCell", forIndexPath: indexPath) as UICollectionViewCell
+        
+        let cast: Cast = castMembers[indexPath.row]
+        
+        let portrait: UIImageView = cell.viewWithTag(200) as UIImageView
+        let name: UILabel = cell.viewWithTag(210) as UILabel
+        let character: UILabel = cell.viewWithTag(220) as UILabel
+        
+        name.text = cast.name
+        character.text = cast.character
+        
+        if let url = cast.imageURL {
+            portrait.sd_setImageWithURL(NSURL(string: url), placeholderImage: UIImage(named: "default.jpeg"))
+        }else {
+            portrait.image = UIImage(named: "default.jpeg")
         }
         
-        self.movie!.synopsis = synopsis
-        self.movie!.userRating = rating
-        self.movie!.runtime = runtime
-        self.infoTextView.text = self.movie!.descriptionText()
-        writeRatings()
-
+        cell.layer.cornerRadius = 5.0
         
-        self.netActivityCounter--
-        if self.netActivityCounter == 0 {
-            UIApplication.sharedApplication().networkActivityIndicatorVisible = false
+        return cell
+    }
+    
+    
+    func didRecieveAPIResults(results: NSDictionary, apiType: APItype) {
+        if(apiType == APItype.Movie){
+            let synopsis: String? = results["overview"] as? String
+            let rating: NSNumber? = results["vote_average"] as? NSNumber
+            let genres: NSArray? = results["genres"] as? NSArray
+            let runtime: NSNumber? = results["runtime"] as? NSNumber
+            for genre in genres! {
+                self.movie!.genre.append(genre["name"] as String)
+            }
+            
+            self.movie!.synopsis = synopsis
+            self.movie!.userRating = rating
+            self.movie!.runtime = runtime
+            self.infoTextView.text = self.movie!.descriptionText()
+            
+            self.netActivityCounter--
+            if self.netActivityCounter == 0 {
+                UIApplication.sharedApplication().networkActivityIndicatorVisible = false
+            }
+        }
+        else if(apiType == APItype.RetrieveCast){
+            let cast: NSArray? = results["cast"] as? NSArray
+            for person in cast! {
+                self.castMembers.append(Cast(name: person["name"] as? NSString, id: person["id"] as? NSNumber, imageURL: person["profile_path"] as? NSString, character: person["character"] as? NSString))
+            }
+            self.netActivityCounter--
+            if self.netActivityCounter == 0 {
+                UIApplication.sharedApplication().networkActivityIndicatorVisible = false
+            }
+            
+            self.crewCollectionView.reloadData()
+            self.crewCollectionView.setNeedsLayout()
         }
     }
     

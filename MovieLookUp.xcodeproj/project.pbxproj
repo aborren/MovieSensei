@@ -16,6 +16,12 @@
 		B29363BC19497CF80062C728 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B29363BB19497CF80062C728 /* Images.xcassets */; };
 		B29363C819497CF80062C728 /* MovieLookUpTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B29363C719497CF80062C728 /* MovieLookUpTests.swift */; };
 		B29438BB1949C70F003F2E93 /* MovieViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B29438BA1949C70F003F2E93 /* MovieViewController.swift */; };
+		B299FB371976921D00CB7382 /* Cast.swift in Sources */ = {isa = PBXBuildFile; fileRef = B299FB361976921D00CB7382 /* Cast.swift */; };
+		B299FB391976970F00CB7382 /* Enum.swift in Sources */ = {isa = PBXBuildFile; fileRef = B299FB381976970F00CB7382 /* Enum.swift */; };
+		B299FB3D1976AE3100CB7382 /* CastViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B299FB3C1976AE3100CB7382 /* CastViewController.swift */; };
+		B299FB6E1976E68200CB7382 /* MovieSelection.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B299FB6C1976E68200CB7382 /* MovieSelection.xcdatamodeld */; };
+		B299FB721976ED2F00CB7382 /* MovieSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = B299FB711976ED2F00CB7382 /* MovieSelection.swift */; };
+		B299FBD519772A2800CB7382 /* MovieSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B299FBD419772A2800CB7382 /* MovieSelectionViewController.swift */; };
 		B2AEB9E51975AC1700F931D8 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2AEB9E41975AC1700F931D8 /* ImageIO.framework */; };
 		B2AEBAA41975B4F800F931D8 /* MKAnnotationView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = B2AEBA841975B4F800F931D8 /* MKAnnotationView+WebCache.m */; };
 		B2AEBAA51975B4F800F931D8 /* NSData+ImageContentType.m in Sources */ = {isa = PBXBuildFile; fileRef = B2AEBA861975B4F800F931D8 /* NSData+ImageContentType.m */; };
@@ -60,6 +66,12 @@
 		B29363C619497CF80062C728 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B29363C719497CF80062C728 /* MovieLookUpTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieLookUpTests.swift; sourceTree = "<group>"; };
 		B29438BA1949C70F003F2E93 /* MovieViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieViewController.swift; sourceTree = "<group>"; };
+		B299FB361976921D00CB7382 /* Cast.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cast.swift; sourceTree = "<group>"; };
+		B299FB381976970F00CB7382 /* Enum.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Enum.swift; sourceTree = "<group>"; };
+		B299FB3C1976AE3100CB7382 /* CastViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CastViewController.swift; sourceTree = "<group>"; };
+		B299FB6D1976E68200CB7382 /* MovieSelection.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MovieSelection.xcdatamodel; sourceTree = "<group>"; };
+		B299FB711976ED2F00CB7382 /* MovieSelection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieSelection.swift; sourceTree = "<group>"; };
+		B299FBD419772A2800CB7382 /* MovieSelectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieSelectionViewController.swift; sourceTree = "<group>"; };
 		B2AEB9E41975AC1700F931D8 /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
 		B2AEBA4F1975B0C000F931D8 /* MovieLookUp-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MovieLookUp-Bridging-Header.h"; sourceTree = "<group>"; };
 		B2AEBA831975B4F800F931D8 /* MKAnnotationView+WebCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MKAnnotationView+WebCache.h"; sourceTree = "<group>"; };
@@ -141,12 +153,13 @@
 			isa = PBXGroup;
 			children = (
 				B28000991949857200AC9712 /* APIController.swift */,
+				B299FB381976970F00CB7382 /* Enum.swift */,
 				B29363B419497CF80062C728 /* AppDelegate.swift */,
-				B2AEBA4F1975B0C000F931D8 /* MovieLookUp-Bridging-Header.h */,
-				B29363B619497CF80062C728 /* SearchViewController.swift */,
-				B29438BA1949C70F003F2E93 /* MovieViewController.swift */,
-				B280009D19498A9200AC9712 /* Movie.swift */,
+				B299FBD01977215B00CB7382 /* ViewControllers */,
+				B299FBD11977221E00CB7382 /* Models */,
 				B29363B819497CF80062C728 /* Main.storyboard */,
+				B2AEBA4F1975B0C000F931D8 /* MovieLookUp-Bridging-Header.h */,
+				B299FB6C1976E68200CB7382 /* MovieSelection.xcdatamodeld */,
 				B29363BB19497CF80062C728 /* Images.xcassets */,
 				B29063F9196961C10000FD2E /* default.jpeg */,
 				B2D29A4519499FD5005BECB4 /* default.jpg */,
@@ -178,6 +191,27 @@
 				B29363C619497CF80062C728 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		B299FBD01977215B00CB7382 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				B29438BA1949C70F003F2E93 /* MovieViewController.swift */,
+				B299FB3C1976AE3100CB7382 /* CastViewController.swift */,
+				B299FBD419772A2800CB7382 /* MovieSelectionViewController.swift */,
+				B29363B619497CF80062C728 /* SearchViewController.swift */,
+			);
+			name = ViewControllers;
+			sourceTree = "<group>";
+		};
+		B299FBD11977221E00CB7382 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				B299FB711976ED2F00CB7382 /* MovieSelection.swift */,
+				B280009D19498A9200AC9712 /* Movie.swift */,
+				B299FB361976921D00CB7382 /* Cast.swift */,
+			);
+			name = Models;
 			sourceTree = "<group>";
 		};
 		B2AEBA821975B4F800F931D8 /* SDWebImage */ = {
@@ -326,13 +360,19 @@
 				B2AEBAB21975B4F800F931D8 /* UIImageView+WebCache.m in Sources */,
 				B2AEBAB01975B4F800F931D8 /* UIImage+WebP.m in Sources */,
 				B2AEBAAC1975B4F800F931D8 /* SDWebImagePrefetcher.m in Sources */,
+				B299FB721976ED2F00CB7382 /* MovieSelection.swift in Sources */,
+				B299FB3D1976AE3100CB7382 /* CastViewController.swift in Sources */,
 				B29363B719497CF80062C728 /* SearchViewController.swift in Sources */,
 				B2AEBAA81975B4F800F931D8 /* SDWebImageDecoder.m in Sources */,
+				B299FB6E1976E68200CB7382 /* MovieSelection.xcdatamodeld in Sources */,
 				B2AEBAA91975B4F800F931D8 /* SDWebImageDownloader.m in Sources */,
+				B299FB391976970F00CB7382 /* Enum.swift in Sources */,
+				B299FB371976921D00CB7382 /* Cast.swift in Sources */,
 				B29363B519497CF80062C728 /* AppDelegate.swift in Sources */,
 				B2AEBAAB1975B4F800F931D8 /* SDWebImageManager.m in Sources */,
 				B2AEBAB31975B4F800F931D8 /* UIView+WebCacheOperation.m in Sources */,
 				B2AEBAAD1975B4F800F931D8 /* UIButton+WebCache.m in Sources */,
+				B299FBD519772A2800CB7382 /* MovieSelectionViewController.swift in Sources */,
 				B2AEBAAF1975B4F800F931D8 /* UIImage+MultiFormat.m in Sources */,
 				B280009E19498A9200AC9712 /* Movie.swift in Sources */,
 				B2AEBAAA1975B4F800F931D8 /* SDWebImageDownloaderOperation.m in Sources */,
@@ -549,6 +589,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		B299FB6C1976E68200CB7382 /* MovieSelection.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				B299FB6D1976E68200CB7382 /* MovieSelection.xcdatamodel */,
+			);
+			currentVersion = B299FB6D1976E68200CB7382 /* MovieSelection.xcdatamodel */;
+			path = MovieSelection.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = B29363A719497CF80062C728 /* Project object */;
 }

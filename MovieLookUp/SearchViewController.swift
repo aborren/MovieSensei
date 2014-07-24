@@ -70,7 +70,6 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
         let movieIndex = searchResultTableView.indexPathForSelectedRow().row
         var selectedMovie = self.movies[movieIndex]
         movieViewController.movie = selectedMovie
-        
     }
     
     // TableView delegate functions
@@ -99,7 +98,7 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
         return cell
     }
 
-    func didRecieveAPIResults(results: NSDictionary) {
+    func didRecieveAPIResults(results: NSDictionary, apiType: APItype) {
         // Store the results in our table data array
         if results.count>0 {
             //delete old movies shown
@@ -115,8 +114,8 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
                 var bgURL: String? = imageURL
                 if(imageURL){
                     var url: String = imageURL!
-                    imageURL = "http://image.tmdb.org/t/p/w92/" + url
-                    bgURL = "http://image.tmdb.org/t/p/w300/" + url
+                    imageURL = "http://image.tmdb.org/t/p/w92" + url
+                    bgURL = "http://image.tmdb.org/t/p/w300" + url
                 }
                 
                 

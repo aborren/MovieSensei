@@ -9,12 +9,12 @@
 import UIKit
 
 protocol APIControllerProtocol {
-    func didRecieveAPIResults(results: NSDictionary)
+    func didRecieveAPIResults(results: NSDictionary, apiType: APItype)
 }
 class APIController {
     var delegate: APIControllerProtocol?
     // API KEY For Rotten Tomatoes
-    let key: NSString = "xgcfgg3pen4k6nvpq2y9haej"
+    //let key: NSString = "xgcfgg3pen4k6nvpq2y9haej"
     //GET config data!
     let TMDBkey: NSString = "9e4746b32f8e924b795985cc297a518f"
     init(delegate: APIControllerProtocol?) {
@@ -27,7 +27,7 @@ class APIController {
         var url: NSURL = NSURL(string: urlPath)
         var request: NSURLRequest = NSURLRequest(URL: url)
         
-        asyncRequest(request)
+        asyncRequest(request, apiType: APItype.RetrieveMovies)
         
         println("Search TMDB API (movie) at URL \(url)")
     }
@@ -37,9 +37,21 @@ class APIController {
         var urlPath = "http://api.themoviedb.org/3/movie/\(escapedSearchTerm)?api_key=\(TMDBkey)"
         var url: NSURL = NSURL(string: urlPath)
         var request: NSURLRequest = NSURLRequest(URL: url)
-        asyncRequest(request)
+        
+        asyncRequest(request, apiType: APItype.Movie)
         
         println("Search TMDB movie using ID \(id) at URL \(url)")
+    }
+    
+    func searchTMDBCastWithMovieID(id: NSNumber) {
+        var escapedSearchTerm = modifySearchTerm(id.stringValue)
+        var urlPath = "http://api.themoviedb.org/3/movie/\(escapedSearchTerm)/credits?api_key=\(TMDBkey)"
+        var url: NSURL = NSURL(string: urlPath)
+        var request: NSURLRequest = NSURLRequest(URL: url)
+
+        asyncRequest(request, apiType: APItype.RetrieveCast)
+        
+        println("Search TMDB for cast for movie with ID \(id) at URL \(url)")
     }
     
     func modifySearchTerm(searchTerm: String) -> String{
@@ -50,7 +62,7 @@ class APIController {
         return escapedSearchTerm
     }
     
-    func asyncRequest(request: NSURLRequest){
+    func asyncRequest(request: NSURLRequest, apiType: APItype){
         NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue.mainQueue(), completionHandler: {(response: NSURLResponse!,data: NSData!,error: NSError!) -> Void in
             if error? {
                 println("ERROR: (error.localizedDescription)")
@@ -64,7 +76,7 @@ class APIController {
                 }
                 else {
                     println("Results recieved")
-                    self.delegate?.didRecieveAPIResults(jsonResult)
+                    self.delegate?.didRecieveAPIResults(jsonResult, apiType: apiType)
                 }
             }
             })

@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import UIKit
 
 class Movie {
     var title: String?
@@ -50,17 +49,17 @@ class Movie {
     
     func descriptionText()->String{
         var description: String = ""
-        
-        if let title = self.title{
-           description += title + "\n\n"
-        }
-        
+
         if let year = self.year{
             description += "Released: \(year)\n"
         }
         
         if let runtime = self.runtime {
             description += "Runtime: \(runtime) min\n"
+        }
+        
+        if let rating = self.userRating {
+            description += "Rating: \(rating)\n"
         }
         
         description += "Genre: "
@@ -71,7 +70,6 @@ class Movie {
             }
         }
         description += "\n"
-
         
         if let synopsis = self.synopsis {
             if synopsis != ""{description += "\nSynopsis:\n\(synopsis)\n"}
