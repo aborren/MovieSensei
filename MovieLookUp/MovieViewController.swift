@@ -18,24 +18,24 @@ class MovieViewController: UIViewController,UICollectionViewDataSource, UICollec
     var castMembers: [Cast] = []
     
     // Outlets
-    @IBOutlet var userRatingLabel : UILabel
-    @IBOutlet var userRatingBar : UIProgressView
-    @IBOutlet var backgroundView : UIImageView
-    @IBOutlet var infoTextView : UITextView
-    @IBOutlet var ratingView : UIView
-    @IBOutlet var crewCollectionView: UICollectionView
-    @IBOutlet var selectionButton: UIBarButtonItem
+    @IBOutlet var userRatingLabel : UILabel?
+    @IBOutlet var userRatingBar : UIProgressView?
+    @IBOutlet var backgroundView : UIImageView?
+    @IBOutlet var infoTextView : UITextView?
+    @IBOutlet var ratingView : UIView?
+    @IBOutlet var crewCollectionView: UICollectionView?
+    @IBOutlet var selectionButton: UIBarButtonItem?
     
     @IBAction func selectionMovie(sender: AnyObject) {
         let appDel : AppDelegate = UIApplication.sharedApplication().delegate as AppDelegate
         let context : NSManagedObjectContext = appDel.managedObjectContext
         
-        if(selectionButton.title == "Add"){
+        if(selectionButton!.title == "Add"){
             let entity = NSEntityDescription.entityForName("MovieSelection", inManagedObjectContext: context)
             var movieSelection = MovieSelection(entity: entity, insertIntoManagedObjectContext: context)
             //risky maybe?
             if let mov = movie {
-                movieSelection.id = mov.id.description
+                movieSelection.id = mov.id!.description
                 movieSelection.name = mov.title!
                 if let bg = mov.bgURL{
                     movieSelection.posterurl = bg
@@ -43,16 +43,16 @@ class MovieViewController: UIViewController,UICollectionViewDataSource, UICollec
                     movieSelection.posterurl = ""
                 }
             }
-            selectionButton.title = "Remove"
-        }else if(selectionButton.title == "Remove"){
+            selectionButton!.title = "Remove"
+        }else if(selectionButton!.title == "Remove"){
             let request = NSFetchRequest(entityName: "MovieSelection")
             request.returnsObjectsAsFaults = false
-            request.predicate = NSPredicate(format: "id = %@", movie!.id.description)             //risky?
+            request.predicate = NSPredicate(format: "id = %@", movie!.id!.description)             //risky?
             var results : NSArray = context.executeFetchRequest(request, error: nil)
             if( results.count > 0){
                 context.deleteObject(results[0] as NSManagedObject)
             }
-            selectionButton.title = "Add"
+            selectionButton!.title = "Add"
         }
         context.save(nil)
     }
@@ -63,13 +63,13 @@ class MovieViewController: UIViewController,UICollectionViewDataSource, UICollec
         
         let request = NSFetchRequest(entityName: "MovieSelection")
         request.returnsObjectsAsFaults = false
-        request.predicate = NSPredicate(format: "id == %@", movie!.id.description)
+        request.predicate = NSPredicate(format: "id == %@", movie!.id!.description)
         
         var results : NSArray = context.executeFetchRequest(request, error: nil)
         if( results.count > 0){
-            selectionButton.title = "Remove"
+            selectionButton!.title = "Remove"
         }else{
-            selectionButton.title = "Add"
+            selectionButton!.title = "Add"
         }
     }
     
@@ -103,7 +103,7 @@ class MovieViewController: UIViewController,UICollectionViewDataSource, UICollec
     // send new data to next view
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject) {
         var castViewController: CastViewController = segue.destinationViewController as CastViewController
-        let castIndex = crewCollectionView.indexPathForCell(sender as UICollectionViewCell).row
+        let castIndex = crewCollectionView!.indexPathForCell(sender as UICollectionViewCell).row
         var selectedCast = self.castMembers[castIndex]
         castViewController.cast = selectedCast
     }
@@ -152,8 +152,8 @@ class MovieViewController: UIViewController,UICollectionViewDataSource, UICollec
                             if !error? {
                                 self.backgroundImage = UIImage(data: data)
 
-                                self.backgroundView.image = self.backgroundImage
-                                self.backgroundView.alpha = 0.5
+                                self.backgroundView!.image = self.backgroundImage
+                                self.backgroundView!.alpha = 0.5
                             }
                             else {
                                 println("Error: \(error.localizedDescription)")
@@ -212,7 +212,7 @@ class MovieViewController: UIViewController,UICollectionViewDataSource, UICollec
             self.movie!.synopsis = synopsis
             self.movie!.userRating = rating
             self.movie!.runtime = runtime
-            self.infoTextView.text = self.movie!.descriptionText()
+            self.infoTextView!.text = self.movie!.descriptionText()
             
             self.netActivityCounter--
             if self.netActivityCounter == 0 {
@@ -229,8 +229,8 @@ class MovieViewController: UIViewController,UICollectionViewDataSource, UICollec
                 UIApplication.sharedApplication().networkActivityIndicatorVisible = false
             }
             
-            self.crewCollectionView.reloadData()
-            self.crewCollectionView.setNeedsLayout()
+            self.crewCollectionView!.reloadData()
+            self.crewCollectionView!.setNeedsLayout()
         }
     }
     

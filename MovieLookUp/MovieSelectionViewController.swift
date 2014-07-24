@@ -14,7 +14,7 @@ class MovieSelectionViewController: UIViewController, UICollectionViewDataSource
     //Variables
     var movies : [Movie] = []
     
-    @IBOutlet var movieCollectionView: UICollectionView
+    @IBOutlet var movieCollectionView: UICollectionView?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,7 +34,7 @@ class MovieSelectionViewController: UIViewController, UICollectionViewDataSource
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject) {
         var movieViewController: MovieViewController = segue.destinationViewController as MovieViewController
-        let movieIndex = movieCollectionView.indexPathForCell(sender as UICollectionViewCell).row
+        let movieIndex = movieCollectionView!.indexPathForCell(sender as UICollectionViewCell).row
         var selectedMovie = self.movies[movieIndex]
         movieViewController.movie = selectedMovie
     }
@@ -65,7 +65,7 @@ class MovieSelectionViewController: UIViewController, UICollectionViewDataSource
         for movie in movies{
             println(movie.title)
         }
-        movieCollectionView.reloadData()
+        movieCollectionView!.reloadData()
     }
 
     

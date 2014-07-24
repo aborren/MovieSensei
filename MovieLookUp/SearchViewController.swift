@@ -11,8 +11,8 @@ import UIKit
 class SearchViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, APIControllerProtocol, UISearchBarDelegate {
     
     // Outlets
-    @IBOutlet var searchResultTableView : UITableView
-    @IBOutlet var searchBar : UISearchBar
+    @IBOutlet var searchResultTableView : UITableView?
+    @IBOutlet var searchBar : UISearchBar?
 
     // Variables
     var movies: [Movie] = [Movie]()
@@ -59,7 +59,7 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
             self.api!.searchTMDBFor(searchBar.text)
         }else{
             movies = []
-            self.searchResultTableView.reloadData()
+            self.searchResultTableView!.reloadData()
         }
     }
     
@@ -67,7 +67,7 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
     // send new data to next view
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject) {
         var movieViewController: MovieViewController = segue.destinationViewController as MovieViewController
-        let movieIndex = searchResultTableView.indexPathForSelectedRow().row
+        let movieIndex = searchResultTableView!.indexPathForSelectedRow().row
         var selectedMovie = self.movies[movieIndex]
         movieViewController.movie = selectedMovie
     }
@@ -130,8 +130,8 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
                 movies.append(newMovie)
                 
             }
-            self.searchResultTableView.reloadData()
-            self.searchResultTableView.setNeedsLayout()
+            self.searchResultTableView!.reloadData()
+            self.searchResultTableView!.setNeedsLayout()
             netActivityDown()
         }
     }
