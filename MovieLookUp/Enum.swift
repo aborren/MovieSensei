@@ -9,5 +9,5 @@
 import Foundation
 
 enum APItype{
-    case RetrieveMovies, Movie, RetrieveCast
+    case RetrieveMovies, Movie, RetrieveCast, RetrieveVideos
 }

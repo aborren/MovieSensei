@@ -54,6 +54,17 @@ class APIController {
         println("Search TMDB for cast for movie with ID \(id) at URL \(url)")
     }
     
+    func searchTMDBTrailerWithMovieID(id: NSNumber) {
+        var escapedSearchTerm = modifySearchTerm(id.stringValue)
+        var urlPath = "http://api.themoviedb.org/3/movie/\(escapedSearchTerm)/videos?api_key=\(TMDBkey)"
+        var url: NSURL = NSURL(string: urlPath)
+        var request: NSURLRequest = NSURLRequest(URL: url)
+        
+        asyncRequest(request, apiType: APItype.RetrieveVideos)
+        
+        println("Search TMDB for trailer videos for movie with ID \(id) at URL \(url)")
+    }
+    
     func modifySearchTerm(searchTerm: String) -> String{
         // The RT API wants multiple terms separated by + symbols, so replace spaces with + signs
         let RTSearchTerm = searchTerm.stringByReplacingOccurrencesOfString(" ", withString: "+", options: NSStringCompareOptions.CaseInsensitiveSearch, range: nil)

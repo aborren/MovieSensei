@@ -25,6 +25,7 @@ class MovieViewController: UIViewController,UICollectionViewDataSource, UICollec
     @IBOutlet var ratingView : UIView?
     @IBOutlet var crewCollectionView: UICollectionView?
     @IBOutlet var selectionButton: UIBarButtonItem?
+    @IBOutlet var youtubePlayer: YTPlayerView!
     
     @IBAction func selectionMovie(sender: AnyObject) {
         let appDel : AppDelegate = UIApplication.sharedApplication().delegate as AppDelegate
@@ -79,11 +80,13 @@ class MovieViewController: UIViewController,UICollectionViewDataSource, UICollec
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.title = movie?.title
+        self.api = APIController(delegate: self)
+
         // Do any additional setup after loading the view.
         setSelectionButton()
         loadBackground()
-        self.title = movie?.title
-        self.api = APIController(delegate: self)
+        getTrailers()
         
         //temp
         
@@ -133,6 +136,12 @@ class MovieViewController: UIViewController,UICollectionViewDataSource, UICollec
         }
         
     }*/
+    
+    //set up youtube
+    func getTrailers(){
+        self.netActivityCounter++
+        self.api!.searchTMDBTrailerWithMovieID(movie!.id!)
+    }
     
     // setup background
     func loadBackground(){
@@ -198,7 +207,6 @@ class MovieViewController: UIViewController,UICollectionViewDataSource, UICollec
         return cell
     }
     
-    
     func didRecieveAPIResults(results: NSDictionary, apiType: APItype) {
         if(apiType == APItype.Movie){
             let synopsis: String? = results["overview"] as? String
@@ -231,6 +239,23 @@ class MovieViewController: UIViewController,UICollectionViewDataSource, UICollec
             
             self.crewCollectionView!.reloadData()
             self.crewCollectionView!.setNeedsLayout()
+        }
+        else if(apiType == APItype.RetrieveVideos){
+            let videos: NSArray? = results["results"] as? NSArray
+            println(videos!.count)
+            for video in videos! {
+                self.youtubePlayer.loadWithVideoId(video["key"] as String)
+                break
+            }
+            if(videos!.count == 0)
+            {
+                self.youtubePlayer.hidden = true
+            }
+            self.netActivityCounter--
+            if self.netActivityCounter == 0 {
+                UIApplication.sharedApplication().networkActivityIndicatorVisible = false
+            }
+
         }
     }
     
