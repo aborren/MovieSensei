@@ -8,12 +8,14 @@
 
 import UIKit
 
-class MovieVideosViewController: UIViewController, APIControllerProtocol {
+class MovieVideosViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, APIControllerProtocol {
 
-    @IBOutlet var youtubePlayer: YTPlayerView!
+    //@IBOutlet var youtubePlayer: YTPlayerView!
+    @IBOutlet var trailerCollectionView: UICollectionView!
     
     var api: APIController?
     var movie: Movie?
+    var trailerKeys: [String] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,20 +33,39 @@ class MovieVideosViewController: UIViewController, APIControllerProtocol {
     func getTrailers(){
         self.api!.searchTMDBTrailerWithMovieID(movie!.id!)
     }
-
+    
+    //CollectionView
+    func collectionView(collectionView: UICollectionView!, numberOfItemsInSection section: Int) -> Int
+    {
+        return trailerKeys.count
+    }
+    
+    func collectionView(collectionView: UICollectionView!, cellForItemAtIndexPath indexPath: NSIndexPath!) -> UICollectionViewCell!
+    {
+        var cell = collectionView.dequeueReusableCellWithReuseIdentifier("TrailerCell", forIndexPath: indexPath) as UICollectionViewCell
+        let trailer: YTPlayerView = cell.viewWithTag(400) as YTPlayerView
+        trailer.loadWithVideoId(trailerKeys[indexPath.row])
+        cell.layer.cornerRadius = 5.0
+        return cell
+    }
+    
+  func collectionView(collectionView: UICollectionView!, didDeselectItemAtIndexPath indexPath: NSIndexPath!) {
+        println("clicked")
+    }
     
     func didRecieveAPIResults(results: NSDictionary, apiType: APItype) {
+        self.trailerKeys = []
         if(apiType == APItype.RetrieveVideos){
             let videos: NSArray? = results["results"] as? NSArray
             println(videos!.count)
             for video in videos! {
-                self.youtubePlayer.loadWithVideoId(video["key"] as String)
-                break
+                trailerKeys.append(video["key"] as String)
             }
             if(videos!.count == 0)
             {
-                self.youtubePlayer.hidden = true
+                //self.youtubePlayer.hidden = true
             }
+            self.trailerCollectionView.reloadData()
         }
     }
 }
