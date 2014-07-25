@@ -24,55 +24,9 @@ class MovieViewController: UIViewController,UICollectionViewDataSource, UICollec
     @IBOutlet var infoTextView : UITextView?
     @IBOutlet var ratingView : UIView?
     @IBOutlet var crewCollectionView: UICollectionView?
-    @IBOutlet var selectionButton: UIBarButtonItem?
-    @IBOutlet var youtubePlayer: YTPlayerView!
     
-    @IBAction func selectionMovie(sender: AnyObject) {
-        let appDel : AppDelegate = UIApplication.sharedApplication().delegate as AppDelegate
-        let context : NSManagedObjectContext = appDel.managedObjectContext
-        
-        if(selectionButton!.title == "Add"){
-            let entity = NSEntityDescription.entityForName("MovieSelection", inManagedObjectContext: context)
-            var movieSelection = MovieSelection(entity: entity, insertIntoManagedObjectContext: context)
-            //risky maybe?
-            if let mov = movie {
-                movieSelection.id = mov.id!.description
-                movieSelection.name = mov.title!
-                if let bg = mov.bgURL{
-                    movieSelection.posterurl = bg
-                }else{
-                    movieSelection.posterurl = ""
-                }
-            }
-            selectionButton!.title = "Remove"
-        }else if(selectionButton!.title == "Remove"){
-            let request = NSFetchRequest(entityName: "MovieSelection")
-            request.returnsObjectsAsFaults = false
-            request.predicate = NSPredicate(format: "id = %@", movie!.id!.description)             //risky?
-            var results : NSArray = context.executeFetchRequest(request, error: nil)
-            if( results.count > 0){
-                context.deleteObject(results[0] as NSManagedObject)
-            }
-            selectionButton!.title = "Add"
-        }
-        context.save(nil)
-    }
-    
-    func setSelectionButton() {
-        let appDel : AppDelegate = UIApplication.sharedApplication().delegate as AppDelegate
-        let context : NSManagedObjectContext = appDel.managedObjectContext
-        
-        let request = NSFetchRequest(entityName: "MovieSelection")
-        request.returnsObjectsAsFaults = false
-        request.predicate = NSPredicate(format: "id == %@", movie!.id!.description)
-        
-        var results : NSArray = context.executeFetchRequest(request, error: nil)
-        if( results.count > 0){
-            selectionButton!.title = "Remove"
-        }else{
-            selectionButton!.title = "Add"
-        }
-    }
+
+
     
     init(coder aDecoder: NSCoder!) {
         super.init(coder: aDecoder)
@@ -84,9 +38,8 @@ class MovieViewController: UIViewController,UICollectionViewDataSource, UICollec
         self.api = APIController(delegate: self)
 
         // Do any additional setup after loading the view.
-        setSelectionButton()
+        
         loadBackground()
-        getTrailers()
         
         //temp
         
@@ -110,38 +63,8 @@ class MovieViewController: UIViewController,UICollectionViewDataSource, UICollec
         var selectedCast = self.castMembers[castIndex]
         castViewController.cast = selectedCast
     }
-  /*
-    // set up ratingView not used anymore..
-   func writeRatings(){
-        if let userR = self.movie!.userRating{
-            userRatingLabel.text = "Rating: \(userR)"
-            if userR == -1 {
-                userRatingLabel.text = "Rating: none"
-            }
-        }
-        
-        if let rating = movie?.userRatingAsFloat() {
-            if rating > 0.7{
-                self.userRatingBar.tintColor = UIColor.greenColor()
-            }else if rating > 0.5 {
-                self.userRatingBar.tintColor = UIColor.yellowColor()
-            }else {
-                self.userRatingBar.tintColor = UIColor.redColor()
-            }
-            self.userRatingBar.progress = rating
-            println(rating)
-        }
-        else{
-            self.userRatingBar.hidden = true
-        }
-        
-    }*/
     
-    //set up youtube
-    func getTrailers(){
-        self.netActivityCounter++
-        self.api!.searchTMDBTrailerWithMovieID(movie!.id!)
-    }
+
     
     // setup background
     func loadBackground(){
@@ -239,23 +162,6 @@ class MovieViewController: UIViewController,UICollectionViewDataSource, UICollec
             
             self.crewCollectionView!.reloadData()
             self.crewCollectionView!.setNeedsLayout()
-        }
-        else if(apiType == APItype.RetrieveVideos){
-            let videos: NSArray? = results["results"] as? NSArray
-            println(videos!.count)
-            for video in videos! {
-                self.youtubePlayer.loadWithVideoId(video["key"] as String)
-                break
-            }
-            if(videos!.count == 0)
-            {
-                self.youtubePlayer.hidden = true
-            }
-            self.netActivityCounter--
-            if self.netActivityCounter == 0 {
-                UIApplication.sharedApplication().networkActivityIndicatorVisible = false
-            }
-
         }
     }
     

@@ -34,11 +34,12 @@ class MovieSelectionViewController: UIViewController, UICollectionViewDataSource
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject) {
         
-        var tabBar: UITabBarController = segue.destinationViewController as UITabBarController
+        var tabBar: MovieTabBarController = segue.destinationViewController as MovieTabBarController
         var movieViewController: MovieViewController = tabBar.viewControllers[0] as MovieViewController
         let movieIndex = movieCollectionView!.indexPathForCell(sender as UICollectionViewCell).row
         var selectedMovie = self.movies[movieIndex]
-        movieViewController.movie = selectedMovie
+        tabBar.movie = selectedMovie
+        //movieViewController.movie = selectedMovie
     }
     
     func setUpMovies(){
@@ -51,7 +52,6 @@ class MovieSelectionViewController: UIViewController, UICollectionViewDataSource
         
         var results : NSArray = context.executeFetchRequest(request, error: nil)
         if( results.count > 0){
-            println(results.count)
             for res in results{
                 let movie : Movie = Movie()
                 movie.imgURL = (res as MovieSelection).posterurl
@@ -60,12 +60,6 @@ class MovieSelectionViewController: UIViewController, UICollectionViewDataSource
                 movie.id = (res as MovieSelection).id.toInt()
                 movies.append(movie)
             }
-        }else
-        {
-        }
-        
-        for movie in movies{
-            println(movie.title)
         }
         movieCollectionView!.reloadData()
     }

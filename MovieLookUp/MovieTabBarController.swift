@@ -7,21 +7,78 @@
 //
 
 import UIKit
+import CoreData
 
 class MovieTabBarController: UITabBarController {
-
+    @IBOutlet var selectionButton: UIBarButtonItem?
+    var movie: Movie?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        setSelectionButton()
+        setUpViewControllers()
         // Do any additional setup after loading the view.
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
-
+    func setUpViewControllers(){
+        println(self.viewControllers.count)
+        var trailers: MovieVideosViewController = self.viewControllers[1] as MovieVideosViewController
+        trailers.movie = self.movie!
+        var movie: MovieViewController = self.viewControllers[0] as MovieViewController
+        movie.movie = self.movie!
+    }
+    
+    @IBAction func selectionMovie(sender: AnyObject) {
+        let appDel : AppDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+        let context : NSManagedObjectContext = appDel.managedObjectContext
+        
+        if(selectionButton!.title == "Add"){
+            let entity = NSEntityDescription.entityForName("MovieSelection", inManagedObjectContext: context)
+            var movieSelection = MovieSelection(entity: entity, insertIntoManagedObjectContext: context)
+            //risky maybe?
+            if let mov = movie {
+                movieSelection.id = mov.id!.description
+                movieSelection.name = mov.title!
+                if let bg = mov.bgURL{
+                    movieSelection.posterurl = bg
+                }else{
+                    movieSelection.posterurl = ""
+                }
+            }
+            selectionButton!.title = "Remove"
+        }else if(selectionButton!.title == "Remove"){
+            let request = NSFetchRequest(entityName: "MovieSelection")
+            request.returnsObjectsAsFaults = false
+            request.predicate = NSPredicate(format: "id = %@", movie!.id!.description)             //risky?
+            var results : NSArray = context.executeFetchRequest(request, error: nil)
+            if( results.count > 0){
+                context.deleteObject(results[0] as NSManagedObject)
+            }
+            selectionButton!.title = "Add"
+        }
+        context.save(nil)
+    }
+    
+    func setSelectionButton() {
+        let appDel : AppDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+        let context : NSManagedObjectContext = appDel.managedObjectContext
+        
+        let request = NSFetchRequest(entityName: "MovieSelection")
+        request.returnsObjectsAsFaults = false
+        request.predicate = NSPredicate(format: "id == %@", movie!.id!.description)
+        
+        var results : NSArray = context.executeFetchRequest(request, error: nil)
+        if( results.count > 0){
+            selectionButton!.title = "Remove"
+        }else{
+            selectionButton!.title = "Add"
+        }
+    }
     /*
     // MARK: - Navigation
 

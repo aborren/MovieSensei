@@ -67,11 +67,12 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
     // send new data to next view
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject) {
         
-        var tabBar: UITabBarController = segue.destinationViewController as UITabBarController
+        var tabBar: MovieTabBarController = segue.destinationViewController as MovieTabBarController
         var movieViewController: MovieViewController = tabBar.viewControllers[0] as MovieViewController
         let movieIndex = searchResultTableView!.indexPathForSelectedRow().row
         var selectedMovie = self.movies[movieIndex]
-        movieViewController.movie = selectedMovie
+        tabBar.movie = selectedMovie
+        //movieViewController.movie = selectedMovie
     }
     
     // TableView delegate functions
