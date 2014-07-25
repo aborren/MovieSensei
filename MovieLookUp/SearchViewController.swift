@@ -112,7 +112,6 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
             for result: NSDictionary in allResults {
                 
                 let name: String? = result["title"] as? String
-                let year: String? = result["release_date"] as? String
                 var imageURL: String? = result["poster_path"] as? String
                 var bgURL: String? = imageURL
                 if(imageURL){
@@ -129,7 +128,6 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
                 newMovie.id = id
                 newMovie.imgURL = imageURL
                 newMovie.bgURL = bgURL
-                newMovie.year = year
                 movies.append(newMovie)
                 
             }

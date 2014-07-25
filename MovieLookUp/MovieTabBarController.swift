@@ -17,6 +17,8 @@ class MovieTabBarController: UITabBarController {
         super.viewDidLoad()
         setSelectionButton()
         setUpViewControllers()
+        self.tabBar.tintColor = UIColor(red: 236.0/255.0, green: 220.0/255.0, blue: 166.0/255.0, alpha: 1.0)
+        self.title = movie!.title
         // Do any additional setup after loading the view.
     }
     
@@ -27,6 +29,8 @@ class MovieTabBarController: UITabBarController {
     
     func setUpViewControllers(){
         println(self.viewControllers.count)
+        var similar: SimilarMoviesViewController = self.viewControllers[2] as SimilarMoviesViewController
+        similar.movie = self.movie!
         var trailers: MovieVideosViewController = self.viewControllers[1] as MovieVideosViewController
         trailers.movie = self.movie!
         var movie: MovieViewController = self.viewControllers[0] as MovieViewController

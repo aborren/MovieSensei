@@ -58,8 +58,9 @@ class Movie {
             description += "Runtime: \(runtime) min\n"
         }
         
-        if let rating = self.userRating {
-            description += "Rating: \(rating)\n"
+        if let rating = self.userRatingAsFloat() {
+            let rate = NSString(format: "%.1f", rating)
+            description += "Rating: \(rate)\n"
         }
         
         description += "Genre: "
@@ -80,7 +81,7 @@ class Movie {
     
     func userRatingAsFloat()->Float?{
         if let rating = self.userRating{
-            return rating.floatValue/10.0
+            return rating.floatValue
         }
         return nil
     }

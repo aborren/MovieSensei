@@ -8,20 +8,26 @@
 
 import UIKit
 
-class MovieVideosViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, APIControllerProtocol {
+class MovieVideosViewController: UIViewController, APIControllerProtocol {
 
     //@IBOutlet var youtubePlayer: YTPlayerView!
-    @IBOutlet var trailerCollectionView: UICollectionView!
+    @IBOutlet var background: UIImageView!
+    @IBOutlet var trailerView: YTPlayerView!
+    @IBOutlet var trailerLabel: UILabel!
+    @IBOutlet var prevBtn: UIButton!
+    @IBOutlet var nextBtn: UIButton!
+    @IBOutlet var noTrailerLabel: UILabel!
     
     var api: APIController?
     var movie: Movie?
+    var currentTrailer: Int = 0
     var trailerKeys: [String] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.api = APIController(delegate: self)
-        
         getTrailers()
+        loadBackground()
         // Do any additional setup after loading the view.
     }
 
@@ -34,38 +40,64 @@ class MovieVideosViewController: UIViewController, UICollectionViewDataSource, U
         self.api!.searchTMDBTrailerWithMovieID(movie!.id!)
     }
     
-    //CollectionView
-    func collectionView(collectionView: UICollectionView!, numberOfItemsInSection section: Int) -> Int
-    {
-        return trailerKeys.count
+    //IBActions
+    @IBAction func prevClick(sender: AnyObject) {
+        currentTrailer--
+        updateTrailerView()
+        updateButtons()
+    }
+    @IBAction func nextClick(sender: AnyObject) {
+        currentTrailer++
+        updateTrailerView()
+        updateButtons()
     }
     
-    func collectionView(collectionView: UICollectionView!, cellForItemAtIndexPath indexPath: NSIndexPath!) -> UICollectionViewCell!
-    {
-        var cell = collectionView.dequeueReusableCellWithReuseIdentifier("TrailerCell", forIndexPath: indexPath) as UICollectionViewCell
-        let trailer: YTPlayerView = cell.viewWithTag(400) as YTPlayerView
-        trailer.loadWithVideoId(trailerKeys[indexPath.row])
-        cell.layer.cornerRadius = 5.0
-        return cell
+    func updateButtons(){
+        nextBtn.hidden = false
+        prevBtn.hidden = false
+        if(trailerKeys.count == 0){
+            nextBtn.hidden = true
+            prevBtn.hidden = true
+        }
+        if(currentTrailer == 0){
+            prevBtn.hidden = true
+        }
+        if(currentTrailer == trailerKeys.count-1){
+            nextBtn.hidden = true
+        }
     }
     
-  func collectionView(collectionView: UICollectionView!, didDeselectItemAtIndexPath indexPath: NSIndexPath!) {
-        println("clicked")
+    func loadBackground(){
+        if let url = movie!.bgURL {
+            background.sd_setImageWithURL(NSURL(string: url), placeholderImage: UIImage(named: "default.jpeg"))
+            background.alpha = 0.5
+        }else {
+            background.image = UIImage(named: "default.jpeg")
+        }
     }
+    
+    func updateTrailerView(){
+        if (trailerKeys.count > 0){
+            var tracker: String
+            tracker = "\(currentTrailer+1)/\(trailerKeys.count)"
+            trailerLabel.text = tracker
+            trailerView.loadWithVideoId(trailerKeys[currentTrailer])
+        } else {
+            noTrailerLabel.hidden = false
+        }
+    }
+
     
     func didRecieveAPIResults(results: NSDictionary, apiType: APItype) {
         self.trailerKeys = []
         if(apiType == APItype.RetrieveVideos){
             let videos: NSArray? = results["results"] as? NSArray
-            println(videos!.count)
             for video in videos! {
                 trailerKeys.append(video["key"] as String)
             }
-            if(videos!.count == 0)
-            {
-                //self.youtubePlayer.hidden = true
-            }
-            self.trailerCollectionView.reloadData()
+            
+            updateTrailerView()
+            updateButtons()
         }
     }
 }

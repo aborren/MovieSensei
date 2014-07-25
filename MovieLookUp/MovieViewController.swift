@@ -34,7 +34,7 @@ class MovieViewController: UIViewController,UICollectionViewDataSource, UICollec
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = movie?.title
+        //self.title = movie?.title
         self.api = APIController(delegate: self)
 
         // Do any additional setup after loading the view.
@@ -136,6 +136,7 @@ class MovieViewController: UIViewController,UICollectionViewDataSource, UICollec
             let rating: NSNumber? = results["vote_average"] as? NSNumber
             let genres: NSArray? = results["genres"] as? NSArray
             let runtime: NSNumber? = results["runtime"] as? NSNumber
+            let year: String? = results["release_date"] as? String
             for genre in genres! {
                 self.movie!.genre.append(genre["name"] as String)
             }
@@ -143,6 +144,7 @@ class MovieViewController: UIViewController,UICollectionViewDataSource, UICollec
             self.movie!.synopsis = synopsis
             self.movie!.userRating = rating
             self.movie!.runtime = runtime
+            self.movie!.year = year
             self.infoTextView!.text = self.movie!.descriptionText()
             
             self.netActivityCounter--
