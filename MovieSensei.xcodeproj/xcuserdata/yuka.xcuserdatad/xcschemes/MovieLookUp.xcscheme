@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "B29363AE19497CF80062C728"
-               BuildableName = "MovieLookUp.app"
-               BlueprintName = "MovieLookUp"
-               ReferencedContainer = "container:MovieLookUp.xcodeproj">
+               BuildableName = "MovieSensei.app"
+               BlueprintName = "MovieSensei"
+               ReferencedContainer = "container:MovieSensei.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "B29363C019497CF80062C728"
-               BuildableName = "MovieLookUpTests.xctest"
-               BlueprintName = "MovieLookUpTests"
-               ReferencedContainer = "container:MovieLookUp.xcodeproj">
+               BuildableName = "MovieSenseiTests.xctest"
+               BlueprintName = "MovieSenseiTests"
+               ReferencedContainer = "container:MovieSensei.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -43,9 +43,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "B29363AE19497CF80062C728"
-            BuildableName = "MovieLookUp.app"
-            BlueprintName = "MovieLookUp"
-            ReferencedContainer = "container:MovieLookUp.xcodeproj">
+            BuildableName = "MovieSensei.app"
+            BlueprintName = "MovieSensei"
+            ReferencedContainer = "container:MovieSensei.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </TestAction>
@@ -62,9 +62,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "B29363AE19497CF80062C728"
-            BuildableName = "MovieLookUp.app"
-            BlueprintName = "MovieLookUp"
-            ReferencedContainer = "container:MovieLookUp.xcodeproj">
+            BuildableName = "MovieSensei.app"
+            BlueprintName = "MovieSensei"
+            ReferencedContainer = "container:MovieSensei.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -80,9 +80,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "B29363AE19497CF80062C728"
-            BuildableName = "MovieLookUp.app"
-            BlueprintName = "MovieLookUp"
-            ReferencedContainer = "container:MovieLookUp.xcodeproj">
+            BuildableName = "MovieSensei.app"
+            BlueprintName = "MovieSensei"
+            ReferencedContainer = "container:MovieSensei.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

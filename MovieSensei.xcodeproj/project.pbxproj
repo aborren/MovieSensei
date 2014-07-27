@@ -18,7 +18,6 @@
 		B29438BB1949C70F003F2E93 /* MovieViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B29438BA1949C70F003F2E93 /* MovieViewController.swift */; };
 		B296F9EB198529B400BA366D /* CastContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B296F9EA198529B400BA366D /* CastContainerViewController.swift */; };
 		B296F9ED19857BFB00BA366D /* CastMoreMoviesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B296F9EC19857BFB00BA366D /* CastMoreMoviesViewController.swift */; };
-		B297291F1982763B007B39E7 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B297291E1982763B007B39E7 /* Default-568h@2x.png */; };
 		B297292119827F1A007B39E7 /* MovieVideosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B297292019827F1A007B39E7 /* MovieVideosViewController.swift */; };
 		B29729231982865C007B39E7 /* MovieTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B29729221982865C007B39E7 /* MovieTabBarController.swift */; };
 		B29729271982D753007B39E7 /* glyphicons_195_circle_info.png in Resources */ = {isa = PBXBuildFile; fileRef = B29729261982D753007B39E7 /* glyphicons_195_circle_info.png */; };
@@ -72,19 +71,18 @@
 		B28000991949857200AC9712 /* APIController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIController.swift; sourceTree = "<group>"; };
 		B280009D19498A9200AC9712 /* Movie.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
 		B29063F9196961C10000FD2E /* default.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = default.jpeg; sourceTree = "<group>"; };
-		B29363AF19497CF80062C728 /* MovieLookUp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MovieLookUp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		B29363AF19497CF80062C728 /* MovieSensei.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MovieSensei.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B29363B319497CF80062C728 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B29363B419497CF80062C728 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B29363B619497CF80062C728 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		B29363B919497CF80062C728 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		B29363BB19497CF80062C728 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		B29363C119497CF80062C728 /* MovieLookUpTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MovieLookUpTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		B29363C119497CF80062C728 /* MovieSenseiTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MovieSenseiTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B29363C619497CF80062C728 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B29363C719497CF80062C728 /* MovieLookUpTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieLookUpTests.swift; sourceTree = "<group>"; };
 		B29438BA1949C70F003F2E93 /* MovieViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieViewController.swift; sourceTree = "<group>"; };
 		B296F9EA198529B400BA366D /* CastContainerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CastContainerViewController.swift; sourceTree = "<group>"; };
 		B296F9EC19857BFB00BA366D /* CastMoreMoviesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CastMoreMoviesViewController.swift; sourceTree = "<group>"; };
-		B297291E1982763B007B39E7 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		B297292019827F1A007B39E7 /* MovieVideosViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieVideosViewController.swift; sourceTree = "<group>"; };
 		B29729221982865C007B39E7 /* MovieTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieTabBarController.swift; sourceTree = "<group>"; };
 		B29729261982D753007B39E7 /* glyphicons_195_circle_info.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = glyphicons_195_circle_info.png; sourceTree = "<group>"; };
@@ -165,7 +163,6 @@
 		B29363A619497CF80062C728 = {
 			isa = PBXGroup;
 			children = (
-				B297291E1982763B007B39E7 /* Default-568h@2x.png */,
 				B2AEBA821975B4F800F931D8 /* SDWebImage */,
 				B2AEB9E41975AC1700F931D8 /* ImageIO.framework */,
 				B29363B119497CF80062C728 /* MovieLookUp */,
@@ -177,8 +174,8 @@
 		B29363B019497CF80062C728 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				B29363AF19497CF80062C728 /* MovieLookUp.app */,
-				B29363C119497CF80062C728 /* MovieLookUpTests.xctest */,
+				B29363AF19497CF80062C728 /* MovieSensei.app */,
+				B29363C119497CF80062C728 /* MovieSenseiTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -315,9 +312,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		B29363AE19497CF80062C728 /* MovieLookUp */ = {
+		B29363AE19497CF80062C728 /* MovieSensei */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = B29363CB19497CF80062C728 /* Build configuration list for PBXNativeTarget "MovieLookUp" */;
+			buildConfigurationList = B29363CB19497CF80062C728 /* Build configuration list for PBXNativeTarget "MovieSensei" */;
 			buildPhases = (
 				B29363AB19497CF80062C728 /* Sources */,
 				B29363AC19497CF80062C728 /* Frameworks */,
@@ -327,14 +324,14 @@
 			);
 			dependencies = (
 			);
-			name = MovieLookUp;
+			name = MovieSensei;
 			productName = MovieLookUp;
-			productReference = B29363AF19497CF80062C728 /* MovieLookUp.app */;
+			productReference = B29363AF19497CF80062C728 /* MovieSensei.app */;
 			productType = "com.apple.product-type.application";
 		};
-		B29363C019497CF80062C728 /* MovieLookUpTests */ = {
+		B29363C019497CF80062C728 /* MovieSenseiTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = B29363CE19497CF80062C728 /* Build configuration list for PBXNativeTarget "MovieLookUpTests" */;
+			buildConfigurationList = B29363CE19497CF80062C728 /* Build configuration list for PBXNativeTarget "MovieSenseiTests" */;
 			buildPhases = (
 				B29363BD19497CF80062C728 /* Sources */,
 				B29363BE19497CF80062C728 /* Frameworks */,
@@ -345,9 +342,9 @@
 			dependencies = (
 				B29363C319497CF80062C728 /* PBXTargetDependency */,
 			);
-			name = MovieLookUpTests;
+			name = MovieSenseiTests;
 			productName = MovieLookUpTests;
-			productReference = B29363C119497CF80062C728 /* MovieLookUpTests.xctest */;
+			productReference = B29363C119497CF80062C728 /* MovieSenseiTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -368,7 +365,7 @@
 					};
 				};
 			};
-			buildConfigurationList = B29363AA19497CF80062C728 /* Build configuration list for PBXProject "MovieLookUp" */;
+			buildConfigurationList = B29363AA19497CF80062C728 /* Build configuration list for PBXProject "MovieSensei" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -381,8 +378,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				B29363AE19497CF80062C728 /* MovieLookUp */,
-				B29363C019497CF80062C728 /* MovieLookUpTests */,
+				B29363AE19497CF80062C728 /* MovieSensei */,
+				B29363C019497CF80062C728 /* MovieSenseiTests */,
 			);
 		};
 /* End PBXProject section */
@@ -404,7 +401,6 @@
 				B29729291982D828007B39E7 /* glyphicons_220_play_button.png in Resources */,
 				B29363BC19497CF80062C728 /* Images.xcassets in Resources */,
 				B2D29A4619499FD5005BECB4 /* default.jpg in Resources */,
-				B297291F1982763B007B39E7 /* Default-568h@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -472,7 +468,7 @@
 /* Begin PBXTargetDependency section */
 		B29363C319497CF80062C728 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = B29363AE19497CF80062C728 /* MovieLookUp */;
+			target = B29363AE19497CF80062C728 /* MovieSensei */;
 			targetProxy = B29363C219497CF80062C728 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -571,24 +567,30 @@
 		B29363CC19497CF80062C728 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				INFOPLIST_FILE = MovieLookUp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = MovieSensei;
 				SWIFT_OBJC_BRIDGING_HEADER = "MovieLookUp/MovieLookUp-Bridging-Header.h";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
 		B29363CD19497CF80062C728 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				INFOPLIST_FILE = MovieLookUp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = MovieSensei;
 				SWIFT_OBJC_BRIDGING_HEADER = "MovieLookUp/MovieLookUp-Bridging-Header.h";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
@@ -607,7 +609,7 @@
 				INFOPLIST_FILE = MovieLookUpTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				METAL_ENABLE_DEBUG_INFO = YES;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = MovieSenseiTests;
 				TEST_HOST = "$(BUNDLE_LOADER)";
 			};
 			name = Debug;
@@ -623,7 +625,7 @@
 				INFOPLIST_FILE = MovieLookUpTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				METAL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = MovieSenseiTests;
 				TEST_HOST = "$(BUNDLE_LOADER)";
 			};
 			name = Release;
@@ -631,7 +633,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		B29363AA19497CF80062C728 /* Build configuration list for PBXProject "MovieLookUp" */ = {
+		B29363AA19497CF80062C728 /* Build configuration list for PBXProject "MovieSensei" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				B29363C919497CF80062C728 /* Debug */,
@@ -640,7 +642,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		B29363CB19497CF80062C728 /* Build configuration list for PBXNativeTarget "MovieLookUp" */ = {
+		B29363CB19497CF80062C728 /* Build configuration list for PBXNativeTarget "MovieSensei" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				B29363CC19497CF80062C728 /* Debug */,
@@ -649,7 +651,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		B29363CE19497CF80062C728 /* Build configuration list for PBXNativeTarget "MovieLookUpTests" */ = {
+		B29363CE19497CF80062C728 /* Build configuration list for PBXNativeTarget "MovieSenseiTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				B29363CF19497CF80062C728 /* Debug */,
