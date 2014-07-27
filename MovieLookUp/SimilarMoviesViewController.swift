@@ -14,11 +14,14 @@ class SimilarMoviesViewController: UIViewController, UICollectionViewDataSource,
     var movies : [Movie] = []
     var movie: Movie?
     var api: APIController?
+    var page: Int = 1
     
     @IBOutlet var similarMoviesCollectionView: UICollectionView?
+    @IBOutlet var background: UIImageView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        loadBackground()
         self.api = APIController(delegate: self)
         self.api!.searchTMDBSimilarMoviesForID(movie!.id!)
         // Do any additional setup after loading the view.
@@ -43,7 +46,15 @@ class SimilarMoviesViewController: UIViewController, UICollectionViewDataSource,
         tabBar.movie = selectedMovie
     }
     
-    
+    func loadBackground(){
+        if let url = movie!.bgURL {
+            background.sd_setImageWithURL(NSURL(string: url), placeholderImage: UIImage(named: "default.jpeg"))
+            background.alpha = 0.5
+        }else {
+            background.image = UIImage(named: "default.jpeg")
+        }
+    }
+   
     //CollectionView
     func collectionView(collectionView: UICollectionView!, numberOfItemsInSection section: Int) -> Int
     {
@@ -56,15 +67,16 @@ class SimilarMoviesViewController: UIViewController, UICollectionViewDataSource,
         
         let movie: Movie = movies[indexPath.row]
         
-        let poster: UIImageView = cell.viewWithTag(500) as UIImageView
         let label : UILabel = cell.viewWithTag(510) as UILabel
+        let poster: UIImageView = cell.viewWithTag(500) as UIImageView
         
         if let url = movie.bgURL {
-            poster.sd_setImageWithURL(NSURL(string: url), placeholderImage: UIImage(named: "default.jpeg"))
             label.text = ""
+            poster.sd_setImageWithURL(NSURL(string: url), placeholderImage: UIImage(named: "default.jpeg"))
         }else {
-            poster.image = UIImage(named: "default.jpeg")
             label.text = movie.title!
+           // label.transform = CGAffineTransformMakeRotation( 3.14 / 3.0 )
+            poster.image = UIImage(named: "default.jpeg")
         }
         
         return cell

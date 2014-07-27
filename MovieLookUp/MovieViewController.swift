@@ -137,8 +137,10 @@ class MovieViewController: UIViewController,UICollectionViewDataSource, UICollec
             let genres: NSArray? = results["genres"] as? NSArray
             let runtime: NSNumber? = results["runtime"] as? NSNumber
             let year: String? = results["release_date"] as? String
-            for genre in genres! {
-                self.movie!.genre.append(genre["name"] as String)
+            if let genre = genres {
+                for g in genre {
+                    self.movie!.genre.append(g["name"] as String)
+                }
             }
             
             self.movie!.synopsis = synopsis

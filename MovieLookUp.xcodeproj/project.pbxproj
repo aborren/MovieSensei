@@ -16,6 +16,8 @@
 		B29363BC19497CF80062C728 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B29363BB19497CF80062C728 /* Images.xcassets */; };
 		B29363C819497CF80062C728 /* MovieLookUpTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B29363C719497CF80062C728 /* MovieLookUpTests.swift */; };
 		B29438BB1949C70F003F2E93 /* MovieViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B29438BA1949C70F003F2E93 /* MovieViewController.swift */; };
+		B296F9EB198529B400BA366D /* CastContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B296F9EA198529B400BA366D /* CastContainerViewController.swift */; };
+		B296F9ED19857BFB00BA366D /* CastMoreMoviesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B296F9EC19857BFB00BA366D /* CastMoreMoviesViewController.swift */; };
 		B297291F1982763B007B39E7 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B297291E1982763B007B39E7 /* Default-568h@2x.png */; };
 		B297292119827F1A007B39E7 /* MovieVideosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B297292019827F1A007B39E7 /* MovieVideosViewController.swift */; };
 		B29729231982865C007B39E7 /* MovieTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B29729221982865C007B39E7 /* MovieTabBarController.swift */; };
@@ -80,6 +82,8 @@
 		B29363C619497CF80062C728 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B29363C719497CF80062C728 /* MovieLookUpTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieLookUpTests.swift; sourceTree = "<group>"; };
 		B29438BA1949C70F003F2E93 /* MovieViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieViewController.swift; sourceTree = "<group>"; };
+		B296F9EA198529B400BA366D /* CastContainerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CastContainerViewController.swift; sourceTree = "<group>"; };
+		B296F9EC19857BFB00BA366D /* CastMoreMoviesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CastMoreMoviesViewController.swift; sourceTree = "<group>"; };
 		B297291E1982763B007B39E7 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		B297292019827F1A007B39E7 /* MovieVideosViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieVideosViewController.swift; sourceTree = "<group>"; };
 		B29729221982865C007B39E7 /* MovieTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieTabBarController.swift; sourceTree = "<group>"; };
@@ -247,7 +251,9 @@
 				B29438BA1949C70F003F2E93 /* MovieViewController.swift */,
 				B299FB3C1976AE3100CB7382 /* CastViewController.swift */,
 				B297292019827F1A007B39E7 /* MovieVideosViewController.swift */,
+				B296F9EC19857BFB00BA366D /* CastMoreMoviesViewController.swift */,
 				B2972937198306D8007B39E7 /* TopListViewController.swift */,
+				B296F9EA198529B400BA366D /* CastContainerViewController.swift */,
 				B299FBD419772A2800CB7382 /* MovieSelectionViewController.swift */,
 				B29729331982F5E0007B39E7 /* SimilarMoviesViewController.swift */,
 				B29729221982865C007B39E7 /* MovieTabBarController.swift */,
@@ -427,12 +433,14 @@
 				B299FB3D1976AE3100CB7382 /* CastViewController.swift in Sources */,
 				B29363B719497CF80062C728 /* SearchViewController.swift in Sources */,
 				B2AEBAA81975B4F800F931D8 /* SDWebImageDecoder.m in Sources */,
+				B296F9ED19857BFB00BA366D /* CastMoreMoviesViewController.swift in Sources */,
 				B299FB6E1976E68200CB7382 /* MovieSelection.xcdatamodeld in Sources */,
 				B2AEBAA91975B4F800F931D8 /* SDWebImageDownloader.m in Sources */,
 				B299FB391976970F00CB7382 /* Enum.swift in Sources */,
 				B299FB371976921D00CB7382 /* Cast.swift in Sources */,
 				B29363B519497CF80062C728 /* AppDelegate.swift in Sources */,
 				B2AEBAAB1975B4F800F931D8 /* SDWebImageManager.m in Sources */,
+				B296F9EB198529B400BA366D /* CastContainerViewController.swift in Sources */,
 				B2AEBAB31975B4F800F931D8 /* UIView+WebCacheOperation.m in Sources */,
 				B29729341982F5E0007B39E7 /* SimilarMoviesViewController.swift in Sources */,
 				B2AEBAAD1975B4F800F931D8 /* UIButton+WebCache.m in Sources */,
