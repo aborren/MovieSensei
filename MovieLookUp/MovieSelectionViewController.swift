@@ -19,17 +19,22 @@ class MovieSelectionViewController: UIViewController, UICollectionViewDataSource
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        
+        var backNavBtn : UIBarButtonItem = UIBarButtonItem(image: UIImage(named: "back-25.png"), style: UIBarButtonItemStyle.Done, target: self, action: "back")
+        self.navigationItem.leftBarButtonItem = backNavBtn
+    }
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+    
+    func back(){
+        self.navigationController.popToViewController(self.navigationController.viewControllers[self.navigationController.viewControllers.count-2] as UIViewController, animated: true)
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(false)
         setUpMovies()
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject) {

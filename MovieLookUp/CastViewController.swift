@@ -17,6 +17,9 @@ class CastViewController: UIViewController {
         super.viewDidLoad()
         self.title = cast?.name
         // Do any additional setup after loading the view.
+        var backNavBtn : UIBarButtonItem = UIBarButtonItem(image: UIImage(named: "back-25.png"), style: UIBarButtonItemStyle.Done, target: self, action: "back")
+        self.navigationItem.leftBarButtonItem = backNavBtn
+
     }
 
     override func didReceiveMemoryWarning() {
@@ -24,7 +27,9 @@ class CastViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-
+    func back(){
+        self.navigationController.popToViewController(self.navigationController.viewControllers[self.navigationController.viewControllers.count-2] as UIViewController, animated: true)
+    }
     
     // #pragma mark - Navigation
 

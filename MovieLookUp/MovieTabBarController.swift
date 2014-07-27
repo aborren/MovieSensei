@@ -19,7 +19,20 @@ class MovieTabBarController: UITabBarController {
         setUpViewControllers()
         self.tabBar.tintColor = UIColor(red: 236.0/255.0, green: 220.0/255.0, blue: 166.0/255.0, alpha: 1.0)
         self.title = movie!.title
+        
+        var backNavBtn : UIBarButtonItem = UIBarButtonItem(image: UIImage(named: "back-25.png"), style: UIBarButtonItemStyle.Done, target: self, action: "back")
+        var menyNavBtn : UIBarButtonItem = UIBarButtonItem(image: UIImage(named: "menu-25.png"), style: UIBarButtonItemStyle.Bordered, target: self, action: "toMainMenu")
+        
+        self.navigationItem.leftBarButtonItems = [backNavBtn, menyNavBtn]
         // Do any additional setup after loading the view.
+    }
+    
+    func toMainMenu(){
+        self.navigationController.popToRootViewControllerAnimated(true)
+    }
+    
+    func back(){
+        self.navigationController.popToViewController(self.navigationController.viewControllers[self.navigationController.viewControllers.count-2] as UIViewController, animated: true)
     }
     
     override func didReceiveMemoryWarning() {
