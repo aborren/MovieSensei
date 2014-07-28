@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6185.11" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="qQh-Y4-nkv">
     <dependencies>
+        <deployment defaultVersion="1792" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6190.4"/>
     </dependencies>
     <scenes>
@@ -80,7 +81,7 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Movies" id="Tzq-H8-7wp">
-                        <barButtonItem key="backBarButtonItem" title="Back" id="kQt-pr-ZZr"/>
+                        <barButtonItem key="backBarButtonItem" title=" " id="kQt-pr-ZZr"/>
                     </navigationItem>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="320" height="480"/>
@@ -182,7 +183,7 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="Info" image="info-32.png" id="JTO-2x-Op6"/>
                     <navigationItem key="navigationItem" title="Movie" id="Xug-2g-BTE">
-                        <barButtonItem key="backBarButtonItem" title="Back" id="SmI-KZ-Awe"/>
+                        <barButtonItem key="backBarButtonItem" title=" " id="SmI-KZ-Awe"/>
                     </navigationItem>
                     <connections>
                         <outlet property="CrewCollectionView" destination="ckI-Iz-kTt" id="wAP-GW-B75"/>
@@ -265,18 +266,14 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eIs-fz-3BF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2354" y="1037"/>
+            <point key="canvasLocation" x="2354" y="1073"/>
         </scene>
         <!--Movie Tab Bar Controller-->
         <scene sceneID="Sg6-jg-54N">
             <objects>
                 <tabBarController id="iFg-d0-LdH" customClass="MovieTabBarController" customModule="MovieSensei" customModuleProvider="target" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="jrS-aT-xft">
-                        <barButtonItem key="rightBarButtonItem" title="Add" id="DQ5-QL-2fm">
-                            <connections>
-                                <action selector="selectionMovie:" destination="iFg-d0-LdH" id="IPp-IM-dM4"/>
-                            </connections>
-                        </barButtonItem>
+                        <barButtonItem key="backBarButtonItem" title=" " id="vhI-Ho-COH"/>
                     </navigationItem>
                     <nil key="simulatedBottomBarMetrics"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" translucent="NO" id="dX0-Ot-xQv">
@@ -288,7 +285,6 @@
                         <color key="selectedImageTintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </tabBar>
                     <connections>
-                        <outlet property="selectionButton" destination="DQ5-QL-2fm" id="w5C-MB-8Ty"/>
                         <segue destination="f4m-6a-YWh" kind="relationship" relationship="viewControllers" id="uiU-Or-INK"/>
                         <segue destination="Pb8-2s-CkZ" kind="relationship" relationship="viewControllers" id="IRe-d7-HuL"/>
                         <segue destination="4Ie-bY-yWJ" kind="relationship" relationship="viewControllers" id="Kjm-PW-OUb"/>
@@ -310,34 +306,36 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="416"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DYU-Ss-qVu">
-                                <rect key="frame" x="10" y="129" width="300" height="75"/>
+                            <imageView userInteractionEnabled="NO" alpha="0.59999999999999998" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="yayoSensei2.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="3oj-uB-vo8">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="416"/>
+                            </imageView>
+                            <button opaque="NO" alpha="0.94999999999999996" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DYU-Ss-qVu">
+                                <rect key="frame" x="10" y="170" width="300" height="75"/>
                                 <color key="backgroundColor" red="0.92549026010000002" green="0.86274516580000005" blue="0.65098041299999998" alpha="1" colorSpace="deviceRGB"/>
                                 <state key="normal" title="Search for Movies">
-                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
                                     <segue destination="BYZ-38-t0r" kind="push" id="Qag-SB-pIq"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xgK-PZ-xEb">
-                                <rect key="frame" x="10" y="47" width="300" height="75"/>
+                            <button opaque="NO" alpha="0.94999999999999996" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xgK-PZ-xEb">
+                                <rect key="frame" x="10" y="88" width="300" height="75"/>
                                 <color key="backgroundColor" red="0.92549026010000002" green="0.86274516580000005" blue="0.65098041299999998" alpha="1" colorSpace="deviceRGB"/>
-                                <state key="normal" title="Discover">
-                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                <state key="normal" title="Movie Lists">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
                                     <segue destination="yUH-uD-SwO" kind="push" id="QjC-iS-WIq"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qIk-Je-xyQ">
-                                <rect key="frame" x="10" y="212" width="300" height="75"/>
+                            <button opaque="NO" alpha="0.94999999999999996" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qIk-Je-xyQ">
+                                <rect key="frame" x="10" y="253" width="300" height="75"/>
                                 <color key="backgroundColor" red="0.92549026010000002" green="0.86274516580000005" blue="0.65098041299999998" alpha="1" colorSpace="deviceRGB"/>
-                                <state key="normal" title="Selected Movies">
-                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                <state key="normal" title="Your Selection">
+                                    <color key="titleShadowColor" white="0.5" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
                                     <segue destination="ZW2-7s-lfb" kind="push" id="Fia-VJ-dvw"/>
@@ -346,7 +344,9 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" title="MovieSensei" id="x3Y-nF-Fvp"/>
+                    <navigationItem key="navigationItem" title="MovieSensei" id="x3Y-nF-Fvp">
+                        <barButtonItem key="backBarButtonItem" title=" " id="l9M-6w-W18"/>
+                    </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yyq-Wg-pbJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -365,13 +365,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="8Mp-vY-f3E">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="416"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="364"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="ucK-wM-zcH">
                                     <size key="itemSize" width="92" height="138"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                    <inset key="sectionInset" minX="10" minY="10" maxX="10" maxY="10"/>
+                                    <inset key="sectionInset" minX="10" minY="10" maxX="10" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="MovieSelectionCell" id="Pp1-Jg-lQ8">
@@ -401,7 +401,7 @@
                                             <constraint firstAttribute="trailing" secondItem="vQC-OW-MVh" secondAttribute="trailing" id="lYU-vm-r9N"/>
                                         </constraints>
                                         <connections>
-                                            <segue destination="iFg-d0-LdH" kind="push" id="En0-x6-ujo"/>
+                                            <segue destination="iFg-d0-LdH" kind="push" identifier="SelectionToMovie" id="En0-x6-ujo"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -410,17 +410,34 @@
                                     <outlet property="delegate" destination="ZW2-7s-lfb" id="973-oz-H1N"/>
                                 </connections>
                             </collectionView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8SL-Xb-kwh">
+                                <rect key="frame" x="10" y="374" width="300" height="30"/>
+                                <color key="backgroundColor" red="0.92549026010000002" green="0.86274516580000005" blue="0.65098041299999998" alpha="1" colorSpace="deviceRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="300" id="8Jf-dO-mYz"/>
+                                    <constraint firstAttribute="height" constant="30" id="efu-Sp-RjB"/>
+                                </constraints>
+                                <state key="normal" title="Sensei Scramble!">
+                                    <color key="titleShadowColor" white="0.5" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="4e3-jO-Jey" kind="modal" identifier="SenseiScramble" id="mVx-87-hTA"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="gld-gd-8Gq" firstAttribute="top" secondItem="8Mp-vY-f3E" secondAttribute="bottom" id="8ax-7E-RbR"/>
+                            <constraint firstAttribute="trailing" secondItem="8SL-Xb-kwh" secondAttribute="trailing" constant="10" id="2VQ-tW-Ev0"/>
+                            <constraint firstItem="gld-gd-8Gq" firstAttribute="top" secondItem="8SL-Xb-kwh" secondAttribute="bottom" constant="12" id="50m-JK-YH3"/>
                             <constraint firstAttribute="trailing" secondItem="8Mp-vY-f3E" secondAttribute="trailing" id="8qC-KR-bdM"/>
                             <constraint firstItem="8Mp-vY-f3E" firstAttribute="leading" secondItem="eVZ-KR-luE" secondAttribute="leading" id="Ev6-dA-GRM"/>
+                            <constraint firstItem="8SL-Xb-kwh" firstAttribute="leading" secondItem="eVZ-KR-luE" secondAttribute="leading" constant="10" id="ScS-s3-4vF"/>
+                            <constraint firstItem="8SL-Xb-kwh" firstAttribute="top" secondItem="8Mp-vY-f3E" secondAttribute="bottom" constant="10" id="bru-le-gLe"/>
                             <constraint firstItem="8Mp-vY-f3E" firstAttribute="top" secondItem="5gY-uL-P05" secondAttribute="bottom" id="suk-wT-V5u"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Selection" id="9Un-nQ-fOW">
-                        <barButtonItem key="backBarButtonItem" title="Back" id="MJI-hs-gAX"/>
+                        <barButtonItem key="backBarButtonItem" title=" " id="MJI-hs-gAX"/>
                     </navigationItem>
                     <connections>
                         <outlet property="movieCollectionView" destination="8Mp-vY-f3E" id="lul-lQ-Psx"/>
@@ -429,6 +446,49 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AVc-pV-TrE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1897" y="1037"/>
+        </scene>
+        <!--Randomized View Controller-->
+        <scene sceneID="sIz-wG-968">
+            <objects>
+                <viewController id="4e3-jO-Jey" customClass="RandomizedViewController" customModule="MovieSensei" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="6Xa-0I-3p8"/>
+                        <viewControllerLayoutGuide type="bottom" id="THf-5f-Mmo"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="5dc-jZ-l8W">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ctw-Bj-OgK">
+                                <rect key="frame" x="87" y="405" width="146" height="30"/>
+                                <color key="backgroundColor" red="0.92549026010000002" green="0.86274516580000005" blue="0.65098041299999998" alpha="1" colorSpace="deviceRGB"/>
+                                <state key="normal" title="Thank you Sensei!">
+                                    <color key="titleColor" red="0.99607849120000003" green="0.99215692280000001" blue="0.99215692280000001" alpha="1" colorSpace="deviceRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="leave:" destination="4e3-jO-Jey" eventType="touchUpInside" id="Ggo-ck-VIZ"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Watch this movie!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9gq-AU-ldw">
+                                <rect key="frame" x="73" y="35" width="175" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.92549026010000002" green="0.86274516580000005" blue="0.65098041299999998" alpha="1" colorSpace="deviceRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xj2-6J-k8b">
+                                <rect key="frame" x="48" y="64" width="215" height="322"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <outlet property="poster" destination="xj2-6J-k8b" id="5Gc-f2-Skd"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Wjt-kd-WNz" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1897" y="1631"/>
         </scene>
         <!--Cast View Controller-->
         <scene sceneID="d9i-7O-DPt">
@@ -467,7 +527,9 @@
                             <constraint firstItem="Wai-9f-RtQ" firstAttribute="top" secondItem="JOq-lM-jE1" secondAttribute="bottom" id="feA-6B-D2x"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="Esd-tA-oux"/>
+                    <navigationItem key="navigationItem" id="Esd-tA-oux">
+                        <barButtonItem key="backBarButtonItem" title=" " id="uvE-hM-mBv"/>
+                    </navigationItem>
                     <connections>
                         <outlet property="ContainerView" destination="SVB-WJ-ldl" id="JcX-Ds-QSa"/>
                     </connections>
@@ -479,7 +541,7 @@
         <!--NavigationController-->
         <scene sceneID="aqZ-PI-8BC">
             <objects>
-                <navigationController title="NavigationController" automaticallyAdjustsScrollViewInsets="NO" id="qQh-Y4-nkv" sceneMemberID="viewController">
+                <navigationController title="NavigationController" automaticallyAdjustsScrollViewInsets="NO" id="qQh-Y4-nkv" customClass="NavigationViewController" customModule="MovieSensei" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="pCf-KV-jFg">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -494,6 +556,7 @@
                     <nil name="viewControllers"/>
                     <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="6MX-RN-fex">
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" red="0.9960784912109375" green="0.99215692281723022" blue="0.99215692281723022" alpha="1" colorSpace="deviceRGB"/>
                     </toolbar>
                     <connections>
                         <segue destination="uhh-FM-ijY" kind="relationship" relationship="rootViewController" id="5Sg-sa-Jqn"/>
@@ -519,7 +582,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                             </imageView>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="nFT-n9-KzL">
-                                <rect key="frame" x="0.0" y="20" width="320" height="460"/>
+                                <rect key="frame" x="0.0" y="20" width="320" height="411"/>
                                 <color key="backgroundColor" white="1" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="nqN-yf-PC4">
                                     <size key="itemSize" width="92" height="138"/>
@@ -584,7 +647,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KZ0-6X-MIP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2773" y="1037"/>
+            <point key="canvasLocation" x="2785" y="1073"/>
         </scene>
         <!--Top-->
         <scene sceneID="aII-P0-uD8">
@@ -673,8 +736,8 @@
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Similar" image="stack-32.png" id="rM2-W2-Oru"/>
-                    <navigationItem key="navigationItem" id="Y5M-S9-4ZH">
-                        <barButtonItem key="backBarButtonItem" title="Back" id="tyM-Jy-rUE"/>
+                    <navigationItem key="navigationItem" title="Movie Lists" id="Y5M-S9-4ZH">
+                        <barButtonItem key="backBarButtonItem" title=" " id="tyM-Jy-rUE"/>
                     </navigationItem>
                     <connections>
                         <outlet property="MoviesCollectionView" destination="BGu-u7-E4X" id="PP9-P3-Xm9"/>
@@ -683,7 +746,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RYp-Iy-JGi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1875" y="1645"/>
+            <point key="canvasLocation" x="1099" y="1037"/>
         </scene>
         <!--Cast Container View Controller-->
         <scene sceneID="vWH-q4-9fF">
@@ -697,7 +760,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="900"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5zv-g4-k8W">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="5zv-g4-k8W">
                                 <rect key="frame" x="10" y="10" width="92" height="139"/>
                                 <color key="backgroundColor" red="0.92549026010000002" green="0.86274516580000005" blue="0.65098041299999998" alpha="1" colorSpace="deviceRGB"/>
                                 <constraints>
@@ -705,7 +768,7 @@
                                     <constraint firstAttribute="width" constant="92" id="rSu-cO-DCC"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Name Bamessonnn Arnolsd" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="198" translatesAutoresizingMaskIntoConstraints="NO" id="nz8-4S-Itn">
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name Bamessonnn Arnolsd" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="198" translatesAutoresizingMaskIntoConstraints="NO" id="nz8-4S-Itn">
                                 <rect key="frame" x="112" y="10" width="198" height="50"/>
                                 <color key="backgroundColor" red="0.92549026010000002" green="0.86274516580000005" blue="0.65098041299999998" alpha="1" colorSpace="deviceRGB"/>
                                 <constraints>
@@ -716,7 +779,7 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="02O-On-FG1">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="02O-On-FG1">
                                 <rect key="frame" x="112" y="70" width="198" height="79"/>
                                 <subviews>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9bt-sT-x3p">
@@ -995,13 +1058,14 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OXV-g0-Nkg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3635" y="1457"/>
+            <point key="canvasLocation" x="3308" y="1452"/>
         </scene>
     </scenes>
     <resources>
         <image name="info-32.png" width="32" height="32"/>
         <image name="stack-32.png" width="32" height="32"/>
         <image name="tv_show-32.png" width="32" height="32"/>
+        <image name="yayoSensei2.jpg" width="309" height="472"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
@@ -1012,7 +1076,7 @@
         </simulatedScreenMetrics>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="ccX-yI-aP5"/>
+        <segue reference="En0-x6-ujo"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.9960784912109375" green="0.99215692281723022" blue="0.99215692281723022" alpha="1" colorSpace="deviceRGB"/>
 </document>

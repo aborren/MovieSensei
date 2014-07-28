@@ -197,7 +197,9 @@ class CastContainerViewController: UIViewController, UITableViewDataSource, UITa
                 }
             }
             if let from = results["place_of_birth"] as? String {
-                fromLabel.text = "From: \(from)"
+                if(from != ""){
+                   fromLabel.text = "From: \(from)"
+                }
             }
         }
 

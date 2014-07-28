@@ -19,17 +19,11 @@ class MovieSelectionViewController: UIViewController, UICollectionViewDataSource
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        var backNavBtn : UIBarButtonItem = UIBarButtonItem(image: UIImage(named: "back-25.png"), style: UIBarButtonItemStyle.Done, target: self, action: "back")
-        self.navigationItem.leftBarButtonItem = backNavBtn
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
-    }
-    
-    func back(){
-        self.navigationController.popToViewController(self.navigationController.viewControllers[self.navigationController.viewControllers.count-2] as UIViewController, animated: true)
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -38,13 +32,21 @@ class MovieSelectionViewController: UIViewController, UICollectionViewDataSource
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject) {
+        if(segue.identifier == "SelectionToMovie"){
+            var tabBar: MovieTabBarController = segue.destinationViewController as MovieTabBarController
+            var movieViewController: MovieViewController = tabBar.viewControllers[0] as MovieViewController
+            let movieIndex = movieCollectionView!.indexPathForCell(sender as UICollectionViewCell).row
+            var selectedMovie = self.movies[movieIndex]
+            tabBar.movie = selectedMovie
+        }else if(segue.identifier == "SenseiScramble"){
+            if(movies.count > 0){
+                var randomizedViewController: RandomizedViewController = segue.destinationViewController as RandomizedViewController
+                let rndNum = Int(arc4random_uniform(UInt32(movies.count)))
+                let rndMovie: Movie = movies[rndNum]
+                randomizedViewController.movie = rndMovie
+            }
+        }
         
-        var tabBar: MovieTabBarController = segue.destinationViewController as MovieTabBarController
-        var movieViewController: MovieViewController = tabBar.viewControllers[0] as MovieViewController
-        let movieIndex = movieCollectionView!.indexPathForCell(sender as UICollectionViewCell).row
-        var selectedMovie = self.movies[movieIndex]
-        tabBar.movie = selectedMovie
-        //movieViewController.movie = selectedMovie
     }
     
     func setUpMovies(){

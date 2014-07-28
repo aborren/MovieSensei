@@ -20,19 +20,24 @@ class MovieTabBarController: UITabBarController {
         self.tabBar.tintColor = UIColor(red: 236.0/255.0, green: 220.0/255.0, blue: 166.0/255.0, alpha: 1.0)
         self.title = movie!.title
         
-        var backNavBtn : UIBarButtonItem = UIBarButtonItem(image: UIImage(named: "back-25.png"), style: UIBarButtonItemStyle.Done, target: self, action: "back")
-        var menyNavBtn : UIBarButtonItem = UIBarButtonItem(image: UIImage(named: "menu-25.png"), style: UIBarButtonItemStyle.Bordered, target: self, action: "toMainMenu")
+        var menyNavBtn : UIBarButtonItem = UIBarButtonItem(image: UIImage(named: "home-25.png"), style: UIBarButtonItemStyle.Plain, target: self, action: "toMainMenu")
+        self.navigationItem.leftItemsSupplementBackButton = true
+        self.navigationItem.leftBarButtonItem = menyNavBtn
         
-        self.navigationItem.leftBarButtonItems = [backNavBtn, menyNavBtn]
-        // Do any additional setup after loading the view.
     }
     
     func toMainMenu(){
         self.navigationController.popToRootViewControllerAnimated(true)
     }
     
-    func back(){
-        self.navigationController.popToViewController(self.navigationController.viewControllers[self.navigationController.viewControllers.count-2] as UIViewController, animated: true)
+    func setPlusButton(){
+        var plus : UIBarButtonItem = UIBarButtonItem(image: UIImage(named: "plus-25.png"), style: UIBarButtonItemStyle.Plain, target: self, action: "addMovie")
+        self.navigationItem.rightBarButtonItem = plus
+    }
+    
+    func setMinusButton(){
+        var minus : UIBarButtonItem = UIBarButtonItem(image: UIImage(named: "minus-25.png"), style: UIBarButtonItemStyle.Plain, target: self, action: "removeMovie")
+        self.navigationItem.rightBarButtonItem = minus
     }
     
     override func didReceiveMemoryWarning() {
@@ -81,6 +86,40 @@ class MovieTabBarController: UITabBarController {
         context.save(nil)
     }
     
+    
+    func addMovie(){
+        let appDel : AppDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+        let context : NSManagedObjectContext = appDel.managedObjectContext
+        let entity = NSEntityDescription.entityForName("MovieSelection", inManagedObjectContext: context)
+        var movieSelection = MovieSelection(entity: entity, insertIntoManagedObjectContext: context)
+        //risky maybe?
+        if let mov = movie {
+            movieSelection.id = mov.id!.description
+            movieSelection.name = mov.title!
+            if let bg = mov.bgURL{
+                movieSelection.posterurl = bg
+            }else{
+                movieSelection.posterurl = ""
+            }
+        }
+        setMinusButton()
+        context.save(nil)
+    }
+    
+    func removeMovie(){
+        let appDel : AppDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+        let context : NSManagedObjectContext = appDel.managedObjectContext
+        let request = NSFetchRequest(entityName: "MovieSelection")
+        request.returnsObjectsAsFaults = false
+        request.predicate = NSPredicate(format: "id = %@", movie!.id!.description)             //risky?
+        var results : NSArray = context.executeFetchRequest(request, error: nil)
+        if( results.count > 0){
+            context.deleteObject(results[0] as NSManagedObject)
+        }
+        setPlusButton()
+        context.save(nil)
+    }
+    
     func setSelectionButton() {
         let appDel : AppDelegate = UIApplication.sharedApplication().delegate as AppDelegate
         let context : NSManagedObjectContext = appDel.managedObjectContext
@@ -91,9 +130,9 @@ class MovieTabBarController: UITabBarController {
         
         var results : NSArray = context.executeFetchRequest(request, error: nil)
         if( results.count > 0){
-            selectionButton!.title = "Remove"
+            setMinusButton()
         }else{
-            selectionButton!.title = "Add"
+            setPlusButton()
         }
     }
     /*

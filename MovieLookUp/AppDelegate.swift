@@ -19,6 +19,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: NSDictionary?) -> Bool {
         // Override point for customization after application launch.
+        //custom back button
+        
+        var appearanceNavigationBar = UINavigationBar.appearance()
+        if(UINavigationBar.instancesRespondToSelector("setBackIndicatorImage:")){
+            appearanceNavigationBar.backIndicatorImage = UIImage(named: "back-25.png")
+            appearanceNavigationBar.backIndicatorTransitionMaskImage = UIImage(named: "back-25.png")
+            
+        }else{
+            //ios6 customized (not valid in this project probably (swift not supporting ios6))
+        }
+        
         return true
     }
 

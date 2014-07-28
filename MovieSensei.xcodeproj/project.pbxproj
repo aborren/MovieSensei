@@ -23,6 +23,11 @@
 		B29673F51985A7D600C92F17 /* tv_show-32@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B29673F41985A7D600C92F17 /* tv_show-32@2x.png */; };
 		B29673F71985A80000C92F17 /* stack-32@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B29673F61985A80000C92F17 /* stack-32@2x.png */; };
 		B29673F91985A88E00C92F17 /* info-32@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B29673F81985A88E00C92F17 /* info-32@2x.png */; };
+		B29673FE1985ACC900C92F17 /* plus-25.png in Resources */ = {isa = PBXBuildFile; fileRef = B29673FC1985ACC900C92F17 /* plus-25.png */; };
+		B29673FF1985ACC900C92F17 /* plus-25@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B29673FD1985ACC900C92F17 /* plus-25@2x.png */; };
+		B29674021985AD1300C92F17 /* minus-25.png in Resources */ = {isa = PBXBuildFile; fileRef = B29674001985AD1300C92F17 /* minus-25.png */; };
+		B29674031985AD1300C92F17 /* minus-25@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B29674011985AD1300C92F17 /* minus-25@2x.png */; };
+		B29674071985B4DF00C92F17 /* RandomizedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B29674061985B4DF00C92F17 /* RandomizedViewController.swift */; };
 		B296F9EB198529B400BA366D /* CastContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B296F9EA198529B400BA366D /* CastContainerViewController.swift */; };
 		B296F9ED19857BFB00BA366D /* CastMoreMoviesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B296F9EC19857BFB00BA366D /* CastMoreMoviesViewController.swift */; };
 		B297292119827F1A007B39E7 /* MovieVideosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B297292019827F1A007B39E7 /* MovieVideosViewController.swift */; };
@@ -38,6 +43,10 @@
 		B299FB6E1976E68200CB7382 /* MovieSelection.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B299FB6C1976E68200CB7382 /* MovieSelection.xcdatamodeld */; };
 		B299FB721976ED2F00CB7382 /* MovieSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = B299FB711976ED2F00CB7382 /* MovieSelection.swift */; };
 		B299FBD519772A2800CB7382 /* MovieSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B299FBD419772A2800CB7382 /* MovieSelectionViewController.swift */; };
+		B29A1B491987020B00979202 /* yayoSensei2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B29A1B481987020B00979202 /* yayoSensei2.jpg */; };
+		B29B0BE919867B0300E89E91 /* NavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B29B0BE819867B0300E89E91 /* NavigationViewController.swift */; };
+		B29B0BEC19867F1B00E89E91 /* home-25.png in Resources */ = {isa = PBXBuildFile; fileRef = B29B0BEA19867F1B00E89E91 /* home-25.png */; };
+		B29B0BED19867F1B00E89E91 /* home-25@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B29B0BEB19867F1B00E89E91 /* home-25@2x.png */; };
 		B2AEB9E51975AC1700F931D8 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2AEB9E41975AC1700F931D8 /* ImageIO.framework */; };
 		B2AEBAA41975B4F800F931D8 /* MKAnnotationView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = B2AEBA841975B4F800F931D8 /* MKAnnotationView+WebCache.m */; };
 		B2AEBAA51975B4F800F931D8 /* NSData+ImageContentType.m in Sources */ = {isa = PBXBuildFile; fileRef = B2AEBA861975B4F800F931D8 /* NSData+ImageContentType.m */; };
@@ -91,6 +100,11 @@
 		B29673F41985A7D600C92F17 /* tv_show-32@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tv_show-32@2x.png"; sourceTree = "<group>"; };
 		B29673F61985A80000C92F17 /* stack-32@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "stack-32@2x.png"; sourceTree = "<group>"; };
 		B29673F81985A88E00C92F17 /* info-32@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "info-32@2x.png"; sourceTree = "<group>"; };
+		B29673FC1985ACC900C92F17 /* plus-25.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "plus-25.png"; sourceTree = "<group>"; };
+		B29673FD1985ACC900C92F17 /* plus-25@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "plus-25@2x.png"; sourceTree = "<group>"; };
+		B29674001985AD1300C92F17 /* minus-25.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "minus-25.png"; sourceTree = "<group>"; };
+		B29674011985AD1300C92F17 /* minus-25@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "minus-25@2x.png"; sourceTree = "<group>"; };
+		B29674061985B4DF00C92F17 /* RandomizedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RandomizedViewController.swift; sourceTree = "<group>"; };
 		B296F9EA198529B400BA366D /* CastContainerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CastContainerViewController.swift; sourceTree = "<group>"; };
 		B296F9EC19857BFB00BA366D /* CastMoreMoviesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CastMoreMoviesViewController.swift; sourceTree = "<group>"; };
 		B297292019827F1A007B39E7 /* MovieVideosViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieVideosViewController.swift; sourceTree = "<group>"; };
@@ -106,6 +120,10 @@
 		B299FB6D1976E68200CB7382 /* MovieSelection.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MovieSelection.xcdatamodel; sourceTree = "<group>"; };
 		B299FB711976ED2F00CB7382 /* MovieSelection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieSelection.swift; sourceTree = "<group>"; };
 		B299FBD419772A2800CB7382 /* MovieSelectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieSelectionViewController.swift; sourceTree = "<group>"; };
+		B29A1B481987020B00979202 /* yayoSensei2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = yayoSensei2.jpg; sourceTree = "<group>"; };
+		B29B0BE819867B0300E89E91 /* NavigationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationViewController.swift; sourceTree = "<group>"; };
+		B29B0BEA19867F1B00E89E91 /* home-25.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "home-25.png"; sourceTree = "<group>"; };
+		B29B0BEB19867F1B00E89E91 /* home-25@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "home-25@2x.png"; sourceTree = "<group>"; };
 		B2AEB9E41975AC1700F931D8 /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
 		B2AEBA4F1975B0C000F931D8 /* MovieLookUp-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MovieLookUp-Bridging-Header.h"; sourceTree = "<group>"; };
 		B2AEBA831975B4F800F931D8 /* MKAnnotationView+WebCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MKAnnotationView+WebCache.h"; sourceTree = "<group>"; };
@@ -235,6 +253,13 @@
 		B297292E1982EC37007B39E7 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				B29A1B481987020B00979202 /* yayoSensei2.jpg */,
+				B29674001985AD1300C92F17 /* minus-25.png */,
+				B29674011985AD1300C92F17 /* minus-25@2x.png */,
+				B29B0BEA19867F1B00E89E91 /* home-25.png */,
+				B29B0BEB19867F1B00E89E91 /* home-25@2x.png */,
+				B29673FC1985ACC900C92F17 /* plus-25.png */,
+				B29673FD1985ACC900C92F17 /* plus-25@2x.png */,
 				B29673EE1985A26A00C92F17 /* menu-25.png */,
 				B29673EF1985A26A00C92F17 /* menu-25@2x.png */,
 				B29673E41985A0EB00C92F17 /* back-25.png */,
@@ -259,7 +284,9 @@
 				B297292019827F1A007B39E7 /* MovieVideosViewController.swift */,
 				B296F9EC19857BFB00BA366D /* CastMoreMoviesViewController.swift */,
 				B2972937198306D8007B39E7 /* TopListViewController.swift */,
+				B29674061985B4DF00C92F17 /* RandomizedViewController.swift */,
 				B296F9EA198529B400BA366D /* CastContainerViewController.swift */,
+				B29B0BE819867B0300E89E91 /* NavigationViewController.swift */,
 				B299FBD419772A2800CB7382 /* MovieSelectionViewController.swift */,
 				B29729331982F5E0007B39E7 /* SimilarMoviesViewController.swift */,
 				B29729221982865C007B39E7 /* MovieTabBarController.swift */,
@@ -401,9 +428,14 @@
 				B29673E71985A10900C92F17 /* back-25@2x.png in Resources */,
 				B29673F01985A26A00C92F17 /* menu-25.png in Resources */,
 				B2DC1C5819819E8F00515BB4 /* Assets in Resources */,
+				B29674021985AD1300C92F17 /* minus-25.png in Resources */,
 				B29673F71985A80000C92F17 /* stack-32@2x.png in Resources */,
+				B29673FF1985ACC900C92F17 /* plus-25@2x.png in Resources */,
+				B29674031985AD1300C92F17 /* minus-25@2x.png in Resources */,
+				B29A1B491987020B00979202 /* yayoSensei2.jpg in Resources */,
 				B29363BA19497CF80062C728 /* Main.storyboard in Resources */,
 				B2972936198304F7007B39E7 /* stack-32.png in Resources */,
+				B29673FE1985ACC900C92F17 /* plus-25.png in Resources */,
 				B29673F91985A88E00C92F17 /* info-32@2x.png in Resources */,
 				B29673E51985A0EB00C92F17 /* back-25.png in Resources */,
 				B29673F11985A26A00C92F17 /* menu-25@2x.png in Resources */,
@@ -412,7 +444,9 @@
 				B29729301982ED49007B39E7 /* tv_show-32.png in Resources */,
 				B29063FA196961C10000FD2E /* default.jpeg in Resources */,
 				B29363BC19497CF80062C728 /* Images.xcassets in Resources */,
+				B29B0BED19867F1B00E89E91 /* home-25@2x.png in Resources */,
 				B2D29A4619499FD5005BECB4 /* default.jpg in Resources */,
+				B29B0BEC19867F1B00E89E91 /* home-25.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -430,6 +464,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B29674071985B4DF00C92F17 /* RandomizedViewController.swift in Sources */,
 				B29438BB1949C70F003F2E93 /* MovieViewController.swift in Sources */,
 				B2AEBAB11975B4F800F931D8 /* UIImageView+HighlightedWebCache.m in Sources */,
 				B2AEBAB21975B4F800F931D8 /* UIImageView+WebCache.m in Sources */,
@@ -441,6 +476,7 @@
 				B299FB3D1976AE3100CB7382 /* CastViewController.swift in Sources */,
 				B29363B719497CF80062C728 /* SearchViewController.swift in Sources */,
 				B2AEBAA81975B4F800F931D8 /* SDWebImageDecoder.m in Sources */,
+				B29B0BE919867B0300E89E91 /* NavigationViewController.swift in Sources */,
 				B296F9ED19857BFB00BA366D /* CastMoreMoviesViewController.swift in Sources */,
 				B299FB6E1976E68200CB7382 /* MovieSelection.xcdatamodeld in Sources */,
 				B2AEBAA91975B4F800F931D8 /* SDWebImageDownloader.m in Sources */,

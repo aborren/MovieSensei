@@ -24,19 +24,13 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
         super.viewDidLoad()
         self.api = APIController(delegate: self)
         // Do any additional setup after loading the view.
-        var backNavBtn : UIBarButtonItem = UIBarButtonItem(image: UIImage(named: "back-25.png"), style: UIBarButtonItemStyle.Done, target: self, action: "back")
-        self.navigationItem.leftBarButtonItem = backNavBtn
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-    func back(){
-        self.navigationController.popToViewController(self.navigationController.viewControllers[self.navigationController.viewControllers.count-2] as UIViewController, animated: true)
-    }
-    
+        
     //NetActivity Functions
     func netActivityUp(){
         self.netActivityCounter++
@@ -98,8 +92,15 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
         let movieLabel: UILabel = cell.viewWithTag(130) as UILabel
         let yearLabel: UILabel = cell.viewWithTag(120) as UILabel
         
+        //trim year (String in Swift is annoying atm
+        if let date = movie.year {
+            var trimmedYear : NSString = date
+            trimmedYear = trimmedYear.substringToIndex(4)
+            yearLabel.text = trimmedYear
+        }
+        
         movieLabel.text = movie.title
-        yearLabel.text = movie.year
+        //yearLabel.text = movie.year
         movieImage.image = UIImage(named: "default.jpeg")
         if(movie.imgURL != nil){
             movieImage.sd_setImageWithURL(NSURL(string: movie.imgURL), placeholderImage: UIImage(named: "default.jpeg"))
