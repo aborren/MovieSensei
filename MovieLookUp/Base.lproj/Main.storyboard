@@ -880,11 +880,14 @@
                         <viewControllerLayoutGuide type="bottom" id="J59-Zm-dIP"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="PQa-G9-rjo">
-                        <rect key="frame" x="0.0" y="64" width="320" height="900"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="900"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="50" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="a3U-WM-Y29">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="50" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="a3U-WM-Y29">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="900"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="320" id="Cg7-fu-Gia"/>
+                                </constraints>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="ApperanceCell" rowHeight="50" id="qcy-Fg-2ZX">
                                         <rect key="frame" x="0.0" y="22" width="320" height="44"/>
@@ -926,19 +929,23 @@
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="J59-Zm-dIP" firstAttribute="top" secondItem="a3U-WM-Y29" secondAttribute="bottom" id="WbU-aG-ov0"/>
+                            <constraint firstItem="a3U-WM-Y29" firstAttribute="top" secondItem="PQa-G9-rjo" secondAttribute="top" id="Wgl-vC-sG9"/>
+                            <constraint firstItem="a3U-WM-Y29" firstAttribute="leading" secondItem="PQa-G9-rjo" secondAttribute="leading" id="hKG-ZY-L28"/>
+                            <constraint firstAttribute="trailing" secondItem="a3U-WM-Y29" secondAttribute="trailing" id="p13-fZ-mWD"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="cA4-89-OeQ">
                         <barButtonItem key="backBarButtonItem" title=" " id="cPr-ig-nNK"/>
                     </navigationItem>
-                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-                    <size key="freeformSize" width="320" height="900"/>
                     <connections>
                         <outlet property="appearancesTable" destination="a3U-WM-Y29" id="9dS-oQ-tQz"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OXV-g0-Nkg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3137" y="1387"/>
+            <point key="canvasLocation" x="3137" y="1401"/>
         </scene>
     </scenes>
     <resources>
