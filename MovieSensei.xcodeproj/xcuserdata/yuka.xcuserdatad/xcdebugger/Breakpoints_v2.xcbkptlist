@@ -74,83 +74,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MovieLookUp/MovieViewController.swift"
-            timestampString = "428501406.491157"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "205"
-            endingLineNumber = "205"
-            landmarkName = "loadBackground()"
-            landmarkType = "5">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "MovieLookUp.MovieViewController.loadBackground (MovieLookUp.MovieViewController)() -&gt; ()"
-                  moduleName = "MovieLookUp"
-                  urlString = "file:///Users/yuka/Documents/iPhone%20Projects/MovieLookUp/MovieLookUp/MovieViewController.swift"
-                  timestampString = "426348054.089819"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "110"
-                  endingLineNumber = "110"
-                  offsetFromSymbolStart = "292">
-               </Location>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "MovieLookUp.MovieViewController.(loadBackground (MovieLookUp.MovieViewController) -&gt; () -&gt; ()).(closure #1)"
-                  moduleName = "MovieLookUp"
-                  urlString = "file:///Users/yuka/Documents/iPhone%20Projects/MovieLookUp/MovieLookUp/MovieViewController.swift"
-                  timestampString = "426348054.090025"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "111"
-                  endingLineNumber = "111"
-                  offsetFromSymbolStart = "20">
-               </Location>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "reabstraction thunk helper from @callee_owned () -&gt; (@unowned ()) to @callee_unowned @objc_block () -&gt; (@unowned ())"
-                  moduleName = "MovieLookUp"
-                  urlString = "file:///Users/yuka/Documents/iPhone%20Projects/MovieLookUp/MovieLookUp/MovieViewController.swift"
-                  timestampString = "426348054.0902"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "110"
-                  endingLineNumber = "110"
-                  offsetFromSymbolStart = "0">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "MovieLookUp/MovieViewController.swift"
-            timestampString = "428501406.491157"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "191"
-            endingLineNumber = "191"
-            landmarkName = "loadBackground()"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "MovieLookUp/MovieViewController.swift"
-            timestampString = "428501406.491157"
+            timestampString = "428515879.995363"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "192"
@@ -242,11 +166,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MovieLookUp/MovieViewController.swift"
-            timestampString = "428501406.491157"
+            timestampString = "428516296.286409"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "279"
-            endingLineNumber = "279"
+            startingLineNumber = "256"
+            endingLineNumber = "256"
             landmarkName = "didRecieveAPIResults(_:apiType:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -258,11 +182,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MovieLookUp/MovieViewController.swift"
-            timestampString = "428501406.491157"
+            timestampString = "428516296.286409"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "283"
-            endingLineNumber = "283"
+            startingLineNumber = "260"
+            endingLineNumber = "260"
             landmarkName = "didRecieveAPIResults(_:apiType:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -274,11 +198,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MovieLookUp/MovieViewController.swift"
-            timestampString = "428501406.491157"
+            timestampString = "428516296.286409"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "281"
-            endingLineNumber = "281"
+            startingLineNumber = "258"
+            endingLineNumber = "258"
             landmarkName = "didRecieveAPIResults(_:apiType:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -290,11 +214,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MovieLookUp/MovieViewController.swift"
-            timestampString = "428501406.491157"
+            timestampString = "428516296.286409"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "284"
-            endingLineNumber = "284"
+            startingLineNumber = "261"
+            endingLineNumber = "261"
             landmarkName = "didRecieveAPIResults(_:apiType:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -306,11 +230,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MovieLookUp/MovieViewController.swift"
-            timestampString = "428501406.491157"
+            timestampString = "428515879.995363"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "179"
-            endingLineNumber = "179"
+            startingLineNumber = "185"
+            endingLineNumber = "185"
             landmarkName = "prepareForSegue(_:sender:)"
             landmarkType = "5">
          </BreakpointContent>

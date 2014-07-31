@@ -20,12 +20,12 @@ class MovieViewController: UIViewController,UICollectionViewDataSource, UICollec
     // Outlets
     @IBOutlet var userRatingLabel : UILabel?
     @IBOutlet var userRatingBar : UIProgressView?
-    @IBOutlet var backgroundView : UIImageView?
+    @IBOutlet var backgroundView : UIImageView!
     @IBOutlet var infoTextView : UITextView!
     @IBOutlet var ratingView : UIView?
     @IBOutlet var crewCollectionView: UICollectionView?
     
-    //trailers
+    // Trailer view
     @IBOutlet var trailerView: YTPlayerView!
     @IBOutlet var trailerLabel: UILabel!
     @IBOutlet var prevBtn: UIButton!
@@ -33,9 +33,15 @@ class MovieViewController: UIViewController,UICollectionViewDataSource, UICollec
     @IBOutlet var noTrailerLabel: UILabel!
     var currentTrailer: Int = 0
     var trailerKeys: [String] = []
-
+    
+    // layout
     @IBOutlet var synopsisHeightConstraint: NSLayoutConstraint!
-
+    func resizeInfoTextView(){
+        let sizeThatShouldFitTheContent: CGSize = infoTextView.sizeThatFits(infoTextView.frame.size)
+        println(sizeThatShouldFitTheContent)
+        synopsisHeightConstraint.constant = sizeThatShouldFitTheContent.height
+        println(infoTextView.frame.size)
+    }
     
     init(coder aDecoder: NSCoder!) {
         super.init(coder: aDecoder)
@@ -180,43 +186,14 @@ class MovieViewController: UIViewController,UICollectionViewDataSource, UICollec
         var selectedCast = self.castMembers[castIndex]
         castViewController.cast = selectedCast
     }
-    //layout
-    func resizeInfoTextView(){
-        let sizeThatShouldFitTheContent: CGSize = infoTextView.sizeThatFits(infoTextView.frame.size)
-        synopsisHeightConstraint.constant = sizeThatShouldFitTheContent.height
-    }
     
     // setup background
     func loadBackground(){
-        let imgURLString = movie!.bgURL
-        if(movie!.bgURL != nil){
-            
-            dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
-                if let urlString = imgURLString{
-                        var imgURL: NSURL = NSURL(string: urlString)
-                    
-                        // Download an NSData representation of the image at the URL
-                        var request: NSURLRequest = NSURLRequest(URL: imgURL)
-                        var urlConnection: NSURLConnection = NSURLConnection(request: request, delegate: self)
-                        self.netActivityCounter++
-                        UIApplication.sharedApplication().networkActivityIndicatorVisible = true
-                        NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue.mainQueue(), completionHandler: {(response: NSURLResponse!,data: NSData!,error: NSError!) -> Void in
-                            if !error? {
-                                self.backgroundImage = UIImage(data: data)
-
-                                self.backgroundView!.image = self.backgroundImage
-                                self.backgroundView!.alpha = 0.5
-                            }
-                            else {
-                                println("Error: \(error.localizedDescription)")
-                            }
-                            self.netActivityCounter--
-                            if self.netActivityCounter == 0 {
-                                UIApplication.sharedApplication().networkActivityIndicatorVisible = false
-                            }
-                        })
-                }
-            })
+        if let url = movie!.bgURL {
+            backgroundView.sd_setImageWithURL(NSURL(string: url), placeholderImage: UIImage(named: "default.jpeg"))
+            backgroundView.alpha = 0.5
+        }else {
+            backgroundView.image = UIImage(named: "default.jpeg")
         }
     }
     
