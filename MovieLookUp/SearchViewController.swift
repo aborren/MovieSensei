@@ -66,13 +66,10 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
     
     // send new data to next view
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject) {
-        
-        var tabBar: MovieTabBarController = segue.destinationViewController as MovieTabBarController
-        var movieViewController: MovieViewController = tabBar.viewControllers[0] as MovieViewController
+        var movieViewController: MovieViewController = segue.destinationViewController as MovieViewController
         let movieIndex = searchResultTableView!.indexPathForSelectedRow().row
         var selectedMovie = self.movies[movieIndex]
-        tabBar.movie = selectedMovie
-        //movieViewController.movie = selectedMovie
+        movieViewController.movie = selectedMovie
     }
     
     // TableView delegate functions
@@ -93,14 +90,16 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
         let yearLabel: UILabel = cell.viewWithTag(120) as UILabel
         
         //trim year (String in Swift is annoying atm
-        if let date = movie.year {
+        /*if let date = movie.year {
+            if(date != ""){
             var trimmedYear : NSString = date
             trimmedYear = trimmedYear.substringToIndex(4)
             yearLabel.text = trimmedYear
-        }
+            }
+        }*/
         
         movieLabel.text = movie.title
-        //yearLabel.text = movie.year
+        yearLabel.text = movie.year
         movieImage.image = UIImage(named: "default.jpeg")
         if(movie.imgURL != nil){
             movieImage.sd_setImageWithURL(NSURL(string: movie.imgURL), placeholderImage: UIImage(named: "default.jpeg"))

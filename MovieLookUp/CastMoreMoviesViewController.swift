@@ -11,8 +11,7 @@ import UIKit
 class CastMoreMoviesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
     @IBOutlet var appearancesTable: UITableView!
-    var movies : [Movie] = []
-    var roles : [String]  = []
+    var movies : [(movie: Movie, role: String)] = []
     var name : String = ""
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,36 +46,34 @@ class CastMoreMoviesViewController: UIViewController, UITableViewDataSource, UIT
             cell = UITableViewCell(style: UITableViewCellStyle.Subtitle, reuseIdentifier: kCellIdentifier)
         }
         let movie = self.movies[indexPath.row]
-        let role = self.roles[indexPath.row]
         let movieImage: UIImageView = cell.viewWithTag(800) as UIImageView
         let movieLabel: UILabel = cell.viewWithTag(810) as UILabel
         let yearLabel: UILabel = cell.viewWithTag(820) as UILabel
         let roleLabel: UILabel = cell.viewWithTag(830) as UILabel
         
-        movieLabel.text = movie.title
+        movieLabel.text = movie.movie.title
         
         //trim year (String in Swift is annoying atm
-        if let date = movie.year {
+        if let date = movie.movie.year {
             var trimmedYear : NSString = date
             trimmedYear = trimmedYear.substringToIndex(4)
             yearLabel.text = trimmedYear
         }
         
         movieImage.image = UIImage(named: "default.jpeg")
-        if(movie.imgURL != nil){
-            movieImage.sd_setImageWithURL(NSURL(string: movie.imgURL), placeholderImage: UIImage(named: "default.jpeg"))
+        if(movie.movie.imgURL != nil){
+            movieImage.sd_setImageWithURL(NSURL(string: movie.movie.imgURL), placeholderImage: UIImage(named: "default.jpeg"))
         }
-        roleLabel.text = role
+        roleLabel.text = movie.role
         return cell
     }
 
     // send new data to next view
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject) {
-        var tabBar: MovieTabBarController = segue.destinationViewController as MovieTabBarController
-        var movieViewController: MovieViewController = tabBar.viewControllers[0] as MovieViewController
+        var movieViewController: MovieViewController = segue.destinationViewController as MovieViewController
         let movieIndex = appearancesTable!.indexPathForSelectedRow().row
         var selectedMovie = self.movies[movieIndex]
-        tabBar.movie = selectedMovie
+        movieViewController.movie = selectedMovie.movie
     }
 
 }

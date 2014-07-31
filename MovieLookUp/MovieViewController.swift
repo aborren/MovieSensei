@@ -21,11 +21,20 @@ class MovieViewController: UIViewController,UICollectionViewDataSource, UICollec
     @IBOutlet var userRatingLabel : UILabel?
     @IBOutlet var userRatingBar : UIProgressView?
     @IBOutlet var backgroundView : UIImageView?
-    @IBOutlet var infoTextView : UITextView?
+    @IBOutlet var infoTextView : UITextView!
     @IBOutlet var ratingView : UIView?
     @IBOutlet var crewCollectionView: UICollectionView?
     
+    //trailers
+    @IBOutlet var trailerView: YTPlayerView!
+    @IBOutlet var trailerLabel: UILabel!
+    @IBOutlet var prevBtn: UIButton!
+    @IBOutlet var nextBtn: UIButton!
+    @IBOutlet var noTrailerLabel: UILabel!
+    var currentTrailer: Int = 0
+    var trailerKeys: [String] = []
 
+    @IBOutlet var synopsisHeightConstraint: NSLayoutConstraint!
 
     
     init(coder aDecoder: NSCoder!) {
@@ -34,11 +43,11 @@ class MovieViewController: UIViewController,UICollectionViewDataSource, UICollec
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //self.title = movie?.title
+        setSelectionButton()
         self.api = APIController(delegate: self)
 
         // Do any additional setup after loading the view.
-        
+        self.title = movie!.title!
         loadBackground()
         
         //temp
@@ -48,14 +57,122 @@ class MovieViewController: UIViewController,UICollectionViewDataSource, UICollec
         UIApplication.sharedApplication().networkActivityIndicatorVisible = true
         self.api!.searchTMDBMovieWithID(movie!.id!)
         self.api!.searchTMDBCastWithMovieID(movie!.id!)
+        self.api!.searchTMDBTrailerWithMovieID(movie!.id!)
+        var menyNavBtn : UIBarButtonItem = UIBarButtonItem(image: UIImage(named: "home-25.png"), style: UIBarButtonItemStyle.Plain, target: self, action: "toMainMenu")
+        self.navigationItem.leftItemsSupplementBackButton = true
+        self.navigationItem.leftBarButtonItem = menyNavBtn
         
     }
+    
+    func toMainMenu(){
+        self.navigationController.popToRootViewControllerAnimated(true)
+    }
+
+    //For core data button
+    func setSelectionButton() {
+        let appDel : AppDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+        let context : NSManagedObjectContext = appDel.managedObjectContext
+        
+        let request = NSFetchRequest(entityName: "MovieSelection")
+        request.returnsObjectsAsFaults = false
+        request.predicate = NSPredicate(format: "id == %@", movie!.id!.description)
+        
+        var results : NSArray = context.executeFetchRequest(request, error: nil)
+        if( results.count > 0){
+            setMinusButton()
+        }else{
+            setPlusButton()
+        }
+    }
+    
+    func setPlusButton(){
+        var plus : UIBarButtonItem = UIBarButtonItem(image: UIImage(named: "plus-25.png"), style: UIBarButtonItemStyle.Plain, target: self, action: "addMovie")
+        self.navigationItem.rightBarButtonItem = plus
+    }
+    
+    func setMinusButton(){
+        var minus : UIBarButtonItem = UIBarButtonItem(image: UIImage(named: "minus-25.png"), style: UIBarButtonItemStyle.Plain, target: self, action: "removeMovie")
+        self.navigationItem.rightBarButtonItem = minus
+    }
+    
+    func addMovie(){
+        let appDel : AppDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+        let context : NSManagedObjectContext = appDel.managedObjectContext
+        let entity = NSEntityDescription.entityForName("MovieSelection", inManagedObjectContext: context)
+        var movieSelection = MovieSelection(entity: entity, insertIntoManagedObjectContext: context)
+        //risky maybe?
+        if let mov = movie {
+            movieSelection.id = mov.id!.description
+            movieSelection.name = mov.title!
+            if let bg = mov.bgURL{
+                movieSelection.posterurl = bg
+            }else{
+                movieSelection.posterurl = ""
+            }
+        }
+        setMinusButton()
+        context.save(nil)
+    }
+    
+    func removeMovie(){
+        let appDel : AppDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+        let context : NSManagedObjectContext = appDel.managedObjectContext
+        let request = NSFetchRequest(entityName: "MovieSelection")
+        request.returnsObjectsAsFaults = false
+        request.predicate = NSPredicate(format: "id = %@", movie!.id!.description)             //risky?
+        var results : NSArray = context.executeFetchRequest(request, error: nil)
+        if( results.count > 0){
+            context.deleteObject(results[0] as NSManagedObject)
+        }
+        setPlusButton()
+        context.save(nil)
+    }
+    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
 
+    //trailer
+    func updateTrailerView(){
+        if (trailerKeys.count > 0){
+            var tracker: String
+            tracker = "\(currentTrailer+1)/\(trailerKeys.count)"
+            trailerLabel.text = tracker
+            trailerView.loadWithVideoId(trailerKeys[currentTrailer])
+        } else {
+            noTrailerLabel.hidden = false
+        }
+    }
+    //IBActions
+    @IBAction func prevClick(sender: AnyObject) {
+        currentTrailer--
+        updateTrailerView()
+        updateButtons()
+    }
+    @IBAction func nextClick(sender: AnyObject) {
+        currentTrailer++
+        updateTrailerView()
+        updateButtons()
+    }
+    
+    func updateButtons(){
+        nextBtn.hidden = false
+        prevBtn.hidden = false
+        if(trailerKeys.count == 0){
+            nextBtn.hidden = true
+            prevBtn.hidden = true
+        }
+        if(currentTrailer == 0){
+            prevBtn.hidden = true
+        }
+        if(currentTrailer == trailerKeys.count-1){
+            nextBtn.hidden = true
+        }
+    }
+    
+    
     // send new data to next view
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject) {
         var castViewController: CastViewController = segue.destinationViewController as CastViewController
@@ -63,8 +180,11 @@ class MovieViewController: UIViewController,UICollectionViewDataSource, UICollec
         var selectedCast = self.castMembers[castIndex]
         castViewController.cast = selectedCast
     }
-    
-
+    //layout
+    func resizeInfoTextView(){
+        let sizeThatShouldFitTheContent: CGSize = infoTextView.sizeThatFits(infoTextView.frame.size)
+        synopsisHeightConstraint.constant = sizeThatShouldFitTheContent.height
+    }
     
     // setup background
     func loadBackground(){
@@ -147,7 +267,8 @@ class MovieViewController: UIViewController,UICollectionViewDataSource, UICollec
             self.movie!.userRating = rating
             self.movie!.runtime = runtime
             self.movie!.year = year
-            self.infoTextView!.text = self.movie!.descriptionText()
+            self.infoTextView.text = self.movie!.descriptionText()
+            resizeInfoTextView()
             
             self.netActivityCounter--
             if self.netActivityCounter == 0 {
@@ -166,6 +287,16 @@ class MovieViewController: UIViewController,UICollectionViewDataSource, UICollec
             
             self.crewCollectionView!.reloadData()
             self.crewCollectionView!.setNeedsLayout()
+        }
+        else if(apiType == APItype.RetrieveVideos){
+            self.trailerKeys = []
+            let videos: NSArray? = results["results"] as? NSArray
+            for video in videos! {
+                trailerKeys.append(video["key"] as String)
+            }
+            
+            updateTrailerView()
+            updateButtons()
         }
     }
     

@@ -49,18 +49,10 @@ class TopListViewController:UIViewController, UICollectionViewDataSource, UIColl
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject) {
-        
-        
-        
-        var tabBar: MovieTabBarController = segue.destinationViewController as MovieTabBarController
-        
-        var movieViewController: MovieViewController = tabBar.viewControllers[0] as MovieViewController
-        
+        var movieViewController: MovieViewController = segue.destinationViewController as MovieViewController
         let movieIndex = MoviesCollectionView!.indexPathForCell(sender as UICollectionViewCell).row
-        
         var selectedMovie = self.movies[movieIndex]
-        
-        tabBar.movie = selectedMovie
+        movieViewController.movie = selectedMovie
         
     }
     

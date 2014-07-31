@@ -38,12 +38,10 @@ class SimilarMoviesViewController: UIViewController, UICollectionViewDataSource,
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject) {
-        
-        var tabBar: MovieTabBarController = segue.destinationViewController as MovieTabBarController
-        var movieViewController: MovieViewController = tabBar.viewControllers[0] as MovieViewController
+        var movieViewController: MovieViewController = segue.destinationViewController as MovieViewController
         let movieIndex = similarMoviesCollectionView!.indexPathForCell(sender as UICollectionViewCell).row
         var selectedMovie = self.movies[movieIndex]
-        tabBar.movie = selectedMovie
+        movieViewController.movie = selectedMovie
     }
     
     func loadBackground(){
@@ -75,7 +73,7 @@ class SimilarMoviesViewController: UIViewController, UICollectionViewDataSource,
             poster.sd_setImageWithURL(NSURL(string: url), placeholderImage: UIImage(named: "default.jpeg"))
         }else {
             label.text = movie.title!
-           // label.transform = CGAffineTransformMakeRotation( 3.14 / 3.0 )
+            label.transform = CGAffineTransformMakeRotation( 3.14 / 3.0 )
             poster.image = UIImage(named: "default.jpeg")
         }
         

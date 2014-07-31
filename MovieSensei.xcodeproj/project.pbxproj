@@ -28,7 +28,6 @@
 		B29674021985AD1300C92F17 /* minus-25.png in Resources */ = {isa = PBXBuildFile; fileRef = B29674001985AD1300C92F17 /* minus-25.png */; };
 		B29674031985AD1300C92F17 /* minus-25@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B29674011985AD1300C92F17 /* minus-25@2x.png */; };
 		B29674071985B4DF00C92F17 /* RandomizedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B29674061985B4DF00C92F17 /* RandomizedViewController.swift */; };
-		B296F9EB198529B400BA366D /* CastContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B296F9EA198529B400BA366D /* CastContainerViewController.swift */; };
 		B296F9ED19857BFB00BA366D /* CastMoreMoviesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B296F9EC19857BFB00BA366D /* CastMoreMoviesViewController.swift */; };
 		B297292119827F1A007B39E7 /* MovieVideosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B297292019827F1A007B39E7 /* MovieVideosViewController.swift */; };
 		B29729231982865C007B39E7 /* MovieTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B29729221982865C007B39E7 /* MovieTabBarController.swift */; };
@@ -105,7 +104,6 @@
 		B29674001985AD1300C92F17 /* minus-25.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "minus-25.png"; sourceTree = "<group>"; };
 		B29674011985AD1300C92F17 /* minus-25@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "minus-25@2x.png"; sourceTree = "<group>"; };
 		B29674061985B4DF00C92F17 /* RandomizedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RandomizedViewController.swift; sourceTree = "<group>"; };
-		B296F9EA198529B400BA366D /* CastContainerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CastContainerViewController.swift; sourceTree = "<group>"; };
 		B296F9EC19857BFB00BA366D /* CastMoreMoviesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CastMoreMoviesViewController.swift; sourceTree = "<group>"; };
 		B297292019827F1A007B39E7 /* MovieVideosViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieVideosViewController.swift; sourceTree = "<group>"; };
 		B29729221982865C007B39E7 /* MovieTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieTabBarController.swift; sourceTree = "<group>"; };
@@ -285,7 +283,6 @@
 				B296F9EC19857BFB00BA366D /* CastMoreMoviesViewController.swift */,
 				B2972937198306D8007B39E7 /* TopListViewController.swift */,
 				B29674061985B4DF00C92F17 /* RandomizedViewController.swift */,
-				B296F9EA198529B400BA366D /* CastContainerViewController.swift */,
 				B29B0BE819867B0300E89E91 /* NavigationViewController.swift */,
 				B299FBD419772A2800CB7382 /* MovieSelectionViewController.swift */,
 				B29729331982F5E0007B39E7 /* SimilarMoviesViewController.swift */,
@@ -484,7 +481,6 @@
 				B299FB371976921D00CB7382 /* Cast.swift in Sources */,
 				B29363B519497CF80062C728 /* AppDelegate.swift in Sources */,
 				B2AEBAAB1975B4F800F931D8 /* SDWebImageManager.m in Sources */,
-				B296F9EB198529B400BA366D /* CastContainerViewController.swift in Sources */,
 				B2AEBAB31975B4F800F931D8 /* UIView+WebCacheOperation.m in Sources */,
 				B29729341982F5E0007B39E7 /* SimilarMoviesViewController.swift in Sources */,
 				B2AEBAAD1975B4F800F931D8 /* UIButton+WebCache.m in Sources */,

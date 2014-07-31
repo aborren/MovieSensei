@@ -33,11 +33,10 @@ class MovieSelectionViewController: UIViewController, UICollectionViewDataSource
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject) {
         if(segue.identifier == "SelectionToMovie"){
-            var tabBar: MovieTabBarController = segue.destinationViewController as MovieTabBarController
-            var movieViewController: MovieViewController = tabBar.viewControllers[0] as MovieViewController
+            var movieViewController: MovieViewController = segue.destinationViewController as MovieViewController
             let movieIndex = movieCollectionView!.indexPathForCell(sender as UICollectionViewCell).row
             var selectedMovie = self.movies[movieIndex]
-            tabBar.movie = selectedMovie
+            movieViewController.movie = selectedMovie
         }else if(segue.identifier == "SenseiScramble"){
             if(movies.count > 0){
                 var randomizedViewController: RandomizedViewController = segue.destinationViewController as RandomizedViewController
