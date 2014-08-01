@@ -8,8 +8,9 @@
 
 import UIKit
 import CoreData
+import QuartzCore
 
-class MovieViewController: UIViewController,UICollectionViewDataSource, UICollectionViewDelegate, APIControllerProtocol {
+class MovieViewController: UIViewController,UICollectionViewDataSource, UICollectionViewDelegate, UITableViewDataSource, UITableViewDelegate, APIControllerProtocol {
     // Variables
     var movie: Movie?
     var backgroundImage: UIImage?
@@ -18,12 +19,15 @@ class MovieViewController: UIViewController,UICollectionViewDataSource, UICollec
     var castMembers: [Cast] = []
     
     // Outlets
+    @IBOutlet var titleLabel: UILabel!
     @IBOutlet var userRatingLabel : UILabel?
     @IBOutlet var userRatingBar : UIProgressView?
     @IBOutlet var backgroundView : UIImageView!
     @IBOutlet var infoTextView : UITextView!
     @IBOutlet var ratingView : UIView?
     @IBOutlet var crewCollectionView: UICollectionView?
+    @IBOutlet var backDropImageView: UIImageView!
+    @IBOutlet var shortInfoTextView: UITextView!
     
     // Trailer view
     @IBOutlet var trailerView: YTPlayerView!
@@ -34,13 +38,35 @@ class MovieViewController: UIViewController,UICollectionViewDataSource, UICollec
     var currentTrailer: Int = 0
     var trailerKeys: [String] = []
     
+    // Table
+    @IBOutlet var similarMoviesTableView: UITableView!
+    var movies: [Movie] = []
+    
     // layout
+    @IBOutlet var similarMoviesHeightConstraint: NSLayoutConstraint!
     @IBOutlet var synopsisHeightConstraint: NSLayoutConstraint!
     func resizeInfoTextView(){
         let sizeThatShouldFitTheContent: CGSize = infoTextView.sizeThatFits(infoTextView.frame.size)
-        println(sizeThatShouldFitTheContent)
         synopsisHeightConstraint.constant = sizeThatShouldFitTheContent.height
-        println(infoTextView.frame.size)
+    }
+    func resizeTableView(){
+        let sizeThatShouldFitTheContent: CGSize = similarMoviesTableView.sizeThatFits(similarMoviesTableView.frame.size)
+        similarMoviesHeightConstraint.constant = sizeThatShouldFitTheContent.height
+        
+        let containerSize : CGSize = self.view.frame.size
+    }
+    
+    //set shadow in short info view
+    func setShadow(){
+        shortInfoTextView.layer.shadowColor = UIColor.darkGrayColor().CGColor
+        shortInfoTextView.layer.shadowOffset = CGSizeMake(1, 1)
+        shortInfoTextView.layer.shadowOpacity = 1.0
+        shortInfoTextView.layer.shadowRadius = 1.0
+        
+        titleLabel.layer.shadowColor = UIColor.darkGrayColor().CGColor
+        titleLabel.layer.shadowOffset = CGSizeMake(1, 1)
+        titleLabel.layer.shadowOpacity = 1.0
+        titleLabel.layer.shadowRadius = 1.0
     }
     
     init(coder aDecoder: NSCoder!) {
@@ -53,8 +79,9 @@ class MovieViewController: UIViewController,UICollectionViewDataSource, UICollec
         self.api = APIController(delegate: self)
 
         // Do any additional setup after loading the view.
-        self.title = movie!.title!
+        self.titleLabel.text = self.movie!.title!
         loadBackground()
+        setShadow()
         
         //temp
         
@@ -64,6 +91,7 @@ class MovieViewController: UIViewController,UICollectionViewDataSource, UICollec
         self.api!.searchTMDBMovieWithID(movie!.id!)
         self.api!.searchTMDBCastWithMovieID(movie!.id!)
         self.api!.searchTMDBTrailerWithMovieID(movie!.id!)
+        self.api!.searchTMDBSimilarMoviesForID(movie!.id!)
         var menyNavBtn : UIBarButtonItem = UIBarButtonItem(image: UIImage(named: "home-25.png"), style: UIBarButtonItemStyle.Plain, target: self, action: "toMainMenu")
         self.navigationItem.leftItemsSupplementBackButton = true
         self.navigationItem.leftBarButtonItem = menyNavBtn
@@ -181,10 +209,17 @@ class MovieViewController: UIViewController,UICollectionViewDataSource, UICollec
     
     // send new data to next view
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject) {
-        var castViewController: CastViewController = segue.destinationViewController as CastViewController
-        let castIndex = crewCollectionView!.indexPathForCell(sender as UICollectionViewCell).row
-        var selectedCast = self.castMembers[castIndex]
-        castViewController.cast = selectedCast
+        if(segue.identifier == "toCast"){
+            var castViewController: CastViewController = segue.destinationViewController as CastViewController
+            let castIndex = crewCollectionView!.indexPathForCell(sender as UICollectionViewCell).row
+            var selectedCast = self.castMembers[castIndex]
+            castViewController.cast = selectedCast
+        }else{
+            var movieViewController: MovieViewController = segue.destinationViewController as MovieViewController
+            let movieIndex = similarMoviesTableView.indexPathForSelectedRow().row
+            var selectedMovie = self.movies[movieIndex]
+            movieViewController.movie = selectedMovie
+        }
     }
     
     // setup background
@@ -194,6 +229,15 @@ class MovieViewController: UIViewController,UICollectionViewDataSource, UICollec
             backgroundView.alpha = 0.5
         }else {
             backgroundView.image = UIImage(named: "default.jpeg")
+        }
+    }
+    
+    func loadBackDrop(){
+        if let url = movie!.backDrop {
+            println(url)
+            backDropImageView.sd_setImageWithURL(NSURL(string: url), placeholderImage: UIImage(named: "default.jpeg"))
+        }else {
+            backDropImageView.image = UIImage(named: "yayoSensei2.jpg")
         }
     }
     
@@ -227,6 +271,49 @@ class MovieViewController: UIViewController,UICollectionViewDataSource, UICollec
         return cell
     }
     
+    // TableView delegate functions
+    func tableView(tableView: UITableView!, numberOfRowsInSection section: Int) -> Int {
+        if(movies.count>5){
+            //seeMoreButton.hidden = false
+            return 5
+        }else{
+            return movies.count
+        }
+    }
+    
+    func tableView(tableView: UITableView!, willDisplayCell cell: UITableViewCell!, forRowAtIndexPath indexPath: NSIndexPath!) {
+        cell.backgroundColor = UIColor(white: 1.0, alpha: 0.5)
+    }
+    
+    func tableView(tableView: UITableView!, cellForRowAtIndexPath indexPath: NSIndexPath!) -> UITableViewCell! {
+        let kCellIdentifier: String = "SimilarMovieCell"
+        var cell: UITableViewCell = tableView.dequeueReusableCellWithIdentifier(kCellIdentifier) as UITableViewCell
+        if cell == nil {
+            cell = UITableViewCell(style: UITableViewCellStyle.Subtitle, reuseIdentifier: kCellIdentifier)
+        }
+        let movie = self.movies[indexPath.row]
+        let movieImage: UIImageView = cell.viewWithTag(800) as UIImageView
+        let movieLabel: UILabel = cell.viewWithTag(830) as UILabel
+        let yearLabel: UILabel = cell.viewWithTag(820) as UILabel
+        
+        //trim year (String in Swift is annoying atm
+        /*if let date = movie.year {
+        if(date != ""){
+        var trimmedYear : NSString = date
+        trimmedYear = trimmedYear.substringToIndex(4)
+        yearLabel.text = trimmedYear
+        }
+        }*/
+        
+        movieLabel.text = movie.title
+        yearLabel.text = movie.year
+        movieImage.image = UIImage(named: "default.jpeg")
+        if(movie.imgURL != nil){
+            movieImage.sd_setImageWithURL(NSURL(string: movie.imgURL), placeholderImage: UIImage(named: "default.jpeg"))
+        }
+        return cell
+    }
+    
     func didRecieveAPIResults(results: NSDictionary, apiType: APItype) {
         if(apiType == APItype.Movie){
             let synopsis: String? = results["overview"] as? String
@@ -240,11 +327,25 @@ class MovieViewController: UIViewController,UICollectionViewDataSource, UICollec
                 }
             }
             
+            //backdrop
+            let backDropURL: String? = results["backdrop_path"] as? String
+            if(backDropURL)
+            {
+                self.movie!.backDrop = "http://image.tmdb.org/t/p/w780" + backDropURL!
+                loadBackDrop()
+            }
+            
             self.movie!.synopsis = synopsis
             self.movie!.userRating = rating
             self.movie!.runtime = runtime
             self.movie!.year = year
-            self.infoTextView.text = self.movie!.descriptionText()
+            
+            if let synopsis = self.movie!.synopsis{
+                self.infoTextView.text = synopsis
+            }
+            
+            self.shortInfoTextView.text = movie!.descriptionText()
+
             resizeInfoTextView()
             
             self.netActivityCounter--
@@ -274,6 +375,41 @@ class MovieViewController: UIViewController,UICollectionViewDataSource, UICollec
             
             updateTrailerView()
             updateButtons()
+        }
+        else if(apiType == APItype.RetrieveSimilar){
+            if results.count>0 {
+                //delete old movies shown
+                movies = []
+                let allResults: [NSDictionary] = results["results"] as [NSDictionary]
+                
+                // Load in result into movie datastructure
+                for result: NSDictionary in allResults {
+                    
+                    let name: String? = result["title"] as? String
+                    var imageURL: String? = result["poster_path"] as? String
+                    var bgURL: String? = imageURL
+                    if(imageURL){
+                        var url: String = imageURL!
+                        imageURL = "http://image.tmdb.org/t/p/w92" + url
+                        bgURL = "http://image.tmdb.org/t/p/w300" + url
+                    }
+                    let id: NSNumber? = result["id"] as? NSNumber
+                    let year: String? = result["release_date"] as? String
+                    
+                    let newMovie = Movie()
+                    newMovie.title = name
+                    newMovie.id = id
+                    newMovie.imgURL = imageURL
+                    newMovie.bgURL = bgURL
+                    newMovie.year = year
+                    movies.append(newMovie)
+                    
+                }
+                self.similarMoviesTableView.reloadData()
+                self.similarMoviesTableView.setNeedsLayout()
+                resizeTableView()
+            }
+
         }
     }
     

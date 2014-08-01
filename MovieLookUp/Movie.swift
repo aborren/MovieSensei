@@ -16,6 +16,7 @@ class Movie {
     var bgURL: String?
     
     // load this data from another call
+    var backDrop: String?
     var runtime: NSNumber?
     var synopsis: String?
     var genre: [String] = []
@@ -70,12 +71,6 @@ class Movie {
                 description += ", "
             }
         }
-        description += "\n"
-        
-        if let synopsis = self.synopsis {
-            if synopsis != ""{description += "\nSynopsis:\n\(synopsis)\n"}
-        }
-        
         return description
     }
     
