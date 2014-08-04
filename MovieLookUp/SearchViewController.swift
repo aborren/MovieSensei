@@ -168,8 +168,7 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
                 let year: String? = result["release_date"] as? String
                 var imageURL: String? = result["poster_path"] as? String
                 var bgURL: String? = imageURL
-                if(imageURL){
-                    var url: String = imageURL!
+                if let url = imageURL {
                     imageURL = "http://image.tmdb.org/t/p/w92" + url
                     bgURL = "http://image.tmdb.org/t/p/w300" + url
                 }

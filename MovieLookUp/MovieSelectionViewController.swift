@@ -51,7 +51,7 @@ class MovieSelectionViewController: UIViewController, UICollectionViewDataSource
     func setUpMovies(){
         movies = []
         let appDel : AppDelegate = UIApplication.sharedApplication().delegate as AppDelegate
-        let context : NSManagedObjectContext = appDel.managedObjectContext
+        let context : NSManagedObjectContext = appDel.managedObjectContext!
         
         let request = NSFetchRequest(entityName: "MovieSelection")
         request.returnsObjectsAsFaults = false

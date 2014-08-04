@@ -158,8 +158,7 @@ class CastViewController: UIViewController, UITableViewDataSource, UITableViewDe
                 let name: String? = result["title"] as? String
                 var imageURL: String? = result["poster_path"] as? String
                 var bgURL: String? = imageURL
-                if(imageURL){
-                    var url: String = imageURL!
+                if let url = imageURL {
                     imageURL = "http://image.tmdb.org/t/p/w92" + url
                     bgURL = "http://image.tmdb.org/t/p/w300" + url
                 }
@@ -172,7 +171,7 @@ class CastViewController: UIViewController, UITableViewDataSource, UITableViewDe
                 newMovie.imgURL = imageURL
                 newMovie.bgURL = bgURL
                 newMovie.year = year
-                if(newMovie.title && newMovie.title != ""){
+                if(newMovie.title != nil && newMovie.title != ""){
                     movies.append(movie: newMovie, role: result["character"] as String)
                 }
                 

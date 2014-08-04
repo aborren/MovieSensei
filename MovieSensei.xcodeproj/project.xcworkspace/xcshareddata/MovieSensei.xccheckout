@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>E5DFAD91-C3C7-403A-90AE-259DDA713A2B</string>
+	<key>IDESourceControlProjectName</key>
+	<string>MovieSensei</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>D37E67188A35A44D40EC1D63C33660A7222AB4E2</key>
+		<string>https://github.com/aborren/MovieLookUp.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>MovieSensei.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>D37E67188A35A44D40EC1D63C33660A7222AB4E2</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/aborren/MovieLookUp.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>D37E67188A35A44D40EC1D63C33660A7222AB4E2</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>D37E67188A35A44D40EC1D63C33660A7222AB4E2</string>
+			<key>IDESourceControlWCCName</key>
+			<string>MovieLookUp</string>
+		</dict>
+	</array>
+</dict>
+</plist>

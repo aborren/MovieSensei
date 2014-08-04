@@ -69,10 +69,6 @@ class MovieViewController: UIViewController,UICollectionViewDataSource, UICollec
         titleLabel.layer.shadowRadius = 1.0
     }
     
-    init(coder aDecoder: NSCoder!) {
-        super.init(coder: aDecoder)
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         setSelectionButton()
@@ -106,7 +102,7 @@ class MovieViewController: UIViewController,UICollectionViewDataSource, UICollec
     //For core data button
     func setSelectionButton() {
         let appDel : AppDelegate = UIApplication.sharedApplication().delegate as AppDelegate
-        let context : NSManagedObjectContext = appDel.managedObjectContext
+        let context : NSManagedObjectContext = appDel.managedObjectContext!
         
         let request = NSFetchRequest(entityName: "MovieSelection")
         request.returnsObjectsAsFaults = false
@@ -132,7 +128,7 @@ class MovieViewController: UIViewController,UICollectionViewDataSource, UICollec
     
     func addMovie(){
         let appDel : AppDelegate = UIApplication.sharedApplication().delegate as AppDelegate
-        let context : NSManagedObjectContext = appDel.managedObjectContext
+        let context : NSManagedObjectContext = appDel.managedObjectContext!
         let entity = NSEntityDescription.entityForName("MovieSelection", inManagedObjectContext: context)
         var movieSelection = MovieSelection(entity: entity, insertIntoManagedObjectContext: context)
         //risky maybe?
@@ -151,7 +147,7 @@ class MovieViewController: UIViewController,UICollectionViewDataSource, UICollec
     
     func removeMovie(){
         let appDel : AppDelegate = UIApplication.sharedApplication().delegate as AppDelegate
-        let context : NSManagedObjectContext = appDel.managedObjectContext
+        let context : NSManagedObjectContext = appDel.managedObjectContext!
         let request = NSFetchRequest(entityName: "MovieSelection")
         request.returnsObjectsAsFaults = false
         request.predicate = NSPredicate(format: "id = %@", movie!.id!.description)             //risky?
@@ -352,7 +348,7 @@ class MovieViewController: UIViewController,UICollectionViewDataSource, UICollec
         
         //backdrop
         let backDropURL: String? = results["backdrop_path"] as? String
-        if(backDropURL)
+        if(backDropURL != nil)
         {
             self.movie!.backDrop = "http://image.tmdb.org/t/p/w780" + backDropURL!
             loadBackDrop()
@@ -416,7 +412,7 @@ class MovieViewController: UIViewController,UICollectionViewDataSource, UICollec
                 let name: String? = result["title"] as? String
                 var imageURL: String? = result["poster_path"] as? String
                 var bgURL: String? = imageURL
-                if(imageURL){
+                if((imageURL) != nil){
                     var url: String = imageURL!
                     imageURL = "http://image.tmdb.org/t/p/w92" + url
                     bgURL = "http://image.tmdb.org/t/p/w300" + url

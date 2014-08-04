@@ -161,7 +161,7 @@ class APIController {
         
         NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue.mainQueue(), completionHandler: {(response: NSURLResponse!,data: NSData!,error: NSError!) -> Void in
             
-            if error? {
+            if error != nil {
                 
                 println("ERROR: (error.localizedDescription)")
                 
@@ -175,7 +175,7 @@ class APIController {
                 
                 // Now send the JSON result to our delegate object
                 
-                if error? {
+                if error != nil {
                     
                     println("HTTP Error: (error?.localizedDescription)")
                     

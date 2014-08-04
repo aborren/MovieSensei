@@ -211,7 +211,7 @@ class TopListViewController:UIViewController, UICollectionViewDataSource, UIColl
                 
                 var bgURL: String? = imageURL
                 
-                if(imageURL){
+                if(imageURL != nil){
                     
                     var url: String = imageURL!
                     
