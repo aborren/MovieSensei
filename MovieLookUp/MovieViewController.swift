@@ -232,6 +232,7 @@ class MovieViewController: UIViewController,UICollectionViewDataSource, UICollec
     func loadBackDrop(){
         if let url = movie!.backDrop {
             backDropImageView.sd_setImageWithURL(NSURL(string: url), placeholderImage: UIImage(named: "default.jpeg"))
+            
         }else {
             backDropImageView.image = UIImage(named: "yayoSensei2.jpg")
         }
@@ -330,6 +331,10 @@ class MovieViewController: UIViewController,UICollectionViewDataSource, UICollec
             processVideoData(videos)
             let similar = results["similar"] as NSDictionary
             processSimilarMoviesData(similar)
+            
+            //experimentellt!
+            //let images = results["images"] as NSDictionary
+            //processImageData(images)
         }
     }
     
@@ -341,6 +346,7 @@ class MovieViewController: UIViewController,UICollectionViewDataSource, UICollec
         let runtime: NSNumber? = results["runtime"] as? NSNumber
         let year: String? = results["release_date"] as? String
         if let genre = genres {
+            self.movie!.genre = []
             for g in genre {
                 self.movie!.genre.append(g["name"] as String)
             }
@@ -433,5 +439,18 @@ class MovieViewController: UIViewController,UICollectionViewDataSource, UICollec
             self.similarMoviesTableView.setNeedsLayout()
             resizeTableView()
         }
+    }
+    
+    func processImageData(results: NSDictionary){
+        var imageURLs: [String] = []
+        let backDrops: NSArray = results["backdrops"] as NSArray
+        for backDrop in backDrops {
+            if let backDropURL = backDrop["file_path"] as? String {
+                imageURLs.append("http://image.tmdb.org/t/p/w780\(backDropURL)")
+            }
+        }
+        backDropImageView.sd_setAnimationImagesWithURLs(imageURLs)
+        let interval: NSTimeInterval = NSTimeInterval.convertFromFloatLiteral(NSNumber(integer: imageURLs.count).doubleValue * 4.0)
+        backDropImageView.animationDuration = interval
     }
 }

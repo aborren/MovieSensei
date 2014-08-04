@@ -133,7 +133,7 @@ class APIController {
     
     func getTMDBMovieWithID_APPENDED(id: NSNumber) {
         var escapedSearchTerm = modifySearchTerm(id.stringValue)
-        var urlPath = "http://api.themoviedb.org/3/movie/\(escapedSearchTerm)?api_key=\(TMDBkey)&append_to_response=credits,similar,videos"
+        var urlPath = "http://api.themoviedb.org/3/movie/\(escapedSearchTerm)?api_key=\(TMDBkey)&append_to_response=credits,similar,videos,images"
         var url: NSURL = NSURL(string: urlPath)
         var request: NSURLRequest = NSURLRequest(URL: url)
         asyncRequest(request, apiType: APItype.MovieAppendedInfo)
