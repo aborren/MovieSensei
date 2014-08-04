@@ -263,7 +263,7 @@ class MovieViewController: UIViewController,UICollectionViewDataSource, UICollec
         if let url = cast.imageURL {
             portrait.sd_setImageWithURL(NSURL(string: url), placeholderImage: UIImage(named: "default.jpeg"))
         }else {
-            portrait.image = UIImage(named: "default.jpeg")
+            portrait.image = UIImage(named: "profilepic.png")
         }
         
         cell.layer.cornerRadius = 5.0
@@ -340,6 +340,7 @@ class MovieViewController: UIViewController,UICollectionViewDataSource, UICollec
     func processMovieData(results: NSDictionary){
         let synopsis: String? = results["overview"] as? String
         let rating: NSNumber? = results["vote_average"] as? NSNumber
+        let votes: Int? = results["vote_count"] as? Int
         let genres: NSArray? = results["genres"] as? NSArray
         let runtime: NSNumber? = results["runtime"] as? NSNumber
         let year: String? = results["release_date"] as? String
@@ -358,10 +359,10 @@ class MovieViewController: UIViewController,UICollectionViewDataSource, UICollec
         }
         
         self.movie!.synopsis = synopsis
-        self.movie!.userRating = rating
+        self.movie!.rating = rating
+        self.movie!.votes = votes
         self.movie!.runtime = runtime
         self.movie!.year = year
-        
         if let synopsis = self.movie!.synopsis{
             self.infoTextView.text = synopsis
         }
@@ -392,9 +393,11 @@ class MovieViewController: UIViewController,UICollectionViewDataSource, UICollec
     
     func processVideoData(results: NSDictionary){
         self.trailerKeys = []
-        let videos: NSArray? = results["results"] as? NSArray
-        for video in videos! {
-            trailerKeys.append(video["key"] as String)
+        let videos: NSArray = results["results"] as NSArray
+        for video in videos {
+            if let videoKey = video["key"] as? String {
+                trailerKeys.append(videoKey)
+            }
         }
         
         updateTrailerView()

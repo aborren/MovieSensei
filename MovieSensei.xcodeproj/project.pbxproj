@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B214F9071990038100231EEE /* profilepic.png in Resources */ = {isa = PBXBuildFile; fileRef = B214F9061990038100231EEE /* profilepic.png */; };
 		B280009A1949857200AC9712 /* APIController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B28000991949857200AC9712 /* APIController.swift */; };
 		B280009E19498A9200AC9712 /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = B280009D19498A9200AC9712 /* Movie.swift */; };
 		B29063FA196961C10000FD2E /* default.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = B29063F9196961C10000FD2E /* default.jpeg */; };
@@ -76,6 +77,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		B214F9061990038100231EEE /* profilepic.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = profilepic.png; sourceTree = "<group>"; };
 		B28000991949857200AC9712 /* APIController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIController.swift; sourceTree = "<group>"; };
 		B280009D19498A9200AC9712 /* Movie.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
 		B29063F9196961C10000FD2E /* default.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = default.jpeg; sourceTree = "<group>"; };
@@ -245,6 +247,7 @@
 		B297292E1982EC37007B39E7 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				B214F9061990038100231EEE /* profilepic.png */,
 				B29A1B481987020B00979202 /* yayoSensei2.jpg */,
 				B29674001985AD1300C92F17 /* minus-25.png */,
 				B29674011985AD1300C92F17 /* minus-25@2x.png */,
@@ -420,6 +423,7 @@
 				B29673F71985A80000C92F17 /* stack-32@2x.png in Resources */,
 				B29673FF1985ACC900C92F17 /* plus-25@2x.png in Resources */,
 				B29674031985AD1300C92F17 /* minus-25@2x.png in Resources */,
+				B214F9071990038100231EEE /* profilepic.png in Resources */,
 				B29A1B491987020B00979202 /* yayoSensei2.jpg in Resources */,
 				B29363BA19497CF80062C728 /* Main.storyboard in Resources */,
 				B2972936198304F7007B39E7 /* stack-32.png in Resources */,

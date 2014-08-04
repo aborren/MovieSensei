@@ -20,7 +20,8 @@ class Movie {
     var runtime: NSNumber?
     var synopsis: String?
     var genre: [String] = []
-    var userRating: NSNumber?
+    var rating: NSNumber?
+    var votes: Int?
     
     //for random selection
     var selected: Bool = false
@@ -45,7 +46,7 @@ class Movie {
         self.runtime = runtime
         self.synopsis = synopsis
         self.genre = genre
-        self.userRating = userRating
+        self.rating = userRating
     }
     
     func descriptionText()->String{
@@ -60,8 +61,10 @@ class Movie {
         }
         
         if let rating = self.userRatingAsFloat() {
-            let rate = NSString(format: "%.1f", rating)
-            description += "Rating: \(rate)\n"
+            if let votes = self.votes{
+                let rate = NSString(format: "%.1f", rating)
+                description += "Rating: \(rate) (\(votes) votes)\n"
+            }
         }
         
         description += "Genre: "
@@ -75,9 +78,17 @@ class Movie {
     }
     
     func userRatingAsFloat()->Float?{
-        if let rating = self.userRating{
+        if let rating = self.rating{
             return rating.floatValue
         }
-        return nil
+        return 0
+    }
+    
+    func getTMDBVoteCount() -> Int?{
+        if let count = votes {
+            return count
+        }else{
+            return 0
+        }
     }
 }

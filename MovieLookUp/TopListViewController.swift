@@ -58,17 +58,10 @@ class TopListViewController:UIViewController, UICollectionViewDataSource, UIColl
     
     //helper to reset table
     func resetCollection(){
-        
         movies = []
-        
         page = 1
-        
-        
-        
         MoviesCollectionView!.reloadData()
-        
         MoviesCollectionView!.scrollRectToVisible(CGRectMake(0, 0, 1, 1), animated: false)
-        
     }
 
     //helper to load next page (max 3)

@@ -26,4 +26,12 @@ class Cast{
         }
         self.character = character
     }
+    
+    init(name: NSString?, id: NSNumber?, imageURL: NSString?){
+        self.name = name
+        self.id = id
+        if let url = imageURL {
+            self.imageURL = "http://image.tmdb.org/t/p/w92" + url
+        }
+    }
 }

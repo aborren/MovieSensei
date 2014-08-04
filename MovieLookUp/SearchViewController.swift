@@ -11,11 +11,13 @@ import UIKit
 class SearchViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, APIControllerProtocol, UISearchBarDelegate {
     
     // Outlets
-    @IBOutlet var searchResultTableView : UITableView?
-    @IBOutlet var searchBar : UISearchBar?
+    @IBOutlet var searchTypeSegmentedControl: UISegmentedControl!
+    @IBOutlet var searchResultTableView : UITableView!
+    @IBOutlet var searchBar : UISearchBar!
 
     // Variables
-    var movies: [Movie] = [Movie]()
+    var movies: [Movie] = []
+    var actors: [Cast] = []
     var api: APIController?
     var imageCache = NSMutableDictionary()
     var netActivityCounter: Int = 0
@@ -30,7 +32,15 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-        
+    
+    // Search for movie or actor
+    @IBAction func indexChanged(sender: AnyObject) {
+        doSearchWithString(searchBar.text)
+        self.searchResultTableView.reloadData()
+        self.searchResultTableView.setNeedsLayout()
+        self.searchResultTableView.scrollRectToVisible(CGRectMake(0, 0, 1, 1), animated: false)
+    }
+    
     //NetActivity Functions
     func netActivityUp(){
         self.netActivityCounter++
@@ -47,36 +57,64 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
     // Searchbar delegate functions
     func searchBarSearchButtonClicked(searchBar: UISearchBar!){
         netActivityUp()
-        self.api!.searchTMDBFor(searchBar.text)
+        doSearchWithString(searchBar.text)
         self.view.endEditing(true)
         
 
     }
     
     func searchBar(searchBar: UISearchBar!, textDidChange searchText: String!){
-        if(searchText != ""){
-            netActivityUp()
-            self.api!.searchTMDBFor(searchBar.text)
+        doSearchWithString(searchText)
+    }
+    
+    func doSearchWithString(searchString:String){
+        if(searchString != ""){
+            // 0 = movie, 1 = actor
+            if(searchTypeSegmentedControl.selectedSegmentIndex == 0){
+                netActivityUp()
+                self.api!.searchTMDBForMovie(searchString)
+            }else if(searchTypeSegmentedControl.selectedSegmentIndex == 1){
+                netActivityUp()
+                self.api!.searchTMDBForPerson(searchString)
+            }
         }else{
             movies = []
+            actors = []
             self.searchResultTableView!.reloadData()
         }
     }
     
-    
     // send new data to next view
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject) {
-        var movieViewController: MovieViewController = segue.destinationViewController as MovieViewController
-        let movieIndex = searchResultTableView!.indexPathForSelectedRow().row
-        var selectedMovie = self.movies[movieIndex]
-        movieViewController.movie = selectedMovie
+        if(searchTypeSegmentedControl.selectedSegmentIndex == 0){
+            var movieViewController: MovieViewController = segue.destinationViewController as MovieViewController
+            let movieIndex = searchResultTableView!.indexPathForSelectedRow().row
+            var selectedMovie = self.movies[movieIndex]
+            movieViewController.movie = selectedMovie
+        }else{
+            var castViewController: CastViewController = segue.destinationViewController as CastViewController
+            let castIndex = searchResultTableView!.indexPathForSelectedRow().row
+            var selectedCast = self.actors[castIndex]
+            castViewController.cast = selectedCast
+        }
     }
     
     // TableView delegate functions
     func tableView(tableView: UITableView!, numberOfRowsInSection section: Int) -> Int {
-        return movies.count
+        if(searchTypeSegmentedControl.selectedSegmentIndex == 0){
+            return movies.count
+        }else{
+            return actors.count
+        }
     }
     
+    func tableView(tableView: UITableView!, didSelectRowAtIndexPath indexPath: NSIndexPath!) {
+        if(searchTypeSegmentedControl.selectedSegmentIndex == 0){
+            performSegueWithIdentifier("SearchToMovie", sender: self)
+        }else{
+            performSegueWithIdentifier("SearchToCast", sender: self)
+        }
+    }
     
     func tableView(tableView: UITableView!, cellForRowAtIndexPath indexPath: NSIndexPath!) -> UITableViewCell! {
         let kCellIdentifier: String = "SearchResultCell"
@@ -84,32 +122,41 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
         if cell == nil {
             cell = UITableViewCell(style: UITableViewCellStyle.Subtitle, reuseIdentifier: kCellIdentifier)
         }
-        let movie = self.movies[indexPath.row]
-        let movieImage: UIImageView = cell.viewWithTag(100) as UIImageView
-        let movieLabel: UILabel = cell.viewWithTag(130) as UILabel
+        let image: UIImageView = cell.viewWithTag(100) as UIImageView
+        let nameLabel: UILabel = cell.viewWithTag(130) as UILabel
         let yearLabel: UILabel = cell.viewWithTag(120) as UILabel
         
-        //trim year (String in Swift is annoying atm
-        /*if let date = movie.year {
+        if(searchTypeSegmentedControl.selectedSegmentIndex == 0){
+            let movie = self.movies[indexPath.row]
+            //trim year (String in Swift is annoying atm
+            /*if let date = movie.year {
             if(date != ""){
             var trimmedYear : NSString = date
             trimmedYear = trimmedYear.substringToIndex(4)
             yearLabel.text = trimmedYear
             }
-        }*/
-        
-        movieLabel.text = movie.title
-        yearLabel.text = movie.year
-        movieImage.image = UIImage(named: "default.jpeg")
-        if(movie.imgURL != nil){
-            movieImage.sd_setImageWithURL(NSURL(string: movie.imgURL), placeholderImage: UIImage(named: "default.jpeg"))
+            }*/
+            nameLabel.text = movie.title
+            yearLabel.text = movie.year
+            image.image = UIImage(named: "default.jpeg")
+            if(movie.imgURL != nil){
+                image.sd_setImageWithURL(NSURL(string: movie.imgURL), placeholderImage: UIImage(named: "default.jpeg"))
+            }
+        }else{
+            let actor = self.actors[indexPath.row]
+            nameLabel.text = actor.name
+            yearLabel.text = ""
+            image.image = UIImage(named: "profilepic.png")
+            if(actor.imageURL != nil){
+                image.sd_setImageWithURL(NSURL(string: actor.imageURL), placeholderImage: UIImage(named: "default.jpeg"))
+            }
         }
+
         return cell
     }
 
     func didRecieveAPIResults(results: NSDictionary, apiType: APItype) {
-        // Store the results in our table data array
-        if results.count>0 {
+        if (apiType == APItype.SearchMovie) {
             //delete old movies shown
             movies = []
             let allResults: [NSDictionary] = results["results"] as [NSDictionary]
@@ -135,12 +182,26 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
                 newMovie.bgURL = bgURL
                 newMovie.year = year
                 movies.append(newMovie)
-                
             }
-            self.searchResultTableView!.reloadData()
-            self.searchResultTableView!.setNeedsLayout()
-            netActivityDown()
+        }else if (apiType == APItype.SearchPerson) {
+            //delete old actors shown
+            actors = []
+            let allResults: [NSDictionary] = results["results"] as [NSDictionary]
+            
+            // Load in result into cast datastructure
+            for result: NSDictionary in allResults {
+                
+                let name: String? = result["name"] as? String
+                var imageURL: String? = result["profile_path"] as? String
+                let id: NSNumber? = result["id"] as? NSNumber
+                
+                let newActor = Cast(name: name, id: id, imageURL: imageURL)
+                actors.append(newActor)
+            }
         }
+        self.searchResultTableView!.reloadData()
+        self.searchResultTableView!.setNeedsLayout()
+        netActivityDown()
     }
 
 }

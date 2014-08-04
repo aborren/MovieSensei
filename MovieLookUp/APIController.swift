@@ -24,13 +24,23 @@ class APIController {
         self.delegate = delegate
     }
     
-    func searchTMDBFor(searchTerm: String) {
+    func searchTMDBForMovie(searchTerm: String) {
         var escapedSearchTerm = modifySearchTerm(searchTerm)
         var urlPath: String = "http://api.themoviedb.org/3/search/movie?api_key=\(TMDBkey)&query=\(escapedSearchTerm)&search_type=ngram"
         var url: NSURL = NSURL(string: urlPath)
         var request: NSURLRequest = NSURLRequest(URL: url)
-        asyncRequest(request, apiType: APItype.RetrieveMovies)
+        asyncRequest(request, apiType: APItype.SearchMovie)
         println("Search TMDB API (movie) at URL \(url)")
+        
+    }
+    
+    func searchTMDBForPerson(searchTerm: String) {
+        var escapedSearchTerm = modifySearchTerm(searchTerm)
+        var urlPath: String = "http://api.themoviedb.org/3/search/person?api_key=\(TMDBkey)&query=\(escapedSearchTerm)&search_type=ngram"
+        var url: NSURL = NSURL(string: urlPath)
+        var request: NSURLRequest = NSURLRequest(URL: url)
+        asyncRequest(request, apiType: APItype.SearchPerson)
+        println("Search TMDB API (person) at URL \(url)")
         
     }
     
@@ -130,15 +140,6 @@ class APIController {
         println("Getting TMDB movie using ID \(id) and appending data at URL \(url)")
     }
     
-    func searchTMDBForMulti(searchTerm: String) {
-        var escapedSearchTerm = modifySearchTerm(searchTerm)
-        var urlPath: String = "http://api.themoviedb.org/3/search/multi?api_key=\(TMDBkey)&query=\(escapedSearchTerm)&search_type=ngram"
-        var url: NSURL = NSURL(string: urlPath)
-        var request: NSURLRequest = NSURLRequest(URL: url)
-        asyncRequest(request, apiType: APItype.RetrieveMovies)
-        println("Search TMDB API (movie) at URL \(url)")
-        
-    }
     
     func modifySearchTerm(searchTerm: String) -> String{
         

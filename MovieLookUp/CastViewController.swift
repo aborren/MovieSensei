@@ -58,7 +58,7 @@ class CastViewController: UIViewController, UITableViewDataSource, UITableViewDe
             if let url = cast.imageURL {
                 portrait.sd_setImageWithURL(NSURL(string: url), placeholderImage: UIImage(named: "default.jpeg"))
             }else {
-                portrait.image = UIImage(named: "default.jpeg")
+                portrait.image = UIImage(named: "profilepic.png")
             }
         }
     }
@@ -78,7 +78,6 @@ class CastViewController: UIViewController, UITableViewDataSource, UITableViewDe
         tableHeightConstraint.constant = sizeThatShouldFitTheContent.height
         
         let containerSize : CGSize = self.view.frame.size
-        println(containerSize)
     }
     
     /*
@@ -153,7 +152,6 @@ class CastViewController: UIViewController, UITableViewDataSource, UITableViewDe
             //delete old movies shown
             movies = []
             let allResults: [NSDictionary] = results["cast"] as [NSDictionary]
-            println("movies = \(allResults.count)")
             // Load in result into movie datastructure
             for result: NSDictionary in allResults {
                 

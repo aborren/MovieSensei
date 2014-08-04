@@ -9,5 +9,5 @@
 import Foundation
 
 enum APItype{
-    case RetrieveMovies, Movie, RetrieveCast, RetrieveVideos, RetrieveSimilar, NowPlaying, Upcoming, Popular, TopRated, Person, PersonAppearances, MovieAppendedInfo, SearchMulti
+    case Movie, RetrieveCast, RetrieveVideos, RetrieveSimilar, NowPlaying, Upcoming, Popular, TopRated, Person, PersonAppearances, MovieAppendedInfo, SearchMulti, SearchPerson, SearchMovie
 }
