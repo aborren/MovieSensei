@@ -53,6 +53,7 @@ class CastViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     func showNameAndPortrait(){
         if let cast = self.cast {
+            self.title = cast.name
             nameLabel.text = cast.name
             if let url = cast.imageURL {
                 portrait.sd_setImageWithURL(NSURL(string: url), placeholderImage: UIImage(named: "default.jpeg"))

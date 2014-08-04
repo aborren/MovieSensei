@@ -77,21 +77,22 @@ class MovieViewController: UIViewController,UICollectionViewDataSource, UICollec
         super.viewDidLoad()
         setSelectionButton()
         self.api = APIController(delegate: self)
-
+        self.title = movie!.title
         // Do any additional setup after loading the view.
         self.titleLabel.text = self.movie!.title!
         loadBackground()
         setShadow()
         
         //temp
-        
+        self.crewCollectionView!.scrollsToTop = false
         self.netActivityCounter++
         self.netActivityCounter++
         UIApplication.sharedApplication().networkActivityIndicatorVisible = true
-        self.api!.searchTMDBMovieWithID(movie!.id!)
+      /*  self.api!.searchTMDBMovieWithID(movie!.id!)
         self.api!.searchTMDBCastWithMovieID(movie!.id!)
         self.api!.searchTMDBTrailerWithMovieID(movie!.id!)
-        self.api!.searchTMDBSimilarMoviesForID(movie!.id!)
+        self.api!.searchTMDBSimilarMoviesForID(movie!.id!)*/
+        self.api!.getTMDBMovieWithID_APPENDED(movie!.id!)
         var menyNavBtn : UIBarButtonItem = UIBarButtonItem(image: UIImage(named: "home-25.png"), style: UIBarButtonItemStyle.Plain, target: self, action: "toMainMenu")
         self.navigationItem.leftItemsSupplementBackButton = true
         self.navigationItem.leftBarButtonItem = menyNavBtn
@@ -234,7 +235,6 @@ class MovieViewController: UIViewController,UICollectionViewDataSource, UICollec
     
     func loadBackDrop(){
         if let url = movie!.backDrop {
-            println(url)
             backDropImageView.sd_setImageWithURL(NSURL(string: url), placeholderImage: UIImage(named: "default.jpeg"))
         }else {
             backDropImageView.image = UIImage(named: "yayoSensei2.jpg")
@@ -316,101 +316,123 @@ class MovieViewController: UIViewController,UICollectionViewDataSource, UICollec
     
     func didRecieveAPIResults(results: NSDictionary, apiType: APItype) {
         if(apiType == APItype.Movie){
-            let synopsis: String? = results["overview"] as? String
-            let rating: NSNumber? = results["vote_average"] as? NSNumber
-            let genres: NSArray? = results["genres"] as? NSArray
-            let runtime: NSNumber? = results["runtime"] as? NSNumber
-            let year: String? = results["release_date"] as? String
-            if let genre = genres {
-                for g in genre {
-                    self.movie!.genre.append(g["name"] as String)
-                }
-            }
-            
-            //backdrop
-            let backDropURL: String? = results["backdrop_path"] as? String
-            if(backDropURL)
-            {
-                self.movie!.backDrop = "http://image.tmdb.org/t/p/w780" + backDropURL!
-                loadBackDrop()
-            }
-            
-            self.movie!.synopsis = synopsis
-            self.movie!.userRating = rating
-            self.movie!.runtime = runtime
-            self.movie!.year = year
-            
-            if let synopsis = self.movie!.synopsis{
-                self.infoTextView.text = synopsis
-            }
-            
-            self.shortInfoTextView.text = movie!.descriptionText()
-
-            resizeInfoTextView()
-            
-            self.netActivityCounter--
-            if self.netActivityCounter == 0 {
-                UIApplication.sharedApplication().networkActivityIndicatorVisible = false
-            }
+            processMovieData(results)
         }
         else if(apiType == APItype.RetrieveCast){
-            let cast: NSArray? = results["cast"] as? NSArray
-            for person in cast! {
-                self.castMembers.append(Cast(name: person["name"] as? NSString, id: person["id"] as? NSNumber, imageURL: person["profile_path"] as? NSString, character: person["character"] as? NSString))
-            }
-            self.netActivityCounter--
-            if self.netActivityCounter == 0 {
-                UIApplication.sharedApplication().networkActivityIndicatorVisible = false
-            }
-            
-            self.crewCollectionView!.reloadData()
-            self.crewCollectionView!.setNeedsLayout()
+            processCastData(results)
         }
         else if(apiType == APItype.RetrieveVideos){
-            self.trailerKeys = []
-            let videos: NSArray? = results["results"] as? NSArray
-            for video in videos! {
-                trailerKeys.append(video["key"] as String)
-            }
-            
-            updateTrailerView()
-            updateButtons()
+            processVideoData(results)
         }
         else if(apiType == APItype.RetrieveSimilar){
-            if results.count>0 {
-                //delete old movies shown
-                movies = []
-                let allResults: [NSDictionary] = results["results"] as [NSDictionary]
-                
-                // Load in result into movie datastructure
-                for result: NSDictionary in allResults {
-                    
-                    let name: String? = result["title"] as? String
-                    var imageURL: String? = result["poster_path"] as? String
-                    var bgURL: String? = imageURL
-                    if(imageURL){
-                        var url: String = imageURL!
-                        imageURL = "http://image.tmdb.org/t/p/w92" + url
-                        bgURL = "http://image.tmdb.org/t/p/w300" + url
-                    }
-                    let id: NSNumber? = result["id"] as? NSNumber
-                    let year: String? = result["release_date"] as? String
-                    
-                    let newMovie = Movie()
-                    newMovie.title = name
-                    newMovie.id = id
-                    newMovie.imgURL = imageURL
-                    newMovie.bgURL = bgURL
-                    newMovie.year = year
-                    movies.append(newMovie)
-                    
-                }
-                self.similarMoviesTableView.reloadData()
-                self.similarMoviesTableView.setNeedsLayout()
-                resizeTableView()
-            }
-
+            processSimilarMoviesData(results)
+        } else if(apiType == APItype.MovieAppendedInfo){
+            processMovieData(results)
+            let credits = results["credits"] as NSDictionary
+            processCastData(credits)
+            let videos = results["videos"] as NSDictionary
+            processVideoData(videos)
+            let similar = results["similar"] as NSDictionary
+            processSimilarMoviesData(similar)
         }
     }
     
+    func processMovieData(results: NSDictionary){
+        let synopsis: String? = results["overview"] as? String
+        let rating: NSNumber? = results["vote_average"] as? NSNumber
+        let genres: NSArray? = results["genres"] as? NSArray
+        let runtime: NSNumber? = results["runtime"] as? NSNumber
+        let year: String? = results["release_date"] as? String
+        if let genre = genres {
+            for g in genre {
+                self.movie!.genre.append(g["name"] as String)
+            }
+        }
+        
+        //backdrop
+        let backDropURL: String? = results["backdrop_path"] as? String
+        if(backDropURL)
+        {
+            self.movie!.backDrop = "http://image.tmdb.org/t/p/w780" + backDropURL!
+            loadBackDrop()
+        }
+        
+        self.movie!.synopsis = synopsis
+        self.movie!.userRating = rating
+        self.movie!.runtime = runtime
+        self.movie!.year = year
+        
+        if let synopsis = self.movie!.synopsis{
+            self.infoTextView.text = synopsis
+        }
+        
+        self.shortInfoTextView.text = movie!.descriptionText()
+        
+        resizeInfoTextView()
+        
+        self.netActivityCounter--
+        if self.netActivityCounter == 0 {
+            UIApplication.sharedApplication().networkActivityIndicatorVisible = false
+        }
+    }
+    
+    func processCastData(results: NSDictionary){
+        let cast: NSArray? = results["cast"] as? NSArray
+        for person in cast! {
+            self.castMembers.append(Cast(name: person["name"] as? NSString, id: person["id"] as? NSNumber, imageURL: person["profile_path"] as? NSString, character: person["character"] as? NSString))
+        }
+        self.netActivityCounter--
+        if self.netActivityCounter == 0 {
+            UIApplication.sharedApplication().networkActivityIndicatorVisible = false
+        }
+        
+        self.crewCollectionView!.reloadData()
+        self.crewCollectionView!.setNeedsLayout()
+    }
+    
+    func processVideoData(results: NSDictionary){
+        self.trailerKeys = []
+        let videos: NSArray? = results["results"] as? NSArray
+        for video in videos! {
+            trailerKeys.append(video["key"] as String)
+        }
+        
+        updateTrailerView()
+        updateButtons()
+    }
+    
+    func processSimilarMoviesData(results: NSDictionary){
+        if results.count>0 {
+            //delete old movies shown
+            movies = []
+            let allResults: [NSDictionary] = results["results"] as [NSDictionary]
+            
+            // Load in result into movie datastructure
+            for result: NSDictionary in allResults {
+                
+                let name: String? = result["title"] as? String
+                var imageURL: String? = result["poster_path"] as? String
+                var bgURL: String? = imageURL
+                if(imageURL){
+                    var url: String = imageURL!
+                    imageURL = "http://image.tmdb.org/t/p/w92" + url
+                    bgURL = "http://image.tmdb.org/t/p/w300" + url
+                }
+                let id: NSNumber? = result["id"] as? NSNumber
+                let year: String? = result["release_date"] as? String
+                
+                let newMovie = Movie()
+                newMovie.title = name
+                newMovie.id = id
+                newMovie.imgURL = imageURL
+                newMovie.bgURL = bgURL
+                newMovie.year = year
+                movies.append(newMovie)
+                
+            }
+            self.similarMoviesTableView.reloadData()
+            self.similarMoviesTableView.setNeedsLayout()
+            resizeTableView()
+        }
+    }
 }
