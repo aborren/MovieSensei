@@ -129,13 +129,13 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
         if(searchTypeSegmentedControl.selectedSegmentIndex == 0){
             let movie = self.movies[indexPath.row]
             //trim year (String in Swift is annoying atm
-            /*if let date = movie.year {
-            if(date != ""){
-            var trimmedYear : NSString = date
-            trimmedYear = trimmedYear.substringToIndex(4)
-            yearLabel.text = trimmedYear
+            if let date = movie.year {
+                if(!date.isEmpty){
+                    var trimmedYear : NSString = date
+                    trimmedYear = trimmedYear.substringToIndex(4)
+                    movie.year = trimmedYear
+                }
             }
-            }*/
             nameLabel.text = movie.title
             yearLabel.text = movie.year
             image.image = UIImage(named: "default.jpeg")

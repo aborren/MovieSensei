@@ -305,7 +305,7 @@
                                         <color key="textColor" red="0.99607849120000003" green="0.99215692280000001" blue="0.99215692280000001" alpha="1" colorSpace="deviceRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" indicatorStyle="black" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="ckI-Iz-kTt">
+                                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsVerticalScrollIndicator="NO" indicatorStyle="black" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="ckI-Iz-kTt">
                                         <rect key="frame" x="0.0" y="342" width="320" height="131"/>
                                         <color key="backgroundColor" white="1" alpha="0.80000000000000004" colorSpace="calibratedWhite"/>
                                         <constraints>
@@ -330,14 +330,16 @@
                                                         </imageView>
                                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="210" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FBq-1f-Oag">
                                                             <rect key="frame" x="0.0" y="99" width="80" height="12"/>
-                                                            <color key="backgroundColor" red="0.92549026010000002" green="0.86274516580000005" blue="0.65098041299999998" alpha="0.80000000000000004" colorSpace="deviceRGB"/>
+                                                            <color key="backgroundColor" red="0.92549026010000002" green="0.86274516580000005" blue="0.65098041299999998" alpha="0.90000000000000002" colorSpace="deviceRGB"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="8"/>
+                                                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="220" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o4G-2s-eVJ">
                                                             <rect key="frame" x="0.0" y="0.0" width="80" height="12"/>
-                                                            <color key="backgroundColor" red="0.92549026010000002" green="0.86274516580000005" blue="0.65098041299999998" alpha="0.80000000000000004" colorSpace="deviceRGB"/>
+                                                            <color key="backgroundColor" red="0.92549026010000002" green="0.86274516580000005" blue="0.65098041299999998" alpha="0.90000000000000002" colorSpace="deviceRGB"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="8"/>
+                                                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                     </subviews>
@@ -499,7 +501,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="416"/>
                             </imageView>
                             <button opaque="NO" alpha="0.94999999999999996" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DYU-Ss-qVu">
-                                <rect key="frame" x="231" y="238" width="79" height="157"/>
+                                <rect key="frame" x="231" y="129" width="79" height="157"/>
                                 <color key="backgroundColor" red="0.92549026010000002" green="0.86274516580000005" blue="0.65098041299999998" alpha="1" colorSpace="deviceRGB"/>
                                 <state key="normal" title="Search">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -510,7 +512,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" alpha="0.94999999999999996" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xgK-PZ-xEb">
-                                <rect key="frame" x="10" y="238" width="213" height="75"/>
+                                <rect key="frame" x="10" y="129" width="213" height="75"/>
                                 <color key="backgroundColor" red="0.92549026010000002" green="0.86274516580000005" blue="0.65098041299999998" alpha="1" colorSpace="deviceRGB"/>
                                 <state key="normal" title="Browse">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -521,7 +523,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" alpha="0.94999999999999996" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qIk-Je-xyQ">
-                                <rect key="frame" x="10" y="321" width="213" height="75"/>
+                                <rect key="frame" x="10" y="212" width="213" height="75"/>
                                 <color key="backgroundColor" red="0.92549026010000002" green="0.86274516580000005" blue="0.65098041299999998" alpha="1" colorSpace="deviceRGB"/>
                                 <state key="normal" title="Your Selection">
                                     <color key="titleShadowColor" white="0.5" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -530,6 +532,15 @@
                                     <segue destination="ZW2-7s-lfb" kind="push" id="Fia-VJ-dvw"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="This product uses the TMDb API but is not endorsed or certified by TMDb." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ahj-A3-5pA">
+                                <rect key="frame" x="0.0" y="395" width="320" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="5"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="var_2_1_PoweredByTMDB_Blk_Logo_Bree.png" translatesAutoresizingMaskIntoConstraints="NO" id="sSP-9V-uU8">
+                                <rect key="frame" x="255" y="391" width="65" height="25"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -1031,7 +1042,7 @@
                                     <constraint firstAttribute="height" constant="20" id="I3L-4U-aWa"/>
                                 </constraints>
                                 <segments>
-                                    <segment title="In Cinema"/>
+                                    <segment title="Showing"/>
                                     <segment title="Upcoming"/>
                                     <segment title="Popular"/>
                                     <segment title="Top Rated"/>
@@ -1145,6 +1156,7 @@
     <resources>
         <image name="info-32.png" width="32" height="32"/>
         <image name="stack-32.png" width="32" height="32"/>
+        <image name="var_2_1_PoweredByTMDB_Blk_Logo_Bree.png" width="520" height="150"/>
         <image name="yayoSensei2.jpg" width="309" height="472"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
@@ -1156,8 +1168,8 @@
         </simulatedScreenMetrics>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="6Rb-BG-l7x"/>
         <segue reference="epO-yh-L7G"/>
+        <segue reference="2v2-xh-Rzp"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.9960784912109375" green="0.99215692281723022" blue="0.99215692281723022" alpha="1" colorSpace="deviceRGB"/>
 </document>

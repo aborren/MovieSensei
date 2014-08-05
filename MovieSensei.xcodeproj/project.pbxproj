@@ -44,6 +44,7 @@
 		B29B0BE919867B0300E89E91 /* NavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B29B0BE819867B0300E89E91 /* NavigationViewController.swift */; };
 		B29B0BEC19867F1B00E89E91 /* home-25.png in Resources */ = {isa = PBXBuildFile; fileRef = B29B0BEA19867F1B00E89E91 /* home-25.png */; };
 		B29B0BED19867F1B00E89E91 /* home-25@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B29B0BEB19867F1B00E89E91 /* home-25@2x.png */; };
+		B29B3FC21990F2EF00A8B5EA /* var_2_1_PoweredByTMDB_Blk_Logo_Bree.png in Resources */ = {isa = PBXBuildFile; fileRef = B29B3FC11990F2EF00A8B5EA /* var_2_1_PoweredByTMDB_Blk_Logo_Bree.png */; };
 		B2AEB9E51975AC1700F931D8 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2AEB9E41975AC1700F931D8 /* ImageIO.framework */; };
 		B2AEBAA41975B4F800F931D8 /* MKAnnotationView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = B2AEBA841975B4F800F931D8 /* MKAnnotationView+WebCache.m */; };
 		B2AEBAA51975B4F800F931D8 /* NSData+ImageContentType.m in Sources */ = {isa = PBXBuildFile; fileRef = B2AEBA861975B4F800F931D8 /* NSData+ImageContentType.m */; };
@@ -118,6 +119,7 @@
 		B29B0BE819867B0300E89E91 /* NavigationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationViewController.swift; sourceTree = "<group>"; };
 		B29B0BEA19867F1B00E89E91 /* home-25.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "home-25.png"; sourceTree = "<group>"; };
 		B29B0BEB19867F1B00E89E91 /* home-25@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "home-25@2x.png"; sourceTree = "<group>"; };
+		B29B3FC11990F2EF00A8B5EA /* var_2_1_PoweredByTMDB_Blk_Logo_Bree.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = var_2_1_PoweredByTMDB_Blk_Logo_Bree.png; sourceTree = "<group>"; };
 		B2AEB9E41975AC1700F931D8 /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
 		B2AEBA4F1975B0C000F931D8 /* MovieLookUp-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MovieLookUp-Bridging-Header.h"; sourceTree = "<group>"; };
 		B2AEBA831975B4F800F931D8 /* MKAnnotationView+WebCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MKAnnotationView+WebCache.h"; sourceTree = "<group>"; };
@@ -247,6 +249,7 @@
 		B297292E1982EC37007B39E7 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				B29B3FC11990F2EF00A8B5EA /* var_2_1_PoweredByTMDB_Blk_Logo_Bree.png */,
 				B214F9061990038100231EEE /* profilepic.png */,
 				B29A1B481987020B00979202 /* yayoSensei2.jpg */,
 				B29674001985AD1300C92F17 /* minus-25.png */,
@@ -424,6 +427,7 @@
 				B29673FF1985ACC900C92F17 /* plus-25@2x.png in Resources */,
 				B29674031985AD1300C92F17 /* minus-25@2x.png in Resources */,
 				B214F9071990038100231EEE /* profilepic.png in Resources */,
+				B29B3FC21990F2EF00A8B5EA /* var_2_1_PoweredByTMDB_Blk_Logo_Bree.png in Resources */,
 				B29A1B491987020B00979202 /* yayoSensei2.jpg in Resources */,
 				B29363BA19497CF80062C728 /* Main.storyboard in Resources */,
 				B2972936198304F7007B39E7 /* stack-32.png in Resources */,

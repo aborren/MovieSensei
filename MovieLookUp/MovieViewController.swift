@@ -84,10 +84,6 @@ class MovieViewController: UIViewController,UICollectionViewDataSource, UICollec
         self.netActivityCounter++
         self.netActivityCounter++
         UIApplication.sharedApplication().networkActivityIndicatorVisible = true
-      /*  self.api!.searchTMDBMovieWithID(movie!.id!)
-        self.api!.searchTMDBCastWithMovieID(movie!.id!)
-        self.api!.searchTMDBTrailerWithMovieID(movie!.id!)
-        self.api!.searchTMDBSimilarMoviesForID(movie!.id!)*/
         self.api!.getTMDBMovieWithID_APPENDED(movie!.id!)
         var menyNavBtn : UIBarButtonItem = UIBarButtonItem(image: UIImage(named: "home-25.png"), style: UIBarButtonItemStyle.Plain, target: self, action: "toMainMenu")
         self.navigationItem.leftItemsSupplementBackButton = true
@@ -247,24 +243,18 @@ class MovieViewController: UIViewController,UICollectionViewDataSource, UICollec
     func collectionView(collectionView: UICollectionView!, cellForItemAtIndexPath indexPath: NSIndexPath!) -> UICollectionViewCell!
     {
         var cell = collectionView.dequeueReusableCellWithReuseIdentifier("CrewCell", forIndexPath: indexPath) as UICollectionViewCell
-        
         let cast: Cast = castMembers[indexPath.row]
-        
         let portrait: UIImageView = cell.viewWithTag(200) as UIImageView
         let name: UILabel = cell.viewWithTag(210) as UILabel
         let character: UILabel = cell.viewWithTag(220) as UILabel
-        
         name.text = cast.name
         character.text = cast.character
-        
         if let url = cast.imageURL {
             portrait.sd_setImageWithURL(NSURL(string: url), placeholderImage: UIImage(named: "default.jpeg"))
         }else {
             portrait.image = UIImage(named: "profilepic.png")
         }
-        
         cell.layer.cornerRadius = 5.0
-        
         return cell
     }
     
@@ -294,13 +284,13 @@ class MovieViewController: UIViewController,UICollectionViewDataSource, UICollec
         let yearLabel: UILabel = cell.viewWithTag(820) as UILabel
         
         //trim year (String in Swift is annoying atm
-        /*if let date = movie.year {
-        if(date != ""){
-        var trimmedYear : NSString = date
-        trimmedYear = trimmedYear.substringToIndex(4)
-        yearLabel.text = trimmedYear
+        if let date = movie.year {
+            if(!date.isEmpty){
+                var trimmedYear : NSString = date
+                trimmedYear = trimmedYear.substringToIndex(4)
+                movie.year = trimmedYear
+            }
         }
-        }*/
         
         movieLabel.text = movie.title
         yearLabel.text = movie.year
@@ -312,18 +302,7 @@ class MovieViewController: UIViewController,UICollectionViewDataSource, UICollec
     }
     
     func didRecieveAPIResults(results: NSDictionary, apiType: APItype) {
-        if(apiType == APItype.Movie){
-            processMovieData(results)
-        }
-        else if(apiType == APItype.RetrieveCast){
-            processCastData(results)
-        }
-        else if(apiType == APItype.RetrieveVideos){
-            processVideoData(results)
-        }
-        else if(apiType == APItype.RetrieveSimilar){
-            processSimilarMoviesData(results)
-        } else if(apiType == APItype.MovieAppendedInfo){
+        if(apiType == APItype.MovieAppendedInfo){
             processMovieData(results)
             let credits = results["credits"] as NSDictionary
             processCastData(credits)
@@ -331,10 +310,9 @@ class MovieViewController: UIViewController,UICollectionViewDataSource, UICollec
             processVideoData(videos)
             let similar = results["similar"] as NSDictionary
             processSimilarMoviesData(similar)
-            
             //experimentellt!
-            //let images = results["images"] as NSDictionary
-            //processImageData(images)
+           /* let images = results["images"] as NSDictionary
+            processImageData(images)*/
         }
     }
     
