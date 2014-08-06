@@ -10,6 +10,10 @@ import UIKit
 import CoreData
 import QuartzCore
 
+//TEST!!!
+var suggested: NSMutableArray = []
+
+
 class MovieViewController: UIViewController,UICollectionViewDataSource, UICollectionViewDelegate, UITableViewDataSource, UITableViewDelegate, APIControllerProtocol {
     // Variables
     var movie: Movie?
@@ -58,15 +62,24 @@ class MovieViewController: UIViewController,UICollectionViewDataSource, UICollec
     
     //set shadow in short info view
     func setShadow(){
-        shortInfoTextView.layer.shadowColor = UIColor.darkGrayColor().CGColor
+      /*  shortInfoTextView.layer.shadowColor = UIColor.darkGrayColor().CGColor
         shortInfoTextView.layer.shadowOffset = CGSizeMake(1, 1)
         shortInfoTextView.layer.shadowOpacity = 1.0
         shortInfoTextView.layer.shadowRadius = 1.0
-        
-        titleLabel.layer.shadowColor = UIColor.darkGrayColor().CGColor
+        */
+        /*titleLabel.layer.shadowColor = UIColor.darkGrayColor().CGColor
         titleLabel.layer.shadowOffset = CGSizeMake(1, 1)
         titleLabel.layer.shadowOpacity = 1.0
-        titleLabel.layer.shadowRadius = 1.0
+        titleLabel.layer.shadowRadius = 1.0*/
+        setShadowOnLayer(shortInfoTextView.layer)
+        setShadowOnLayer(titleLabel.layer)
+    }
+    
+    func setShadowOnLayer(layer: CALayer){
+        layer.shadowColor = UIColor.darkGrayColor().CGColor
+        layer.shadowOffset = CGSizeMake(1, 1)
+        layer.shadowOpacity = 1.0
+        layer.shadowRadius = 1.0
     }
     
     override func viewDidLoad() {
@@ -245,8 +258,8 @@ class MovieViewController: UIViewController,UICollectionViewDataSource, UICollec
         var cell = collectionView.dequeueReusableCellWithReuseIdentifier("CrewCell", forIndexPath: indexPath) as UICollectionViewCell
         let cast: Cast = castMembers[indexPath.row]
         let portrait: UIImageView = cell.viewWithTag(200) as UIImageView
-        let name: UILabel = cell.viewWithTag(210) as UILabel
-        let character: UILabel = cell.viewWithTag(220) as UILabel
+        var name: UILabel = cell.viewWithTag(210) as UILabel
+        var character: UILabel = cell.viewWithTag(220) as UILabel
         name.text = cast.name
         character.text = cast.character
         if let url = cast.imageURL {
@@ -255,6 +268,9 @@ class MovieViewController: UIViewController,UICollectionViewDataSource, UICollec
             portrait.image = UIImage(named: "profilepic.png")
         }
         cell.layer.cornerRadius = 5.0
+        
+
+        
         return cell
     }
     
@@ -411,6 +427,41 @@ class MovieViewController: UIViewController,UICollectionViewDataSource, UICollec
                 newMovie.bgURL = bgURL
                 newMovie.year = year
                 movies.append(newMovie)
+                
+                //TEST EXPERIMENTELLT!!
+                
+                let votes: Float? = result["vote_count"] as? Float
+                var sM = SuggestedMovie()
+                sM.title = name
+                sM.id = id
+                if let rating = result["vote_average"] as? NSNumber{
+                    if(votes < 10){
+                        sM.rating = rating * (votes!/10.0)
+                    }else{
+                        sM.rating = rating
+                    }
+                }else{ sM.rating = 0 }
+                
+                if let pop = result["popularity"] as? String{
+                    sM.popularity = NSNumberFormatter().numberFromString(pop)
+                }else{
+                    sM.popularity = 0.0
+                }
+
+            
+                var flag = false
+                
+                for s in suggested{
+                    if((s as SuggestedMovie).id == sM.id){
+                        flag = true
+                        (s as SuggestedMovie).counter++
+                    }
+                }
+                
+                if(flag){
+                }else {
+                    suggested.addObject(sM)
+                }
                 
             }
             self.similarMoviesTableView.reloadData()

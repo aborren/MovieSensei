@@ -7,7 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B2136261199271DE00B2808C /* SuggestedMovie.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2136260199271DE00B2808C /* SuggestedMovie.swift */; };
 		B214F9071990038100231EEE /* profilepic.png in Resources */ = {isa = PBXBuildFile; fileRef = B214F9061990038100231EEE /* profilepic.png */; };
+		B23CB67719928CBD000A24D0 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B23CB67619928CBD000A24D0 /* TableViewController.swift */; };
 		B280009A1949857200AC9712 /* APIController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B28000991949857200AC9712 /* APIController.swift */; };
 		B280009E19498A9200AC9712 /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = B280009D19498A9200AC9712 /* Movie.swift */; };
 		B29063FA196961C10000FD2E /* default.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = B29063F9196961C10000FD2E /* default.jpeg */; };
@@ -78,7 +80,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		B2136260199271DE00B2808C /* SuggestedMovie.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SuggestedMovie.swift; sourceTree = "<group>"; };
 		B214F9061990038100231EEE /* profilepic.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = profilepic.png; sourceTree = "<group>"; };
+		B23CB67619928CBD000A24D0 /* TableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
 		B28000991949857200AC9712 /* APIController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIController.swift; sourceTree = "<group>"; };
 		B280009D19498A9200AC9712 /* Movie.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
 		B29063F9196961C10000FD2E /* default.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = default.jpeg; sourceTree = "<group>"; };
@@ -282,6 +286,7 @@
 				B296F9EC19857BFB00BA366D /* CastMoreMoviesViewController.swift */,
 				B2972937198306D8007B39E7 /* TopListViewController.swift */,
 				B29674061985B4DF00C92F17 /* RandomizedViewController.swift */,
+				B23CB67619928CBD000A24D0 /* TableViewController.swift */,
 				B29B0BE819867B0300E89E91 /* NavigationViewController.swift */,
 				B299FBD419772A2800CB7382 /* MovieSelectionViewController.swift */,
 				B29363B619497CF80062C728 /* SearchViewController.swift */,
@@ -294,6 +299,7 @@
 			children = (
 				B299FB711976ED2F00CB7382 /* MovieSelection.swift */,
 				B280009D19498A9200AC9712 /* Movie.swift */,
+				B2136260199271DE00B2808C /* SuggestedMovie.swift */,
 				B299FB361976921D00CB7382 /* Cast.swift */,
 			);
 			name = Models;
@@ -479,6 +485,7 @@
 				B299FB391976970F00CB7382 /* Enum.swift in Sources */,
 				B299FB371976921D00CB7382 /* Cast.swift in Sources */,
 				B29363B519497CF80062C728 /* AppDelegate.swift in Sources */,
+				B23CB67719928CBD000A24D0 /* TableViewController.swift in Sources */,
 				B2AEBAAB1975B4F800F931D8 /* SDWebImageManager.m in Sources */,
 				B2AEBAB31975B4F800F931D8 /* UIView+WebCacheOperation.m in Sources */,
 				B2AEBAAD1975B4F800F931D8 /* UIButton+WebCache.m in Sources */,
@@ -491,6 +498,7 @@
 				B2AEBAA51975B4F800F931D8 /* NSData+ImageContentType.m in Sources */,
 				B280009A1949857200AC9712 /* APIController.swift in Sources */,
 				B2AEBAA41975B4F800F931D8 /* MKAnnotationView+WebCache.m in Sources */,
+				B2136261199271DE00B2808C /* SuggestedMovie.swift in Sources */,
 				B2AEBAA61975B4F800F931D8 /* SDImageCache.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
