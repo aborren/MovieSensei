@@ -16,10 +16,19 @@ class NavigationViewController: UINavigationController {
     }
 
     override func didReceiveMemoryWarning() {
+        
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
 
+    //only allow landscape for movie playback
+    override func shouldAutorotate() -> Bool {
+        if(self.viewControllers[self.viewControllers.count-1].isKindOfClass(YTPlayerView)){
+            return true
+        }
+        return false
+    }
+    
     /*
     // MARK: - Navigation
 

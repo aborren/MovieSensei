@@ -15,20 +15,20 @@ class CastViewController: UIViewController, UITableViewDataSource, UITableViewDe
     var movies : [(movie: Movie, role: String)] = []
     
     
-    @IBOutlet var appearancesTable: UITableView!
-    @IBOutlet var portrait: UIImageView!
-    @IBOutlet var biography: UITextView!
-    @IBOutlet var basicInfo: UIView!
-    @IBOutlet var nameLabel: UILabel!
+    @IBOutlet var appearancesTable: UITableView?
+    @IBOutlet var portrait: UIImageView?
+    @IBOutlet var biography: UITextView?
+    @IBOutlet var basicInfo: UIView?
+    @IBOutlet var nameLabel: UILabel?
     
-    @IBOutlet var bornLabel: UILabel!
-    @IBOutlet var diedLabel: UILabel!
-    @IBOutlet var fromLabel: UILabel!
+    @IBOutlet var bornLabel: UILabel?
+    @IBOutlet var diedLabel: UILabel?
+    @IBOutlet var fromLabel: UILabel?
     
-    @IBOutlet var seeMoreButton: UIButton!
+    @IBOutlet var seeMoreButton: UIButton?
     
-    @IBOutlet var tableHeightConstraint: NSLayoutConstraint!
-    @IBOutlet var biographyHeightConstraint: NSLayoutConstraint!
+    @IBOutlet var tableHeightConstraint: NSLayoutConstraint?
+    @IBOutlet var biographyHeightConstraint: NSLayoutConstraint?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,11 +54,11 @@ class CastViewController: UIViewController, UITableViewDataSource, UITableViewDe
     func showNameAndPortrait(){
         if let cast = self.cast {
             self.title = cast.name
-            nameLabel.text = cast.name
+            self.nameLabel!.text = cast.name
             if let url = cast.imageURL {
-                portrait.sd_setImageWithURL(NSURL(string: url), placeholderImage: UIImage(named: "default.jpeg"))
+                self.portrait!.sd_setImageWithURL(NSURL(string: url), placeholderImage: UIImage(named: "default.jpeg"))
             }else {
-                portrait.image = UIImage(named: "profilepic.png")
+                self.portrait!.image = UIImage(named: "profilepic.png")
             }
         }
     }
@@ -69,13 +69,13 @@ class CastViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
     
     func resizeBiographyTextView(){
-        let sizeThatShouldFitTheContent: CGSize = biography.sizeThatFits(biography.frame.size)
-        biographyHeightConstraint.constant = sizeThatShouldFitTheContent.height
+        let sizeThatShouldFitTheContent: CGSize = self.biography!.sizeThatFits(self.biography!.frame.size)
+        self.biographyHeightConstraint!.constant = sizeThatShouldFitTheContent.height
     }
     
     func resizeTableView(){
-        let sizeThatShouldFitTheContent: CGSize = appearancesTable.sizeThatFits(appearancesTable.frame.size)
-        tableHeightConstraint.constant = sizeThatShouldFitTheContent.height
+        let sizeThatShouldFitTheContent: CGSize = self.appearancesTable!.sizeThatFits(self.appearancesTable!.frame.size)
+        self.tableHeightConstraint!.constant = sizeThatShouldFitTheContent.height
         
         let containerSize : CGSize = self.view.frame.size
     }
@@ -94,10 +94,10 @@ class CastViewController: UIViewController, UITableViewDataSource, UITableViewDe
     // TableView delegate functions
     func tableView(tableView: UITableView!, numberOfRowsInSection section: Int) -> Int {
         if(movies.count>5){
-            seeMoreButton.hidden = false
+            self.seeMoreButton!.hidden = false
             return 5
         }else{
-            return movies.count
+            return self.movies.count
         }
     }
     
@@ -183,22 +183,22 @@ class CastViewController: UIViewController, UITableViewDataSource, UITableViewDe
             self.appearancesTable!.setNeedsLayout()
             resizeTableView()
         }else if(apiType == APItype.Person && results.count>0 ){
-            biography.text = results["biography"] as? String
+            self.biography!.text = results["biography"] as? String
             resizeBiographyTextView()
             
             if let born = results["birthday"] as? String {
                 if(born != ""){
-                    bornLabel.text = "Born: \(born)"
+                    self.bornLabel!.text = "Born: \(born)"
                 }
             }
             if let died = results["deathday"] as? String {
                 if(died != ""){
-                    diedLabel.text = "Died: \(died)"
+                    self.diedLabel!.text = "Died: \(died)"
                 }
             }
             if let from = results["place_of_birth"] as? String {
                 if(from != ""){
-                    fromLabel.text = "From: \(from)"
+                    self.fromLabel!.text = "From: \(from)"
                 }
             }
         }

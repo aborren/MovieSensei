@@ -10,7 +10,7 @@ import UIKit
 import CoreData
 import QuartzCore
 
-//TEST!!!
+//TEST!!! global arr
 var suggested: NSMutableArray = []
 
 
@@ -23,63 +23,54 @@ class MovieViewController: UIViewController,UICollectionViewDataSource, UICollec
     var castMembers: [Cast] = []
     
     // Outlets
-    @IBOutlet var titleLabel: UILabel!
+    @IBOutlet var titleLabel: UILabel?
     @IBOutlet var userRatingLabel : UILabel?
     @IBOutlet var userRatingBar : UIProgressView?
-    @IBOutlet var backgroundView : UIImageView!
-    @IBOutlet var infoTextView : UITextView!
+    @IBOutlet var backgroundView : UIImageView?
+    @IBOutlet var infoTextView : UITextView?
     @IBOutlet var ratingView : UIView?
     @IBOutlet var crewCollectionView: UICollectionView?
-    @IBOutlet var backDropImageView: UIImageView!
-    @IBOutlet var shortInfoTextView: UITextView!
+    @IBOutlet var backDropImageView: UIImageView?
+    @IBOutlet var shortInfoTextView: UITextView?
     
     // Trailer view
-    @IBOutlet var trailerView: YTPlayerView!
-    @IBOutlet var trailerLabel: UILabel!
-    @IBOutlet var prevBtn: UIButton!
-    @IBOutlet var nextBtn: UIButton!
-    @IBOutlet var noTrailerLabel: UILabel!
+    @IBOutlet var trailerView: YTPlayerView?
+    @IBOutlet var trailerLabel: UILabel?
+    @IBOutlet var prevBtn: UIButton?
+    @IBOutlet var nextBtn: UIButton?
+    @IBOutlet var noTrailerLabel: UILabel?
     var currentTrailer: Int = 0
     var trailerKeys: [String] = []
     
     // Table
-    @IBOutlet var similarMoviesTableView: UITableView!
+    @IBOutlet var similarMoviesTableView: UITableView?
     var movies: [Movie] = []
     
     // layout
     @IBOutlet var similarMoviesHeightConstraint: NSLayoutConstraint!
     @IBOutlet var synopsisHeightConstraint: NSLayoutConstraint!
     func resizeInfoTextView(){
-        let sizeThatShouldFitTheContent: CGSize = infoTextView.sizeThatFits(infoTextView.frame.size)
-        synopsisHeightConstraint.constant = sizeThatShouldFitTheContent.height
+        let sizeThatShouldFitTheContent: CGSize = infoTextView!.sizeThatFits(infoTextView!.frame.size)
+        self.synopsisHeightConstraint.constant = sizeThatShouldFitTheContent.height
     }
     func resizeTableView(){
-        let sizeThatShouldFitTheContent: CGSize = similarMoviesTableView.sizeThatFits(similarMoviesTableView.frame.size)
-        similarMoviesHeightConstraint.constant = sizeThatShouldFitTheContent.height
+        let sizeThatShouldFitTheContent: CGSize = similarMoviesTableView!.sizeThatFits(similarMoviesTableView!.frame.size)
+        self.similarMoviesHeightConstraint.constant = sizeThatShouldFitTheContent.height
         
         let containerSize : CGSize = self.view.frame.size
     }
     
     //set shadow in short info view
     func setShadow(){
-      /*  shortInfoTextView.layer.shadowColor = UIColor.darkGrayColor().CGColor
-        shortInfoTextView.layer.shadowOffset = CGSizeMake(1, 1)
-        shortInfoTextView.layer.shadowOpacity = 1.0
-        shortInfoTextView.layer.shadowRadius = 1.0
-        */
-        /*titleLabel.layer.shadowColor = UIColor.darkGrayColor().CGColor
-        titleLabel.layer.shadowOffset = CGSizeMake(1, 1)
-        titleLabel.layer.shadowOpacity = 1.0
-        titleLabel.layer.shadowRadius = 1.0*/
-        setShadowOnLayer(shortInfoTextView.layer)
-        setShadowOnLayer(titleLabel.layer)
+        setShadowOnLayer(self.shortInfoTextView!.layer)
+        setShadowOnLayer(self.titleLabel!.layer)
     }
     
     func setShadowOnLayer(layer: CALayer){
         layer.shadowColor = UIColor.darkGrayColor().CGColor
         layer.shadowOffset = CGSizeMake(1, 1)
         layer.shadowOpacity = 1.0
-        layer.shadowRadius = 1.0
+        layer.shadowRadius = 0.5
     }
     
     override func viewDidLoad() {
@@ -88,7 +79,7 @@ class MovieViewController: UIViewController,UICollectionViewDataSource, UICollec
         self.api = APIController(delegate: self)
         self.title = movie!.title
         // Do any additional setup after loading the view.
-        self.titleLabel.text = self.movie!.title!
+        self.titleLabel!.text = self.movie!.title!
         loadBackground()
         setShadow()
         
@@ -107,7 +98,12 @@ class MovieViewController: UIViewController,UICollectionViewDataSource, UICollec
     func toMainMenu(){
         self.navigationController.popToRootViewControllerAnimated(true)
     }
-
+/*
+    override func viewDidDisappear(animated: Bool) {
+        super.viewDidDisappear(animated)
+        println("dis")
+    }
+ */
     //For core data button
     func setSelectionButton() {
         let appDel : AppDelegate = UIApplication.sharedApplication().delegate as AppDelegate
@@ -172,17 +168,30 @@ class MovieViewController: UIViewController,UICollectionViewDataSource, UICollec
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+
     }
 
     //trailer
+    func loadTrailerView(){
+        if (trailerKeys.count > 0) {
+            var tracker: String
+            tracker = "\(currentTrailer+1)/\(trailerKeys.count)"
+            trailerLabel!.text = tracker
+            trailerView!.loadWithVideoId(trailerKeys[currentTrailer])
+        }else {
+            noTrailerLabel!.hidden = false
+        }
+        updateButtons()
+    }
+    
     func updateTrailerView(){
         if (trailerKeys.count > 0){
             var tracker: String
             tracker = "\(currentTrailer+1)/\(trailerKeys.count)"
-            trailerLabel.text = tracker
-            trailerView.loadWithVideoId(trailerKeys[currentTrailer])
+            trailerLabel!.text = tracker
+            trailerView!.cueVideoById(trailerKeys[currentTrailer], startSeconds: 0.0, suggestedQuality: kYTPlaybackQualityLarge)
         } else {
-            noTrailerLabel.hidden = false
+            noTrailerLabel!.hidden = false
         }
     }
     //IBActions
@@ -198,17 +207,17 @@ class MovieViewController: UIViewController,UICollectionViewDataSource, UICollec
     }
     
     func updateButtons(){
-        nextBtn.hidden = false
-        prevBtn.hidden = false
+        nextBtn!.hidden = false
+        prevBtn!.hidden = false
         if(trailerKeys.count == 0){
-            nextBtn.hidden = true
-            prevBtn.hidden = true
+            nextBtn!.hidden = true
+            prevBtn!.hidden = true
         }
         if(currentTrailer == 0){
-            prevBtn.hidden = true
+            prevBtn!.hidden = true
         }
         if(currentTrailer == trailerKeys.count-1){
-            nextBtn.hidden = true
+            nextBtn!.hidden = true
         }
     }
     
@@ -222,7 +231,7 @@ class MovieViewController: UIViewController,UICollectionViewDataSource, UICollec
             castViewController.cast = selectedCast
         }else{
             var movieViewController: MovieViewController = segue.destinationViewController as MovieViewController
-            let movieIndex = similarMoviesTableView.indexPathForSelectedRow().row
+            let movieIndex = similarMoviesTableView!.indexPathForSelectedRow().row
             var selectedMovie = self.movies[movieIndex]
             movieViewController.movie = selectedMovie
         }
@@ -230,20 +239,20 @@ class MovieViewController: UIViewController,UICollectionViewDataSource, UICollec
     
     // setup background
     func loadBackground(){
-        if let url = movie!.bgURL {
-            backgroundView.sd_setImageWithURL(NSURL(string: url), placeholderImage: UIImage(named: "default.jpeg"))
-            backgroundView.alpha = 0.5
+        if let url = self.movie!.bgURL {
+            self.backgroundView!.sd_setImageWithURL(NSURL(string: url), placeholderImage: UIImage(named: "default.jpeg"))
+            self.backgroundView!.alpha = 0.5
         }else {
-            backgroundView.image = UIImage(named: "default.jpeg")
+            self.backgroundView!.image = UIImage(named: "default.jpeg")
         }
     }
     
     func loadBackDrop(){
-        if let url = movie!.backDrop {
-            backDropImageView.sd_setImageWithURL(NSURL(string: url), placeholderImage: UIImage(named: "default.jpeg"))
+        if let url = self.movie!.backDrop {
+            self.backDropImageView!.sd_setImageWithURL(NSURL(string: url), placeholderImage: UIImage(named: "default.jpeg"))
             
         }else {
-            backDropImageView.image = UIImage(named: "yayoSensei2.jpg")
+            self.backDropImageView!.image = UIImage(named: "yayoSensei2.jpg")
         }
     }
     
@@ -267,7 +276,7 @@ class MovieViewController: UIViewController,UICollectionViewDataSource, UICollec
         }else {
             portrait.image = UIImage(named: "profilepic.png")
         }
-        cell.layer.cornerRadius = 5.0
+        //cell.layer.cornerRadius = 5.0
         
 
         
@@ -323,7 +332,7 @@ class MovieViewController: UIViewController,UICollectionViewDataSource, UICollec
             let credits = results["credits"] as NSDictionary
             processCastData(credits)
             let videos = results["videos"] as NSDictionary
-            processVideoData(videos)
+            		processVideoData(videos)
             let similar = results["similar"] as NSDictionary
             processSimilarMoviesData(similar)
             //experimentellt!
@@ -360,10 +369,10 @@ class MovieViewController: UIViewController,UICollectionViewDataSource, UICollec
         self.movie!.runtime = runtime
         self.movie!.year = year
         if let synopsis = self.movie!.synopsis{
-            self.infoTextView.text = synopsis
+            self.infoTextView!.text = synopsis
         }
         
-        self.shortInfoTextView.text = movie!.descriptionText()
+        self.shortInfoTextView!.text = movie!.descriptionText()
         
         resizeInfoTextView()
         
@@ -395,9 +404,7 @@ class MovieViewController: UIViewController,UICollectionViewDataSource, UICollec
                 trailerKeys.append(videoKey)
             }
         }
-        
-        updateTrailerView()
-        updateButtons()
+        loadTrailerView()
     }
     
     func processSimilarMoviesData(results: NSDictionary){
@@ -464,8 +471,8 @@ class MovieViewController: UIViewController,UICollectionViewDataSource, UICollec
                 }
                 
             }
-            self.similarMoviesTableView.reloadData()
-            self.similarMoviesTableView.setNeedsLayout()
+            self.similarMoviesTableView!.reloadData()
+            self.similarMoviesTableView!.setNeedsLayout()
             resizeTableView()
         }
     }
@@ -475,11 +482,11 @@ class MovieViewController: UIViewController,UICollectionViewDataSource, UICollec
         let backDrops: NSArray = results["backdrops"] as NSArray
         for backDrop in backDrops {
             if let backDropURL = backDrop["file_path"] as? String {
-                imageURLs.append("http://image.tmdb.org/t/p/w780\(backDropURL)")
+                imageURLs.append("http://image.tmdb.org/t/p/w300\(backDropURL)")
             }
         }
-        backDropImageView.sd_setAnimationImagesWithURLs(imageURLs)
+        self.backDropImageView!.sd_setAnimationImagesWithURLs(imageURLs)
         let interval: NSTimeInterval = NSTimeInterval.convertFromFloatLiteral(NSNumber(integer: imageURLs.count).doubleValue * 4.0)
-        backDropImageView.animationDuration = interval
+        self.backDropImageView!.animationDuration = interval
     }
 }
