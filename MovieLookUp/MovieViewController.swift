@@ -49,6 +49,7 @@ class MovieViewController: UIViewController,UICollectionViewDataSource, UICollec
     // layout
     @IBOutlet var similarMoviesHeightConstraint: NSLayoutConstraint!
     @IBOutlet var synopsisHeightConstraint: NSLayoutConstraint!
+    
     func resizeInfoTextView(){
         let sizeThatShouldFitTheContent: CGSize = infoTextView!.sizeThatFits(infoTextView!.frame.size)
         self.synopsisHeightConstraint.constant = sizeThatShouldFitTheContent.height

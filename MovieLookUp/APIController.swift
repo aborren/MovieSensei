@@ -140,6 +140,21 @@ class APIController {
         println("Getting TMDB movie using ID \(id) and appending data at URL \(url)")
     }
     
+    func getTMDBGenres() {
+        var urlPath = "http://api.themoviedb.org/3/genre/movie/list?api_key=\(TMDBkey)"
+        var url: NSURL = NSURL(string: urlPath)
+        var request: NSURLRequest = NSURLRequest(URL: url)
+        asyncRequest(request, apiType: APItype.RetrieveGenres)
+        println("Getting TMDB genres at URL \(url)")
+    }
+    
+    func discoverTMDB(page: Int, searchString: String) {
+        var urlPath = "http://api.themoviedb.org/3/discover/movie?api_key=\(TMDBkey)\(searchString)&page=\(page)"
+        var url: NSURL = NSURL(string: urlPath)
+        var request: NSURLRequest = NSURLRequest(URL: url)
+        asyncRequest(request, apiType: APItype.RetrieveDiscovery)
+        println("Discovering TMDB at URL \(url)")
+    }
     
     func modifySearchTerm(searchTerm: String) -> String{
         
