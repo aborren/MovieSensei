@@ -40,22 +40,22 @@ class DiscoverListViewController: UIViewController, UICollectionViewDataSource, 
     }
 
     //CollectionView
-    func collectionView(collectionView: UICollectionView!, numberOfItemsInSection section: Int) -> Int
+    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int
     {
         return movies.count
     }
-    
-    func collectionView(collectionView: UICollectionView!, cellForItemAtIndexPath indexPath: NSIndexPath!) -> UICollectionViewCell! {
+
+    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         var cell = collectionView.dequeueReusableCellWithReuseIdentifier("DiscoverMovieCell", forIndexPath: indexPath) as UICollectionViewCell
         let movie: Movie = movies[indexPath.row] as Movie
-        let label : UILabel = cell.viewWithTag(610) as UILabel
+        //let label : UILabel = cell.viewWithTag(610) as UILabel
         let poster: UIImageView = cell.viewWithTag(600) as UIImageView
         if let url = movie.bgURL {
-            label.text = ""
+            //label.text = ""
             poster.sd_setImageWithURL(NSURL(string: url), placeholderImage: UIImage(named: "default.jpeg"))
         }else {
-            label.text = movie.title!
-            label.transform = CGAffineTransformMakeRotation( 3.14 / 3.0 )
+            //label.text = movie.title!
+            //label.transform = CGAffineTransformMakeRotation( 3.14 / 3.0 )
             poster.image = UIImage(named: "default.jpeg")
         }
         //load more data
@@ -101,9 +101,10 @@ class DiscoverListViewController: UIViewController, UICollectionViewDataSource, 
         }
     }
 
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject) {
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         var movieViewController: MovieViewController = segue.destinationViewController as MovieViewController
-        let movieIndex = moviesCollectionView!.indexPathForCell(sender as UICollectionViewCell).row
+        let sendingCell: UICollectionViewCell = sender as UICollectionViewCell
+        let movieIndex = moviesCollectionView!.indexPathForCell(sendingCell)!.row
         var selectedMovie = self.movies[movieIndex]
         movieViewController.movie = selectedMovie
         

@@ -25,7 +25,7 @@ class CastMoreMoviesViewController: UIViewController, UITableViewDataSource, UIT
     }
     
     func toMainMenu(){
-        self.navigationController.popToRootViewControllerAnimated(true)
+        self.navigationController!.popToRootViewControllerAnimated(true)
     }
     
     override func didReceiveMemoryWarning() {
@@ -34,17 +34,14 @@ class CastMoreMoviesViewController: UIViewController, UITableViewDataSource, UIT
     }
     
     // TableView delegate functions
-    func tableView(tableView: UITableView!, numberOfRowsInSection section: Int) -> Int {
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return movies.count
     }
     
     
-    func tableView(tableView: UITableView!, cellForRowAtIndexPath indexPath: NSIndexPath!) -> UITableViewCell! {
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let kCellIdentifier: String = "ApperanceCell"
         var cell: UITableViewCell = tableView.dequeueReusableCellWithIdentifier(kCellIdentifier) as UITableViewCell
-        if cell == nil {
-            cell = UITableViewCell(style: UITableViewCellStyle.Subtitle, reuseIdentifier: kCellIdentifier)
-        }
         let movie = self.movies[indexPath.row]
         let movieImage: UIImageView = cell.viewWithTag(800) as UIImageView
         let movieLabel: UILabel = cell.viewWithTag(810) as UILabel
@@ -62,16 +59,16 @@ class CastMoreMoviesViewController: UIViewController, UITableViewDataSource, UIT
         
         movieImage.image = UIImage(named: "default.jpeg")
         if(movie.movie.imgURL != nil){
-            movieImage.sd_setImageWithURL(NSURL(string: movie.movie.imgURL), placeholderImage: UIImage(named: "default.jpeg"))
+            movieImage.sd_setImageWithURL(NSURL(string: movie.movie.imgURL!), placeholderImage: UIImage(named: "default.jpeg"))
         }
         roleLabel.text = movie.role
         return cell
     }
 
     // send new data to next view
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject) {
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         var movieViewController: MovieViewController = segue.destinationViewController as MovieViewController
-        let movieIndex = appearancesTable!.indexPathForSelectedRow().row
+        let movieIndex = appearancesTable!.indexPathForSelectedRow()!.row
         var selectedMovie = self.movies[movieIndex]
         movieViewController.movie = selectedMovie.movie
     }

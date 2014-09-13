@@ -85,22 +85,22 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
     }
     
     // send new data to next view
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject) {
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if(searchTypeSegmentedControl.selectedSegmentIndex == 0){
             var movieViewController: MovieViewController = segue.destinationViewController as MovieViewController
-            let movieIndex = searchResultTableView!.indexPathForSelectedRow().row
+            let movieIndex = searchResultTableView!.indexPathForSelectedRow()!.row
             var selectedMovie = self.movies[movieIndex]
             movieViewController.movie = selectedMovie
         }else{
             var castViewController: CastViewController = segue.destinationViewController as CastViewController
-            let castIndex = searchResultTableView!.indexPathForSelectedRow().row
+            let castIndex = searchResultTableView!.indexPathForSelectedRow()!.row
             var selectedCast = self.actors[castIndex]
             castViewController.cast = selectedCast
         }
     }
     
     // TableView delegate functions
-    func tableView(tableView: UITableView!, numberOfRowsInSection section: Int) -> Int {
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if(searchTypeSegmentedControl.selectedSegmentIndex == 0){
             return movies.count
         }else{
@@ -108,7 +108,7 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
         }
     }
     
-    func tableView(tableView: UITableView!, didSelectRowAtIndexPath indexPath: NSIndexPath!) {
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if(searchTypeSegmentedControl.selectedSegmentIndex == 0){
             performSegueWithIdentifier("SearchToMovie", sender: self)
         }else{
@@ -116,12 +116,10 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
         }
     }
     
-    func tableView(tableView: UITableView!, cellForRowAtIndexPath indexPath: NSIndexPath!) -> UITableViewCell! {
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let kCellIdentifier: String = "SearchResultCell"
         var cell: UITableViewCell = tableView.dequeueReusableCellWithIdentifier(kCellIdentifier) as UITableViewCell
-        if cell == nil {
-            cell = UITableViewCell(style: UITableViewCellStyle.Subtitle, reuseIdentifier: kCellIdentifier)
-        }
+
         let image: UIImageView = cell.viewWithTag(100) as UIImageView
         let nameLabel: UILabel = cell.viewWithTag(130) as UILabel
         let yearLabel: UILabel = cell.viewWithTag(120) as UILabel
@@ -140,7 +138,7 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
             yearLabel.text = movie.year
             image.image = UIImage(named: "default.jpeg")
             if(movie.imgURL != nil){
-                image.sd_setImageWithURL(NSURL(string: movie.imgURL), placeholderImage: UIImage(named: "default.jpeg"))
+                image.sd_setImageWithURL(NSURL(string: movie.imgURL!), placeholderImage: UIImage(named: "default.jpeg"))
             }
         }else{
             let actor = self.actors[indexPath.row]
@@ -148,7 +146,7 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
             yearLabel.text = ""
             image.image = UIImage(named: "profilepic.png")
             if(actor.imageURL != nil){
-                image.sd_setImageWithURL(NSURL(string: actor.imageURL), placeholderImage: UIImage(named: "default.jpeg"))
+                image.sd_setImageWithURL(NSURL(string: actor.imageURL!), placeholderImage: UIImage(named: "default.jpeg"))
             }
         }
 

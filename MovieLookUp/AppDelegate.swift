@@ -28,7 +28,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }else{
             //ios6 customized (not valid in this project probably (swift not supporting ios6))
         }
-        
         return true
     }
 
@@ -67,7 +66,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     lazy var managedObjectModel: NSManagedObjectModel = {
         // The managed object model for the application. This property is not optional. It is a fatal error for the application not to be able to find and load its model.
         let modelURL = NSBundle.mainBundle().URLForResource("MovieSelection", withExtension: "momd")
-        return NSManagedObjectModel(contentsOfURL: modelURL)
+        return NSManagedObjectModel(contentsOfURL: modelURL!)
     }()
 
     lazy var persistentStoreCoordinator: NSPersistentStoreCoordinator? = {

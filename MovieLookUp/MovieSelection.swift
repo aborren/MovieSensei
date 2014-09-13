@@ -14,4 +14,5 @@ class MovieSelection: NSManagedObject {
     @NSManaged var id : String
     @NSManaged var name : String
     @NSManaged var posterurl : String
+    //@NSManaged var lists : NSSet
 }

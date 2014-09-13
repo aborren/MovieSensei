@@ -30,23 +30,23 @@ class DiscoverGenreViewController: UIViewController, UICollectionViewDataSource,
         // Dispose of any resources that can be recreated.
     }
  
-    func collectionView(collectionView: UICollectionView!, numberOfItemsInSection section: Int) -> Int
+    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int
     {
         return genres.count
     }
     
-    func collectionView(collectionView: UICollectionView!, cellForItemAtIndexPath indexPath: NSIndexPath!) -> UICollectionViewCell! {
+    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         var cell = collectionView.dequeueReusableCellWithReuseIdentifier("GenreCell", forIndexPath: indexPath) as UICollectionViewCell
-        (cell.viewWithTag(11) as UILabel).text = (genres[indexPath.row] as NSDictionary)["name"] as String
+        (cell.viewWithTag(11) as UILabel).text = (genres[indexPath.row] as NSDictionary)["name"] as? String
         return cell
     }
 
-    func collectionView(collectionView: UICollectionView!, didSelectItemAtIndexPath indexPath: NSIndexPath!) {
-        (collectionView.cellForItemAtIndexPath(indexPath).viewWithTag(11) as UILabel).text = (genres[indexPath.row] as NSDictionary)["name"] as String + " Y "
+    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        (collectionView.cellForItemAtIndexPath(indexPath)!.viewWithTag(11) as UILabel).text = (genres[indexPath.row] as NSDictionary)["name"] as String! + " Y "
     }
     
-    func collectionView(collectionView: UICollectionView!, didDeselectItemAtIndexPath indexPath: NSIndexPath!) {
-        (collectionView.cellForItemAtIndexPath(indexPath).viewWithTag(11) as UILabel).text = (genres[indexPath.row] as NSDictionary)["name"] as String
+    func collectionView(collectionView: UICollectionView, didDeselectItemAtIndexPath indexPath: NSIndexPath) {
+        (collectionView.cellForItemAtIndexPath(indexPath)!.viewWithTag(11) as UILabel).text = (genres[indexPath.row] as NSDictionary)["name"] as String!
     }
     
     func didRecieveAPIResults(results: NSDictionary, apiType: APItype) {
@@ -55,7 +55,7 @@ class DiscoverGenreViewController: UIViewController, UICollectionViewDataSource,
     }
 
 
-    override func prepareForSegue(segue: UIStoryboardSegue!, sender: AnyObject!) {
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         selectedGenreIDs = []
         for selectedGenre in genreCollectionView.indexPathsForSelectedItems() {
             selectedGenreIDs.append((genres[selectedGenre.row] as NSDictionary)["id"] as Int)

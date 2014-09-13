@@ -33,6 +33,11 @@ class MovieViewController: UIViewController,UICollectionViewDataSource, UICollec
     @IBOutlet var backDropImageView: UIImageView?
     @IBOutlet var shortInfoTextView: UITextView?
     
+    // Rating view
+    @IBOutlet var ratingLabel: UILabel?
+    @IBOutlet var votesCountLabel: UILabel?
+    
+    
     // Trailer view
     @IBOutlet var trailerView: YTPlayerView?
     @IBOutlet var trailerLabel: UILabel?
@@ -57,13 +62,10 @@ class MovieViewController: UIViewController,UICollectionViewDataSource, UICollec
     func resizeTableView(){
         let sizeThatShouldFitTheContent: CGSize = similarMoviesTableView!.sizeThatFits(similarMoviesTableView!.frame.size)
         self.similarMoviesHeightConstraint.constant = sizeThatShouldFitTheContent.height
-        
-        let containerSize : CGSize = self.view.frame.size
     }
     
     //set shadow in short info view
     func setShadow(){
-        setShadowOnLayer(self.shortInfoTextView!.layer)
         setShadowOnLayer(self.titleLabel!.layer)
     }
     
@@ -97,7 +99,7 @@ class MovieViewController: UIViewController,UICollectionViewDataSource, UICollec
     }
     
     func toMainMenu(){
-        self.navigationController.popToRootViewControllerAnimated(true)
+        self.navigationController!.popToRootViewControllerAnimated(true)
     }
 /*
     override func viewDidDisappear(animated: Bool) {
@@ -114,7 +116,7 @@ class MovieViewController: UIViewController,UICollectionViewDataSource, UICollec
         request.returnsObjectsAsFaults = false
         request.predicate = NSPredicate(format: "id == %@", movie!.id!.description)
         
-        var results : NSArray = context.executeFetchRequest(request, error: nil)
+        var results : NSArray = context.executeFetchRequest(request, error: nil)!
         if( results.count > 0){
             setMinusButton()
         }else{
@@ -136,7 +138,7 @@ class MovieViewController: UIViewController,UICollectionViewDataSource, UICollec
         let appDel : AppDelegate = UIApplication.sharedApplication().delegate as AppDelegate
         let context : NSManagedObjectContext = appDel.managedObjectContext!
         let entity = NSEntityDescription.entityForName("MovieSelection", inManagedObjectContext: context)
-        var movieSelection = MovieSelection(entity: entity, insertIntoManagedObjectContext: context)
+        var movieSelection = MovieSelection(entity: entity!, insertIntoManagedObjectContext: context)
         //risky maybe?
         if let mov = movie {
             movieSelection.id = mov.id!.description
@@ -157,7 +159,7 @@ class MovieViewController: UIViewController,UICollectionViewDataSource, UICollec
         let request = NSFetchRequest(entityName: "MovieSelection")
         request.returnsObjectsAsFaults = false
         request.predicate = NSPredicate(format: "id = %@", movie!.id!.description)             //risky?
-        var results : NSArray = context.executeFetchRequest(request, error: nil)
+        var results : NSArray = context.executeFetchRequest(request, error: nil)!
         if( results.count > 0){
             context.deleteObject(results[0] as NSManagedObject)
         }
@@ -224,15 +226,15 @@ class MovieViewController: UIViewController,UICollectionViewDataSource, UICollec
     
     
     // send new data to next view
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject) {
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if(segue.identifier == "toCast"){
             var castViewController: CastViewController = segue.destinationViewController as CastViewController
-            let castIndex = crewCollectionView!.indexPathForCell(sender as UICollectionViewCell).row
+            let castIndex = crewCollectionView!.indexPathForCell(sender as UICollectionViewCell)!.row
             var selectedCast = self.castMembers[castIndex]
             castViewController.cast = selectedCast
         }else{
             var movieViewController: MovieViewController = segue.destinationViewController as MovieViewController
-            let movieIndex = similarMoviesTableView!.indexPathForSelectedRow().row
+            let movieIndex = similarMoviesTableView!.indexPathForSelectedRow()!.row
             var selectedMovie = self.movies[movieIndex]
             movieViewController.movie = selectedMovie
         }
@@ -258,12 +260,12 @@ class MovieViewController: UIViewController,UICollectionViewDataSource, UICollec
     }
     
     //CollectionView
-    func collectionView(collectionView: UICollectionView!, numberOfItemsInSection section: Int) -> Int
+    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int
     {
         return castMembers.count
     }
     
-    func collectionView(collectionView: UICollectionView!, cellForItemAtIndexPath indexPath: NSIndexPath!) -> UICollectionViewCell!
+    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell
     {
         var cell = collectionView.dequeueReusableCellWithReuseIdentifier("CrewCell", forIndexPath: indexPath) as UICollectionViewCell
         let cast: Cast = castMembers[indexPath.row]
@@ -285,7 +287,7 @@ class MovieViewController: UIViewController,UICollectionViewDataSource, UICollec
     }
     
     // TableView delegate functions
-    func tableView(tableView: UITableView!, numberOfRowsInSection section: Int) -> Int {
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if(movies.count>5){
             //seeMoreButton.hidden = false
             return 5
@@ -294,16 +296,14 @@ class MovieViewController: UIViewController,UICollectionViewDataSource, UICollec
         }
     }
     
-    func tableView(tableView: UITableView!, willDisplayCell cell: UITableViewCell!, forRowAtIndexPath indexPath: NSIndexPath!) {
+    func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
         cell.backgroundColor = UIColor(white: 1.0, alpha: 0.5)
     }
     
-    func tableView(tableView: UITableView!, cellForRowAtIndexPath indexPath: NSIndexPath!) -> UITableViewCell! {
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let kCellIdentifier: String = "SimilarMovieCell"
         var cell: UITableViewCell = tableView.dequeueReusableCellWithIdentifier(kCellIdentifier) as UITableViewCell
-        if cell == nil {
-            cell = UITableViewCell(style: UITableViewCellStyle.Subtitle, reuseIdentifier: kCellIdentifier)
-        }
+
         let movie = self.movies[indexPath.row]
         let movieImage: UIImageView = cell.viewWithTag(800) as UIImageView
         let movieLabel: UILabel = cell.viewWithTag(830) as UILabel
@@ -322,7 +322,7 @@ class MovieViewController: UIViewController,UICollectionViewDataSource, UICollec
         yearLabel.text = movie.year
         movieImage.image = UIImage(named: "default.jpeg")
         if(movie.imgURL != nil){
-            movieImage.sd_setImageWithURL(NSURL(string: movie.imgURL), placeholderImage: UIImage(named: "default.jpeg"))
+            movieImage.sd_setImageWithURL(NSURL(string: movie.imgURL!), placeholderImage: UIImage(named: "default.jpeg"))
         }
         return cell
     }
@@ -374,7 +374,9 @@ class MovieViewController: UIViewController,UICollectionViewDataSource, UICollec
         }
         
         self.shortInfoTextView!.text = movie!.descriptionText()
-        
+        self.ratingLabel!.text = movie!.getRating()
+        self.votesCountLabel!.text = movie!.getVotes()
+            
         resizeInfoTextView()
         
         self.netActivityCounter--

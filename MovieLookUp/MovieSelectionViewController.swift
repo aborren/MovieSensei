@@ -31,10 +31,10 @@ class MovieSelectionViewController: UIViewController, UICollectionViewDataSource
         setUpMovies()
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject) {
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if(segue.identifier == "SelectionToMovie"){
             var movieViewController: MovieViewController = segue.destinationViewController as MovieViewController
-            let movieIndex = movieCollectionView!.indexPathForCell(sender as UICollectionViewCell).row
+            let movieIndex = movieCollectionView!.indexPathForCell(sender as UICollectionViewCell)!.row
             var selectedMovie = self.movies[movieIndex]
             movieViewController.movie = selectedMovie
         }else if(segue.identifier == "SenseiScramble"){
@@ -56,7 +56,7 @@ class MovieSelectionViewController: UIViewController, UICollectionViewDataSource
         let request = NSFetchRequest(entityName: "MovieSelection")
         request.returnsObjectsAsFaults = false
         
-        var results : NSArray = context.executeFetchRequest(request, error: nil)
+        var results : NSArray = context.executeFetchRequest(request, error: nil)!
         if( results.count > 0){
             for res in results{
                 let movie : Movie = Movie()
@@ -72,19 +72,16 @@ class MovieSelectionViewController: UIViewController, UICollectionViewDataSource
 
     
     //CollectionView
-    func collectionView(collectionView: UICollectionView!, numberOfItemsInSection section: Int) -> Int
+    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int
     {
         return movies.count
     }
     
-    func collectionView(collectionView: UICollectionView!, cellForItemAtIndexPath indexPath: NSIndexPath!) -> UICollectionViewCell!
+    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell
     {
         var cell = collectionView.dequeueReusableCellWithReuseIdentifier("MovieSelectionCell", forIndexPath: indexPath) as UICollectionViewCell
-        
         let movie: Movie = movies[indexPath.row]
-        
         let poster: UIImageView = cell.viewWithTag(300) as UIImageView
-        
         if let url = movie.imgURL {
             poster.sd_setImageWithURL(NSURL(string: url), placeholderImage: UIImage(named: "default.jpeg"))
         }else {

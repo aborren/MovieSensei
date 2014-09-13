@@ -12,6 +12,7 @@ class NavigationViewController: UINavigationController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationBar.titleTextAttributes = [ NSFontAttributeName: UIFont(name: "Papyrus", size: 20)]
         // Do any additional setup after loading the view.
     }
 

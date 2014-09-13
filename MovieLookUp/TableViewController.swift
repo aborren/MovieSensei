@@ -47,14 +47,14 @@ class TableViewController: UITableViewController {
 
     // MARK: - Table view data source
 
-    override func tableView(tableView: UITableView!, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete method implementation.
         // Return the number of rows in the section.
         return sugga.count
     }
 
     
-    override func tableView(tableView: UITableView!, cellForRowAtIndexPath indexPath: NSIndexPath!) -> UITableViewCell! {
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("suggestedCell", forIndexPath: indexPath) as UITableViewCell
 
         // Configure the cell...
@@ -106,9 +106,9 @@ class TableViewController: UITableViewController {
     }
     */
 
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject) {
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         var movieViewController: MovieViewController = segue.destinationViewController as MovieViewController
-        let movieIndex = t.indexPathForSelectedRow().row
+        let movieIndex = t.indexPathForSelectedRow()!.row
         var selectedMovie = Movie()
         selectedMovie.id = sugga[movieIndex].id
         selectedMovie.title = sugga[movieIndex].title

@@ -43,7 +43,7 @@ class CastViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
     
     func toMainMenu(){
-        self.navigationController.popToRootViewControllerAnimated(true)
+        self.navigationController!.popToRootViewControllerAnimated(true)
     }
     
     override func didReceiveMemoryWarning() {
@@ -92,7 +92,7 @@ class CastViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     
     // TableView delegate functions
-    func tableView(tableView: UITableView!, numberOfRowsInSection section: Int) -> Int {
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if(movies.count>5){
             self.seeMoreButton!.hidden = false
             return 5
@@ -102,12 +102,10 @@ class CastViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
     
     
-    func tableView(tableView: UITableView!, cellForRowAtIndexPath indexPath: NSIndexPath!) -> UITableViewCell! {
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let kCellIdentifier: String = "ApperanceCell"
         var cell: UITableViewCell = tableView.dequeueReusableCellWithIdentifier(kCellIdentifier) as UITableViewCell
-        if cell == nil {
-            cell = UITableViewCell(style: UITableViewCellStyle.Subtitle, reuseIdentifier: kCellIdentifier)
-        }
+
         let movie = self.movies[indexPath.row]
         let movieImage: UIImageView = cell.viewWithTag(700) as UIImageView
         let movieLabel: UILabel = cell.viewWithTag(710) as UILabel
@@ -125,14 +123,14 @@ class CastViewController: UIViewController, UITableViewDataSource, UITableViewDe
         
         movieImage.image = UIImage(named: "default.jpeg")
         if(movie.movie.imgURL != nil){
-            movieImage.sd_setImageWithURL(NSURL(string: movie.movie.imgURL), placeholderImage: UIImage(named: "default.jpeg"))
+            movieImage.sd_setImageWithURL(NSURL(string: movie.movie.imgURL!), placeholderImage: UIImage(named: "default.jpeg"))
         }
         roleLabel.text = movie.role
         return cell
     }
     
     // send new data to next view
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject) {
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if (segue.identifier == "MoreMovies"){
             var moreMoviesViewController: CastMoreMoviesViewController = segue.destinationViewController as CastMoreMoviesViewController
             moreMoviesViewController.movies = self.movies
@@ -141,7 +139,7 @@ class CastViewController: UIViewController, UITableViewDataSource, UITableViewDe
             }
         }else{
             var movieViewController: MovieViewController = segue.destinationViewController as MovieViewController
-            let movieIndex = appearancesTable!.indexPathForSelectedRow().row
+            let movieIndex = appearancesTable!.indexPathForSelectedRow()!.row
             var selectedMovie = self.movies[movieIndex]
             movieViewController.movie = selectedMovie.movie
         }

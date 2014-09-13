@@ -166,7 +166,7 @@ class APIController {
         
         let escapedSearchTerm = RTSearchTerm.stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)
         
-        return escapedSearchTerm
+        return escapedSearchTerm!
         
     }
     

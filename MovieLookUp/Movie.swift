@@ -36,7 +36,7 @@ class Movie {
     init(title: String?, year: NSNumber?, id:NSNumber?, imgURL:String?, bgURL:String?){
         self.title = title
         var nf: NSNumberFormatter = NSNumberFormatter()
-        self.year = nf.stringFromNumber(year)
+        self.year = nf.stringFromNumber(year!)
         self.id = id
         self.imgURL = imgURL
         self.bgURL = bgURL
@@ -49,6 +49,28 @@ class Movie {
         self.rating = userRating
     }
     
+    func getRating()->String{
+        if (getVotes() == "not available"){
+            return "n/a"
+        }
+        if let rating = self.userRatingAsFloat() {
+            let rate = NSString(format: "%.1f", rating)
+            return "\(rate)"
+        }
+        return "n/a"
+    }
+    
+    func getVotes()->String{
+        if let votes = self.votes{
+            if (votes == 1) {
+                return "(1 vote)"
+            }else if (votes > 1){
+                return "(\(votes) votes)"
+            }
+        }
+        return "not available"
+    }
+    
     func descriptionText()->String{
         var description: String = ""
 
@@ -59,14 +81,7 @@ class Movie {
         if let runtime = self.runtime {
             description += "Runtime: \(runtime) min\n"
         }
-        
-        if let rating = self.userRatingAsFloat() {
-            if let votes = self.votes{
-                let rate = NSString(format: "%.1f", rating)
-                description += "Rating: \(rate) (\(votes) votes)\n"
-            }
-        }
-        
+
         description += "Genre: "
         for (var i = 0; i < genre.count; ++i) {
             description += genre[i]
