@@ -327,9 +327,6 @@ class MovieViewController: UIViewController,UICollectionViewDataSource, UICollec
             //seeMoreButton.hidden = false
             return 5
         }else{
-            if(movies.count==0){
-                similarMoviesHeaderHeight.constant = 0.0
-            }
             return movies.count
         }
     }
@@ -512,6 +509,11 @@ class MovieViewController: UIViewController,UICollectionViewDataSource, UICollec
                 }
                 */
             }
+            
+            if(movies.count==0){
+                similarMoviesHeaderHeight.constant = 0.0
+            }
+            
             self.similarMoviesTableView!.reloadData()
             self.similarMoviesTableView!.setNeedsLayout()
             resizeTableView()

@@ -1013,6 +1013,7 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Selection" id="9Un-nQ-fOW">
+                        <barButtonItem key="backBarButtonItem" title=" " id="jaX-bM-jeA"/>
                         <barButtonItem key="rightBarButtonItem" image="dice-25.png" id="GCe-Jk-Fxj">
                             <connections>
                                 <segue destination="4e3-jO-Jey" kind="modal" identifier="SenseiScramble" id="xtZ-La-L0X"/>
