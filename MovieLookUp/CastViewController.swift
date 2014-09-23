@@ -19,7 +19,6 @@ class CastViewController: UIViewController, UITableViewDataSource, UITableViewDe
     @IBOutlet var portrait: UIImageView?
     @IBOutlet var biography: UITextView?
     @IBOutlet var basicInfo: UIView?
-    @IBOutlet var nameLabel: UILabel?
     
     @IBOutlet var bornLabel: UILabel?
     @IBOutlet var diedLabel: UILabel?
@@ -54,7 +53,6 @@ class CastViewController: UIViewController, UITableViewDataSource, UITableViewDe
     func showNameAndPortrait(){
         if let cast = self.cast {
             self.title = cast.name
-            self.nameLabel!.text = cast.name
             if let url = cast.imageURL {
                 self.portrait!.sd_setImageWithURL(NSURL(string: url), placeholderImage: UIImage(named: "default.jpeg"))
             }else {

@@ -9,3 +9,5 @@
 #import "UIImageView+WebCache.h"
 #import "YTPlayerView.h"
 #import "NMRangeSlider.h"
+#import "UIImage+animatedGIF.h"
+#import "MBProgressHUD.h"

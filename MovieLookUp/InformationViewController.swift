@@ -1,35 +1,31 @@
 //
-//  NavigationViewController.swift
+//  InformationViewController.swift
 //  MovieSensei
 //
-//  Created by Dan Isacson on 28/07/14.
+//  Created by Dan Isacson on 23/09/14.
 //  Copyright (c) 2014 dna. All rights reserved.
 //
 
 import UIKit
 
-class NavigationViewController: UINavigationController {
+class InformationViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        //self.navigationBar.titleTextAttributes = [ NSFontAttributeName: UIFont(name: "Papyrus", size: 20)]
+
         // Do any additional setup after loading the view.
     }
 
     override func didReceiveMemoryWarning() {
-        
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
-    //only allow landscape for movie playback
-    override func shouldAutorotate() -> Bool {
-        if(self.viewControllers[self.viewControllers.count-1].isKindOfClass(YTPlayerView)){
-            return true
-        }
-        return false
-    }
     
+    @IBAction func goToFacebook(sender: AnyObject) {
+        let url = NSURL(string: "fb://profile/356517281166111")
+        UIApplication.sharedApplication().openURL(url)
+    }
+
     /*
     // MARK: - Navigation
 

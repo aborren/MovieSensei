@@ -14,13 +14,17 @@ import QuartzCore
 var suggested: NSMutableArray = []
 
 
-class MovieViewController: UIViewController,UICollectionViewDataSource, UICollectionViewDelegate, UITableViewDataSource, UITableViewDelegate, APIControllerProtocol {
+class MovieViewController: UIViewController,UICollectionViewDataSource, UICollectionViewDelegate, UITableViewDataSource, UITableViewDelegate, APIControllerProtocol, MBProgressHUDDelegate {
+    
     // Variables
     var movie: Movie?
     var backgroundImage: UIImage?
     var api: APIController?
     var netActivityCounter = 0
     var castMembers: [Cast] = []
+    
+    // HUD
+    var HUD : MBProgressHUD = MBProgressHUD()
     
     // Outlets
     @IBOutlet var titleLabel: UILabel?
@@ -54,6 +58,9 @@ class MovieViewController: UIViewController,UICollectionViewDataSource, UICollec
     // layout
     @IBOutlet var similarMoviesHeightConstraint: NSLayoutConstraint!
     @IBOutlet var synopsisHeightConstraint: NSLayoutConstraint!
+    @IBOutlet var castHeightConstraint: NSLayoutConstraint!
+    @IBOutlet var similarMoviesHeaderHeight: NSLayoutConstraint!
+    
     
     func resizeInfoTextView(){
         let sizeThatShouldFitTheContent: CGSize = infoTextView!.sizeThatFits(infoTextView!.frame.size)
@@ -134,6 +141,13 @@ class MovieViewController: UIViewController,UICollectionViewDataSource, UICollec
         self.navigationItem.rightBarButtonItem = minus
     }
     
+    
+    //HUD delegate
+    func hudWasHidden(hud: MBProgressHUD!) {
+        HUD.removeFromSuperview()
+        //släpp minne?
+    }
+    
     func addMovie(){
         let appDel : AppDelegate = UIApplication.sharedApplication().delegate as AppDelegate
         let context : NSManagedObjectContext = appDel.managedObjectContext!
@@ -151,8 +165,19 @@ class MovieViewController: UIViewController,UICollectionViewDataSource, UICollec
         }
         setMinusButton()
         context.save(nil)
+        
+        //show notification
+        HUD = MBProgressHUD(view: self.view)
+        self.view.addSubview(HUD)
+        HUD.mode = MBProgressHUDModeText
+        HUD.delegate = self
+        HUD.labelText = "Movie added to your list."
+        HUD.color = UIColor.darkGrayColor()
+        HUD.show(true)
+        HUD.hide(true, afterDelay: 1.5)
+
     }
-    
+
     func removeMovie(){
         let appDel : AppDelegate = UIApplication.sharedApplication().delegate as AppDelegate
         let context : NSManagedObjectContext = appDel.managedObjectContext!
@@ -165,6 +190,16 @@ class MovieViewController: UIViewController,UICollectionViewDataSource, UICollec
         }
         setPlusButton()
         context.save(nil)
+        
+        //show notification
+        HUD = MBProgressHUD(view: self.view)
+        self.view.addSubview(HUD)
+        HUD.mode = MBProgressHUDModeText
+        HUD.delegate = self
+        HUD.labelText = "Movie removed from your list."
+        HUD.color = UIColor.darkGrayColor()
+        HUD.show(true)
+        HUD.hide(true, afterDelay: 1.5)
     }
     
     
@@ -252,10 +287,10 @@ class MovieViewController: UIViewController,UICollectionViewDataSource, UICollec
     
     func loadBackDrop(){
         if let url = self.movie!.backDrop {
-            self.backDropImageView!.sd_setImageWithURL(NSURL(string: url), placeholderImage: UIImage(named: "default.jpeg"))
+            self.backDropImageView!.sd_setImageWithURL(NSURL(string: url), placeholderImage: UIImage(named: "banner-bg.jpg"))
             
         }else {
-            self.backDropImageView!.image = UIImage(named: "yayoSensei2.jpg")
+            self.backDropImageView!.image = UIImage(named: "banner-bg.jpg")
         }
     }
     
@@ -292,6 +327,9 @@ class MovieViewController: UIViewController,UICollectionViewDataSource, UICollec
             //seeMoreButton.hidden = false
             return 5
         }else{
+            if(movies.count==0){
+                similarMoviesHeaderHeight.constant = 0.0
+            }
             return movies.count
         }
     }
@@ -439,7 +477,7 @@ class MovieViewController: UIViewController,UICollectionViewDataSource, UICollec
                 movies.append(newMovie)
                 
                 //TEST EXPERIMENTELLT!!
-                
+                /*
                 let votes: Float? = result["vote_count"] as? Float
                 var sM = SuggestedMovie()
                 sM.title = name
@@ -472,7 +510,7 @@ class MovieViewController: UIViewController,UICollectionViewDataSource, UICollec
                 }else {
                     suggested.addObject(sM)
                 }
-                
+                */
             }
             self.similarMoviesTableView!.reloadData()
             self.similarMoviesTableView!.setNeedsLayout()

@@ -10,11 +10,9 @@ import UIKit
 
 class DiscoverGenreViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, APIControllerProtocol  {
 
-    @IBOutlet var skipButton: UIButton!
-    @IBOutlet var nextButton: UIButton!
     @IBOutlet var genreCollectionView: UICollectionView!
     var api: APIController?
-    var genres = []
+    var genres: NSMutableArray = []
     var selectedGenreIDs: [Int] = []
     
     override func viewDidLoad() {
@@ -38,28 +36,46 @@ class DiscoverGenreViewController: UIViewController, UICollectionViewDataSource,
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         var cell = collectionView.dequeueReusableCellWithReuseIdentifier("GenreCell", forIndexPath: indexPath) as UICollectionViewCell
         (cell.viewWithTag(11) as UILabel).text = (genres[indexPath.row] as NSDictionary)["name"] as? String
+        
+        
+        updateSelectedRows()
+        cell.backgroundColor = UIColor.whiteColor()
+        for id in selectedGenreIDs{
+            if((genres[indexPath.row] as NSDictionary)["id"] as Int == id){
+                cell.backgroundColor = UIColor.lightGrayColor()
+            }
+        }
+        
         return cell
     }
-
+    
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        (collectionView.cellForItemAtIndexPath(indexPath)!.viewWithTag(11) as UILabel).text = (genres[indexPath.row] as NSDictionary)["name"] as String! + " Y "
+        collectionView.cellForItemAtIndexPath(indexPath)!.backgroundColor = UIColor.lightGrayColor()
     }
     
     func collectionView(collectionView: UICollectionView, didDeselectItemAtIndexPath indexPath: NSIndexPath) {
-        (collectionView.cellForItemAtIndexPath(indexPath)!.viewWithTag(11) as UILabel).text = (genres[indexPath.row] as NSDictionary)["name"] as String!
+        collectionView.cellForItemAtIndexPath(indexPath)!.backgroundColor = UIColor.whiteColor()
     }
     
     func didRecieveAPIResults(results: NSDictionary, apiType: APItype) {
-        genres = results["genres"] as NSArray
+        genres = results["genres"] as NSMutableArray
+        for genre in genres {
+            if(((genre as NSDictionary)["name"] as String!) == "Erotic"){
+                genres.removeObject(genre)
+            }
+        }
         genreCollectionView.reloadData()
     }
 
-
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    func updateSelectedRows(){
         selectedGenreIDs = []
         for selectedGenre in genreCollectionView.indexPathsForSelectedItems() {
             selectedGenreIDs.append((genres[selectedGenre.row] as NSDictionary)["id"] as Int)
         }
+    }
+
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        updateSelectedRows()
         (segue.destinationViewController as DiscoverYearViewController).selectedGenreIDs = self.selectedGenreIDs
         println(selectedGenreIDs)
     }
