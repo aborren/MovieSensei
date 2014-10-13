@@ -15,6 +15,8 @@ protocol APIControllerProtocol {
 class APIController {
     var delegate: APIControllerProtocol?
     
+    //Affiliate-ID: 10lMui
+    
     // API KEY For Rotten Tomatoes
     //let key: NSString = "xgcfgg3pen4k6nvpq2y9haej"
     //GET config data!

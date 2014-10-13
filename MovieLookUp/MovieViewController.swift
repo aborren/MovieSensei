@@ -60,6 +60,7 @@ class MovieViewController: UIViewController,UICollectionViewDataSource, UICollec
     @IBOutlet var synopsisHeightConstraint: NSLayoutConstraint!
     @IBOutlet var castHeightConstraint: NSLayoutConstraint!
     @IBOutlet var similarMoviesHeaderHeight: NSLayoutConstraint!
+    @IBOutlet var blankSpaceAboveSimilarMovies: NSLayoutConstraint!
     
     
     func resizeInfoTextView(){
@@ -510,7 +511,9 @@ class MovieViewController: UIViewController,UICollectionViewDataSource, UICollec
                 */
             }
             
+            //layout
             if(movies.count==0){
+                blankSpaceAboveSimilarMovies.constant = 0.0
                 similarMoviesHeaderHeight.constant = 0.0
             }
             
