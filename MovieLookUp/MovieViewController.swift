@@ -18,7 +18,7 @@ class MovieViewController: UIViewController,UICollectionViewDataSource, UICollec
     
     // Variables
     var movie: Movie?
-    var backgroundImage: UIImage?
+    weak var backgroundImage: UIImage?
     var api: APIController?
     var netActivityCounter = 0
     var castMembers: [Cast] = []
@@ -30,11 +30,11 @@ class MovieViewController: UIViewController,UICollectionViewDataSource, UICollec
     @IBOutlet var titleLabel: UILabel?
     @IBOutlet var userRatingLabel : UILabel?
     @IBOutlet var userRatingBar : UIProgressView?
-    @IBOutlet var backgroundView : UIImageView?
+    @IBOutlet weak var backgroundView : UIImageView?
     @IBOutlet var infoTextView : UITextView?
     @IBOutlet var ratingView : UIView?
     @IBOutlet var crewCollectionView: UICollectionView?
-    @IBOutlet var backDropImageView: UIImageView?
+    @IBOutlet weak var backDropImageView: UIImageView?
     @IBOutlet var shortInfoTextView: UITextView?
     
     // Rating view
@@ -43,7 +43,7 @@ class MovieViewController: UIViewController,UICollectionViewDataSource, UICollec
     
     
     // Trailer view
-    @IBOutlet var trailerView: YTPlayerView?
+    @IBOutlet weak var trailerView: YTPlayerView?
     @IBOutlet var trailerLabel: UILabel?
     @IBOutlet var prevBtn: UIButton?
     @IBOutlet var nextBtn: UIButton?
@@ -105,7 +105,7 @@ class MovieViewController: UIViewController,UICollectionViewDataSource, UICollec
         self.navigationItem.leftBarButtonItem = menyNavBtn
         
     }
-    
+    //test
     func toMainMenu(){
         self.navigationController!.popToRootViewControllerAnimated(true)
     }
@@ -532,7 +532,6 @@ class MovieViewController: UIViewController,UICollectionViewDataSource, UICollec
             }
         }
         self.backDropImageView!.sd_setAnimationImagesWithURLs(imageURLs)
-        let interval: NSTimeInterval = NSTimeInterval.convertFromFloatLiteral(NSNumber(integer: imageURLs.count).doubleValue * 4.0)
-        self.backDropImageView!.animationDuration = interval
+        self.backDropImageView!.animationDuration = NSNumber(integer: imageURLs.count).doubleValue * 4.0
     }
 }

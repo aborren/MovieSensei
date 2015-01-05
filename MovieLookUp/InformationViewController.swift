@@ -23,7 +23,7 @@ class InformationViewController: UIViewController {
     
     @IBAction func goToFacebook(sender: AnyObject) {
         let url = NSURL(string: "fb://profile/356517281166111")
-        UIApplication.sharedApplication().openURL(url)
+        UIApplication.sharedApplication().openURL(url!)
     }
 
     /*

@@ -29,7 +29,7 @@ class APIController {
     func searchTMDBForMovie(searchTerm: String) {
         var escapedSearchTerm = modifySearchTerm(searchTerm)
         var urlPath: String = "http://api.themoviedb.org/3/search/movie?api_key=\(TMDBkey)&query=\(escapedSearchTerm)&search_type=ngram"
-        var url: NSURL = NSURL(string: urlPath)
+        var url: NSURL = NSURL(string: urlPath)!
         var request: NSURLRequest = NSURLRequest(URL: url)
         asyncRequest(request, apiType: APItype.SearchMovie)
         println("Search TMDB API (movie) at URL \(url)")
@@ -39,7 +39,7 @@ class APIController {
     func searchTMDBForPerson(searchTerm: String) {
         var escapedSearchTerm = modifySearchTerm(searchTerm)
         var urlPath: String = "http://api.themoviedb.org/3/search/person?api_key=\(TMDBkey)&query=\(escapedSearchTerm)&search_type=ngram"
-        var url: NSURL = NSURL(string: urlPath)
+        var url: NSURL = NSURL(string: urlPath)!
         var request: NSURLRequest = NSURLRequest(URL: url)
         asyncRequest(request, apiType: APItype.SearchPerson)
         println("Search TMDB API (person) at URL \(url)")
@@ -49,7 +49,7 @@ class APIController {
     func searchTMDBMovieWithID(id: NSNumber) {
         var escapedSearchTerm = modifySearchTerm(id.stringValue)
         var urlPath = "http://api.themoviedb.org/3/movie/\(escapedSearchTerm)?api_key=\(TMDBkey)"
-        var url: NSURL = NSURL(string: urlPath)
+        var url: NSURL = NSURL(string: urlPath)!
         var request: NSURLRequest = NSURLRequest(URL: url)
         asyncRequest(request, apiType: APItype.Movie)
         println("Search TMDB movie using ID \(id) at URL \(url)")
@@ -58,7 +58,7 @@ class APIController {
     func searchTMDBCastWithMovieID(id: NSNumber) {
         var escapedSearchTerm = modifySearchTerm(id.stringValue)
         var urlPath = "http://api.themoviedb.org/3/movie/\(escapedSearchTerm)/credits?api_key=\(TMDBkey)"
-        var url: NSURL = NSURL(string: urlPath)
+        var url: NSURL = NSURL(string: urlPath)!
         var request: NSURLRequest = NSURLRequest(URL: url)
         asyncRequest(request, apiType: APItype.RetrieveCast)
         println("Search TMDB for cast for movie with ID \(id) at URL \(url)")
@@ -67,7 +67,7 @@ class APIController {
     func searchTMDBTrailerWithMovieID(id: NSNumber) {
         var escapedSearchTerm = modifySearchTerm(id.stringValue)
         var urlPath = "http://api.themoviedb.org/3/movie/\(escapedSearchTerm)/videos?api_key=\(TMDBkey)"
-        var url: NSURL = NSURL(string: urlPath)
+        var url: NSURL = NSURL(string: urlPath)!
         var request: NSURLRequest = NSURLRequest(URL: url)
         asyncRequest(request, apiType: APItype.RetrieveVideos)
         println("Search TMDB for trailer videos for movie with ID \(id) at URL \(url)")        
@@ -76,7 +76,7 @@ class APIController {
     func searchTMDBSimilarMoviesForID(id: NSNumber) {
         var escapedSearchTerm = modifySearchTerm(id.stringValue)
         var urlPath = "http://api.themoviedb.org/3/movie/\(escapedSearchTerm)/similar?api_key=\(TMDBkey)"
-        var url: NSURL = NSURL(string: urlPath)
+        var url: NSURL = NSURL(string: urlPath)!
         var request: NSURLRequest = NSURLRequest(URL: url)
         asyncRequest(request, apiType: APItype.RetrieveSimilar)
         println("Search TMDB for similar movies for ID \(id) at URL \(url)")        
@@ -84,7 +84,7 @@ class APIController {
     
     func searchTMDBNowPlaying(page: Int) {
         var urlPath = "http://api.themoviedb.org/3/movie/now_playing?api_key=\(TMDBkey)&page=\(page)"
-        var url: NSURL = NSURL(string: urlPath)
+        var url: NSURL = NSURL(string: urlPath)!
         var request: NSURLRequest = NSURLRequest(URL: url)
         asyncRequest(request, apiType: APItype.NowPlaying)
         println("Search TMDB for Now Playing at URL \(url)")
@@ -92,7 +92,7 @@ class APIController {
     
     func searchTMDBUpcoming(page: Int) {
         var urlPath = "http://api.themoviedb.org/3/movie/upcoming?api_key=\(TMDBkey)&page=\(page)"
-        var url: NSURL = NSURL(string: urlPath)
+        var url: NSURL = NSURL(string: urlPath)!
         var request: NSURLRequest = NSURLRequest(URL: url)
         asyncRequest(request, apiType: APItype.Upcoming)
         println("Search TMDB for Upcoming at URL \(url)")
@@ -100,7 +100,7 @@ class APIController {
     
     func searchTMDBPopular(page: Int) {
         var urlPath = "http://api.themoviedb.org/3/movie/popular?api_key=\(TMDBkey)&page=\(page)"
-        var url: NSURL = NSURL(string: urlPath)
+        var url: NSURL = NSURL(string: urlPath)!
         var request: NSURLRequest = NSURLRequest(URL: url)
         asyncRequest(request, apiType: APItype.Popular)
         println("Search TMDB for Popular at URL \(url)")
@@ -108,7 +108,7 @@ class APIController {
     
     func searchTMDBTopRated(page: Int) {
         var urlPath = "http://api.themoviedb.org/3/movie/top_rated?api_key=\(TMDBkey)&page=\(page)"
-        var url: NSURL = NSURL(string: urlPath)
+        var url: NSURL = NSURL(string: urlPath)!
         var request: NSURLRequest = NSURLRequest(URL: url)
         asyncRequest(request, apiType: APItype.TopRated)
         println("Search TMDB for Top Rated at URL \(url)")
@@ -117,7 +117,7 @@ class APIController {
     func searchTMDBPersonWithID(id: NSNumber) {
         var escapedSearchTerm = modifySearchTerm(id.stringValue)
         var urlPath = "http://api.themoviedb.org/3/person/\(escapedSearchTerm)?api_key=\(TMDBkey)"
-        var url: NSURL = NSURL(string: urlPath)
+        var url: NSURL = NSURL(string: urlPath)!
         var request: NSURLRequest = NSURLRequest(URL: url)
         asyncRequest(request, apiType: APItype.Person)
         println("Search TMDB person using ID \(id) at URL \(url)")
@@ -126,7 +126,7 @@ class APIController {
     func searchTMDBPersonCreditWithID(id: NSNumber) {
         var escapedSearchTerm = modifySearchTerm(id.stringValue)
         var urlPath = "http://api.themoviedb.org/3/person/\(escapedSearchTerm)/movie_credits?api_key=\(TMDBkey)"  //combined or just movie?
-        var url: NSURL = NSURL(string: urlPath)
+        var url: NSURL = NSURL(string: urlPath)!
         var request: NSURLRequest = NSURLRequest(URL: url)
         asyncRequest(request, apiType: APItype.PersonAppearances)
         println("Search TMDB person's credit using ID \(id) at URL \(url)")
@@ -136,7 +136,7 @@ class APIController {
     func getTMDBMovieWithID_APPENDED(id: NSNumber) {
         var escapedSearchTerm = modifySearchTerm(id.stringValue)
         var urlPath = "http://api.themoviedb.org/3/movie/\(escapedSearchTerm)?api_key=\(TMDBkey)&append_to_response=credits,similar,videos,images"
-        var url: NSURL = NSURL(string: urlPath)
+        var url: NSURL = NSURL(string: urlPath)!
         var request: NSURLRequest = NSURLRequest(URL: url)
         asyncRequest(request, apiType: APItype.MovieAppendedInfo)
         println("Getting TMDB movie using ID \(id) and appending data at URL \(url)")
@@ -144,7 +144,7 @@ class APIController {
     
     func getTMDBGenres() {
         var urlPath = "http://api.themoviedb.org/3/genre/movie/list?api_key=\(TMDBkey)"
-        var url: NSURL = NSURL(string: urlPath)
+        var url: NSURL = NSURL(string: urlPath)!
         var request: NSURLRequest = NSURLRequest(URL: url)
         asyncRequest(request, apiType: APItype.RetrieveGenres)
         println("Getting TMDB genres at URL \(url)")
@@ -152,7 +152,7 @@ class APIController {
     
     func discoverTMDB(page: Int, searchString: String) {
         var urlPath = "http://api.themoviedb.org/3/discover/movie?api_key=\(TMDBkey)\(searchString)&page=\(page)"
-        var url: NSURL = NSURL(string: urlPath)
+        var url: NSURL = NSURL(string: urlPath)!
         var request: NSURLRequest = NSURLRequest(URL: url)
         asyncRequest(request, apiType: APItype.RetrieveDiscovery)
         println("Discovering TMDB at URL \(url)")
