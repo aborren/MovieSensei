@@ -112,7 +112,7 @@
                                         progress:(SDWebImageDownloaderProgressBlock)progressBlock
                                        completed:(SDWebImageCompletionWithFinishedBlock)completedBlock {
     // Invoking this method without a completedBlock is pointless
-    NSParameterAssert(completedBlock);
+    NSAssert(completedBlock != nil, @"If you mean to prefetch the image, use -[SDWebImagePrefetcher prefetchURLs] instead");
 
     // Very common mistake is to send the URL using NSString object instead of NSURL. For some strange reason, XCode won't
     // throw any warning for this type mismatch. Here we failsafe this error by allowing URLs to be passed as NSString.
@@ -194,7 +194,9 @@
 
                     if (error.code != NSURLErrorNotConnectedToInternet && error.code != NSURLErrorCancelled && error.code != NSURLErrorTimedOut) {
                         @synchronized (self.failedURLs) {
-                            [self.failedURLs addObject:url];
+                            if (![self.failedURLs containsObject:url]) {
+                                [self.failedURLs addObject:url];
+                            }
                         }
                     }
                 }
@@ -323,24 +325,6 @@
 //        self.cancelBlock = nil;
         _cancelBlock = nil;
     }
-}
-
-@end
-
-
-@implementation SDWebImageManager (Deprecated)
-
-// deprecated method, uses the non deprecated method
-// adapter for the completion block
-- (id <SDWebImageOperation>)downloadWithURL:(NSURL *)url options:(SDWebImageOptions)options progress:(SDWebImageDownloaderProgressBlock)progressBlock completed:(SDWebImageCompletedWithFinishedBlock)completedBlock {
-    return [self downloadImageWithURL:url
-                              options:options
-                             progress:progressBlock
-                            completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished, NSURL *imageURL) {
-                                if (completedBlock) {
-                                    completedBlock(image, error, cacheType, finished);
-                                }
-                            }];
 }
 
 @end

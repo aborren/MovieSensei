@@ -294,15 +294,16 @@ class MovieViewController: UIViewController,UICollectionViewDataSource, UICollec
     
     func loadBackDrop(){
         
-        let anim: CATransition = CATransition()
-        anim.duration = 1.2
-        anim.type = kCATransitionFade
-        anim.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
-        anim.removedOnCompletion = false
-        self.backDropImageView!.layer.addAnimation(anim, forKey: "Transition")
-        
         if let url = self.movie!.backDrop {
-            self.backDropImageView!.sd_setImageWithURL(NSURL(string: url), placeholderImage: UIImage(named: "banner-bg.jpg"))
+            self.backDropImageView!.sd_setImageWithURL(NSURL(string: url), placeholderImage: UIImage(named: "banner-bg.jpg"), completed: { (image, error, cacheType, url) -> Void in
+                let anim: CATransition = CATransition()
+                anim.duration = 1.2
+                anim.type = kCATransitionFade
+                anim.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+                anim.removedOnCompletion = false
+                self.backDropImageView!.layer.addAnimation(anim, forKey: "Transition")
+                })
+            //self.backDropImageView!.sd_setImageWithURL(NSURL(string: url), placeholderImage: UIImage(named: "banner-bg.jpg"))
             
         }else {
             self.backDropImageView!.image = UIImage(named: "banner-bg.jpg")
@@ -325,7 +326,18 @@ class MovieViewController: UIViewController,UICollectionViewDataSource, UICollec
         name.text = cast.name
         character.text = cast.character
         if let url = cast.imageURL {
-            portrait.sd_setImageWithURL(NSURL(string: url), placeholderImage: UIImage(named: "default.jpeg"))
+            
+            portrait.sd_setImageWithURL(NSURL(string: url), placeholderImage: UIImage(named: "default.jpeg"), completed: { (image, error, cacheType, url) -> Void in
+                if(cacheType == SDImageCacheType.None){
+                    let anim: CATransition = CATransition()
+                    anim.duration = 1.2
+                    anim.type = kCATransitionFade
+                    anim.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+                    anim.removedOnCompletion = false
+                    portrait.layer.addAnimation(anim, forKey: "Transition")}
+            })
+            
+            //portrait.sd_setImageWithURL(NSURL(string: url), placeholderImage: UIImage(named: "default.jpeg"))
         }else {
             portrait.image = UIImage(named: "profilepic.png")
         }

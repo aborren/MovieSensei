@@ -69,7 +69,15 @@ class DiscoverListViewController: UIViewController, UICollectionViewDataSource, 
         let poster: UIImageView = cell.viewWithTag(600) as UIImageView
         if let url = movie.bgURL {
             //label.text = ""
-            poster.sd_setImageWithURL(NSURL(string: url), placeholderImage: UIImage(named: "default.jpeg"))
+            poster.sd_setImageWithURL(NSURL(string: url), placeholderImage: UIImage(named: "default.jpeg"), completed: { (image, error, cacheType, url) -> Void in
+                if(cacheType == SDImageCacheType.None){
+                    let anim: CATransition = CATransition()
+                    anim.duration = 1.2
+                    anim.type = kCATransitionFade
+                    anim.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+                    anim.removedOnCompletion = false
+                    poster.layer.addAnimation(anim, forKey: "Transition")}
+            })
         }else {
             //label.text = movie.title!
             //label.transform = CGAffineTransformMakeRotation( 3.14 / 3.0 )
