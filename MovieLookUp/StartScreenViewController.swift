@@ -19,7 +19,7 @@ class StartScreenViewController: UIViewController {
         self.variableDurationImageView.image = [UIImage animatedImageWithAnimatedGIFURL:url];*/
         let url = NSBundle.mainBundle().URLForResource("blink", withExtension: "gif")
         self.blinkingSensei.image = UIImage.animatedImageWithAnimatedGIFURL(url)
-        
+
     }
 
     override func didReceiveMemoryWarning() {

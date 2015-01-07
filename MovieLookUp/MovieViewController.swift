@@ -56,6 +56,7 @@ class MovieViewController: UIViewController,UICollectionViewDataSource, UICollec
     var movies: [Movie] = []
     
     // layout
+    @IBOutlet var bannerHeightConstraint: NSLayoutConstraint!
     @IBOutlet var similarMoviesHeightConstraint: NSLayoutConstraint!
     @IBOutlet var synopsisHeightConstraint: NSLayoutConstraint!
     @IBOutlet var castHeightConstraint: NSLayoutConstraint!
@@ -105,7 +106,7 @@ class MovieViewController: UIViewController,UICollectionViewDataSource, UICollec
         self.navigationItem.leftBarButtonItem = menyNavBtn
         
     }
-    //test
+    
     func toMainMenu(){
         self.navigationController!.popToRootViewControllerAnimated(true)
     }
@@ -278,6 +279,11 @@ class MovieViewController: UIViewController,UICollectionViewDataSource, UICollec
     
     // setup background
     func loadBackground(){
+        
+        //set banner height
+        self.bannerHeightConstraint.constant = self.view.frame.width/1.77
+        
+        
         if let url = self.movie!.bgURL {
             self.backgroundView!.sd_setImageWithURL(NSURL(string: url), placeholderImage: UIImage(named: "default.jpeg"))
             self.backgroundView!.alpha = 0.5
@@ -287,6 +293,14 @@ class MovieViewController: UIViewController,UICollectionViewDataSource, UICollec
     }
     
     func loadBackDrop(){
+        
+        let anim: CATransition = CATransition()
+        anim.duration = 1.2
+        anim.type = kCATransitionFade
+        anim.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+        anim.removedOnCompletion = false
+        self.backDropImageView!.layer.addAnimation(anim, forKey: "Transition")
+        
         if let url = self.movie!.backDrop {
             self.backDropImageView!.sd_setImageWithURL(NSURL(string: url), placeholderImage: UIImage(named: "banner-bg.jpg"))
             

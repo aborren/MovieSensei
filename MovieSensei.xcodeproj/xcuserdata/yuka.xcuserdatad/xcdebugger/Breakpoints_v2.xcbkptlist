@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MovieLookUp/MovieViewController.swift"
-            timestampString = "434364081.862311"
+            timestampString = "442174468.0186"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "279"
-            endingLineNumber = "279"
+            startingLineNumber = "280"
+            endingLineNumber = "280"
             landmarkName = "MovieViewController"
             landmarkType = "3">
          </BreakpointContent>
@@ -117,22 +117,6 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "MovieLookUp/TopListViewController.swift"
-            timestampString = "428931505.953817"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "103"
-            endingLineNumber = "103"
-            landmarkName = "collectionView(_:cellForItemAtIndexPath:)"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "MovieLookUp/CastContainerViewController.swift"
             timestampString = "428346238.889918"
             startingColumnNumber = "9223372036854775807"
@@ -210,11 +194,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MovieLookUp/MovieViewController.swift"
-            timestampString = "434364081.862311"
+            timestampString = "442185387.429874"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "442"
-            endingLineNumber = "442"
+            startingLineNumber = "456"
+            endingLineNumber = "456"
             landmarkName = "processVideoData(_:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -226,11 +210,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MovieLookUp/MovieViewController.swift"
-            timestampString = "434364081.862311"
+            timestampString = "442185387.429874"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "440"
-            endingLineNumber = "440"
+            startingLineNumber = "454"
+            endingLineNumber = "454"
             landmarkName = "processVideoData(_:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -274,11 +258,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MovieLookUp/MovieViewController.swift"
-            timestampString = "434364081.862311"
+            timestampString = "442174468.0186"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "229"
-            endingLineNumber = "229"
+            startingLineNumber = "230"
+            endingLineNumber = "230"
             landmarkName = "updateTrailerView()"
             landmarkType = "5">
             <Locations>
@@ -352,11 +336,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MovieLookUp/MovieViewController.swift"
-            timestampString = "434364081.862311"
+            timestampString = "442174468.0186"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "130"
-            endingLineNumber = "130"
+            startingLineNumber = "131"
+            endingLineNumber = "131"
             landmarkName = "setSelectionButton()"
             landmarkType = "5">
          </BreakpointContent>

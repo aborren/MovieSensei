@@ -8,7 +8,7 @@
 
 import UIKit
 
-class DiscoverGenreViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, APIControllerProtocol  {
+class DiscoverGenreViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, APIControllerProtocol  {
 
     @IBOutlet var genreCollectionView: UICollectionView!
     var api: APIController?
@@ -72,6 +72,11 @@ class DiscoverGenreViewController: UIViewController, UICollectionViewDataSource,
         for selectedGenre in genreCollectionView.indexPathsForSelectedItems() {
             selectedGenreIDs.append((genres[selectedGenre.row] as NSDictionary)["id"] as Int)
         }
+    }
+    
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+        
+        return CGSize(width: (collectionView.frame.width/2 - 15), height: 50)
     }
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {

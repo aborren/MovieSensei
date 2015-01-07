@@ -8,7 +8,7 @@
 
 import UIKit
 
-class DiscoverListViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, APIControllerProtocol, UIActionSheetDelegate {
+class DiscoverListViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, APIControllerProtocol, UIActionSheetDelegate {
 
     var api: APIController?
     var movies: [Movie] = []
@@ -82,7 +82,12 @@ class DiscoverListViewController: UIViewController, UICollectionViewDataSource, 
         }
         return cell
     }
-    
+
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+        let w = collectionView.frame.width / 3 - 14
+        let h = w * 1.5
+        return CGSize(width: w, height: h)
+    }
     
     @IBAction func sortByAction(sender: AnyObject) {
         let actionSheet: UIActionSheet = UIActionSheet(title: "Sort By", delegate: self, cancelButtonTitle: "Cancel", destructiveButtonTitle: nil, otherButtonTitles: "Vote Average, descending", "Vote Average, ascending", "Release Date, descending", "Release Date, ascending", "Popularity, descending", "Popularity, ascending")

@@ -7,7 +7,7 @@
 //
 import UIKit
 
-class TopListViewController:UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, APIControllerProtocol {
+class TopListViewController:UIViewController, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, APIControllerProtocol {
     //Variables
     var movies : [Movie] = []
     var movie: Movie?
@@ -107,7 +107,17 @@ class TopListViewController:UIViewController, UICollectionViewDataSource, UIColl
         let poster: UIImageView = cell.viewWithTag(600) as UIImageView
         if let url = movie.bgURL {
             //label.text = ""
-            poster.sd_setImageWithURL(NSURL(string: url), placeholderImage: UIImage(named: "default.jpeg"))
+
+            let block: SDWebImageCompletionBlock! = {(image: UIImage!, error: NSError!, cacheType: SDImageCacheType!, imageURL: NSURL!) -> Void in
+                if(cacheType == SDImageCacheType.None){
+                    println("not cached!")
+                    println(image)
+                }
+                
+            }
+            poster.sd_setImageWithURL(NSURL(string: url), placeholderImage: UIImage(named: "default.jpeg"), completed: block)
+            //UIView.transitionWithView(poster, duration: 5, options: UIViewAnimationOptions.TransitionCrossDissolve, animations: {poster.image = UIImage(named: "default.jpeg")}, completion: nil)
+            //poster.sd_setImageWithURL(NSURL(string: url), placeholderImage: UIImage(named: "default.jpeg"))
         }else {
             //label.text = movie.title!
             //label.transform = CGAffineTransformMakeRotation( 3.14 / 3.0 )
@@ -118,6 +128,12 @@ class TopListViewController:UIViewController, UICollectionViewDataSource, UIColl
             loadNextPage()
         }
         return cell
+    }
+    
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+        let w = collectionView.frame.width / 3 - 14
+        let h = w * 1.5
+        return CGSize(width: w, height: h)
     }
     
     //API

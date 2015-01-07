@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class MovieSelectionViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
+class MovieSelectionViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
 
     //Variables
     var movies : [Movie] = []
@@ -88,6 +88,12 @@ class MovieSelectionViewController: UIViewController, UICollectionViewDataSource
             poster.image = UIImage(named: "default.jpeg")
         }
         return cell
+    }
+    
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+        let w = collectionView.frame.width / 3 - 14
+        let h = w * 1.5
+        return CGSize(width: w, height: h)
     }
     
     /*

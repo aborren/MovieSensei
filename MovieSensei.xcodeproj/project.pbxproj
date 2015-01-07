@@ -98,7 +98,6 @@
 		B299FB6E1976E68200CB7382 /* MovieSelection.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B299FB6C1976E68200CB7382 /* MovieSelection.xcdatamodeld */; };
 		B299FB721976ED2F00CB7382 /* MovieSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = B299FB711976ED2F00CB7382 /* MovieSelection.swift */; };
 		B299FBD519772A2800CB7382 /* MovieSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B299FBD419772A2800CB7382 /* MovieSelectionViewController.swift */; };
-		B29A1B491987020B00979202 /* yayoSensei2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B29A1B481987020B00979202 /* yayoSensei2.jpg */; };
 		B29B0BE919867B0300E89E91 /* NavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B29B0BE819867B0300E89E91 /* NavigationViewController.swift */; };
 		B29B0BEC19867F1B00E89E91 /* home-25.png in Resources */ = {isa = PBXBuildFile; fileRef = B29B0BEA19867F1B00E89E91 /* home-25.png */; };
 		B29B0BED19867F1B00E89E91 /* home-25@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B29B0BEB19867F1B00E89E91 /* home-25@2x.png */; };
@@ -238,7 +237,6 @@
 		B299FB6D1976E68200CB7382 /* MovieSelection.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MovieSelection.xcdatamodel; sourceTree = "<group>"; };
 		B299FB711976ED2F00CB7382 /* MovieSelection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieSelection.swift; sourceTree = "<group>"; };
 		B299FBD419772A2800CB7382 /* MovieSelectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieSelectionViewController.swift; sourceTree = "<group>"; };
-		B29A1B481987020B00979202 /* yayoSensei2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = yayoSensei2.jpg; sourceTree = "<group>"; };
 		B29B0BE819867B0300E89E91 /* NavigationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationViewController.swift; sourceTree = "<group>"; };
 		B29B0BEA19867F1B00E89E91 /* home-25.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "home-25.png"; sourceTree = "<group>"; };
 		B29B0BEB19867F1B00E89E91 /* home-25@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "home-25@2x.png"; sourceTree = "<group>"; };
@@ -403,7 +401,6 @@
 				B22CE6EC199E526700CB6F98 /* logoblue.jpg */,
 				B22CE6ED199E526700CB6F98 /* logogreen.jpg */,
 				B214F9061990038100231EEE /* profilepic.png */,
-				B29A1B481987020B00979202 /* yayoSensei2.jpg */,
 				B29674001985AD1300C92F17 /* minus-25.png */,
 				B29674011985AD1300C92F17 /* minus-25@2x.png */,
 				B29B0BEA19867F1B00E89E91 /* home-25.png */,
@@ -621,7 +618,6 @@
 				B299531219A29326009C5E39 /* slider-metal-handle@2x.png in Resources */,
 				B299531319A29326009C5E39 /* slider-metal-track.png in Resources */,
 				B22CE6EF199E526700CB6F98 /* logoblue.jpg in Resources */,
-				B29A1B491987020B00979202 /* yayoSensei2.jpg in Resources */,
 				B29363BA19497CF80062C728 /* Main.storyboard in Resources */,
 				B2972936198304F7007B39E7 /* stack-32.png in Resources */,
 				B299533519A29342009C5E39 /* slider-default-handle@2x.png in Resources */,
@@ -834,11 +830,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = MovieLookUp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = MovieSensei;
+				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "MovieLookUp/MovieLookUp-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -850,11 +848,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = MovieLookUp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = MovieSensei;
+				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "MovieLookUp/MovieLookUp-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
