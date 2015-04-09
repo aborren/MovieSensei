@@ -33,13 +33,13 @@ class MovieSelectionViewController: UIViewController, UICollectionViewDataSource
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if(segue.identifier == "SelectionToMovie"){
-            var movieViewController: MovieViewController = segue.destinationViewController as MovieViewController
-            let movieIndex = movieCollectionView!.indexPathForCell(sender as UICollectionViewCell)!.row
+            var movieViewController: MovieViewController = segue.destinationViewController as! MovieViewController
+            let movieIndex = movieCollectionView!.indexPathForCell(sender as! UICollectionViewCell)!.row
             var selectedMovie = self.movies[movieIndex]
             movieViewController.movie = selectedMovie
         }else if(segue.identifier == "SenseiScramble"){
             if(movies.count > 0){
-                var randomizedViewController: RandomizedViewController = segue.destinationViewController as RandomizedViewController
+                var randomizedViewController: RandomizedViewController = segue.destinationViewController as! RandomizedViewController
                 let rndNum = Int(arc4random_uniform(UInt32(movies.count)))
                 let rndMovie: Movie = movies[rndNum]
                 randomizedViewController.movie = rndMovie
@@ -50,7 +50,7 @@ class MovieSelectionViewController: UIViewController, UICollectionViewDataSource
     
     func setUpMovies(){
         movies = []
-        let appDel : AppDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+        let appDel : AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         let context : NSManagedObjectContext = appDel.managedObjectContext!
         
         let request = NSFetchRequest(entityName: "MovieSelection")
@@ -60,10 +60,10 @@ class MovieSelectionViewController: UIViewController, UICollectionViewDataSource
         if( results.count > 0){
             for res in results{
                 let movie : Movie = Movie()
-                movie.imgURL = (res as MovieSelection).posterurl
+                movie.imgURL = (res as! MovieSelection).posterurl
                 movie.bgURL = movie.imgURL
-                movie.title = (res as MovieSelection).name
-                movie.id = (res as MovieSelection).id.toInt()
+                movie.title = (res as! MovieSelection).name
+                movie.id = (res as! MovieSelection).id.toInt()
                 movies.append(movie)
             }
         }
@@ -79,9 +79,9 @@ class MovieSelectionViewController: UIViewController, UICollectionViewDataSource
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell
     {
-        var cell = collectionView.dequeueReusableCellWithReuseIdentifier("MovieSelectionCell", forIndexPath: indexPath) as UICollectionViewCell
+        var cell = collectionView.dequeueReusableCellWithReuseIdentifier("MovieSelectionCell", forIndexPath: indexPath) as! UICollectionViewCell
         let movie: Movie = movies[indexPath.row]
-        let poster: UIImageView = cell.viewWithTag(300) as UIImageView
+        let poster: UIImageView = cell.viewWithTag(300) as! UIImageView
         if let url = movie.imgURL {
             poster.sd_setImageWithURL(NSURL(string: url), placeholderImage: UIImage(named: "default.jpeg"), completed: { (image, error, cacheType, url) -> Void in
                 if(cacheType == SDImageCacheType.None){

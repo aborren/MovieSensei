@@ -63,10 +63,10 @@ class DiscoverListViewController: UIViewController, UICollectionViewDataSource, 
     }
 
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        var cell = collectionView.dequeueReusableCellWithReuseIdentifier("DiscoverMovieCell", forIndexPath: indexPath) as UICollectionViewCell
+        var cell = collectionView.dequeueReusableCellWithReuseIdentifier("DiscoverMovieCell", forIndexPath: indexPath) as! UICollectionViewCell
         let movie: Movie = movies[indexPath.row] as Movie
         //let label : UILabel = cell.viewWithTag(610) as UILabel
-        let poster: UIImageView = cell.viewWithTag(600) as UIImageView
+        let poster: UIImageView = cell.viewWithTag(600) as! UIImageView
         if let url = movie.bgURL {
             //label.text = ""
             poster.sd_setImageWithURL(NSURL(string: url), placeholderImage: UIImage(named: "default.jpeg"), completed: { (image, error, cacheType, url) -> Void in
@@ -138,7 +138,7 @@ class DiscoverListViewController: UIViewController, UICollectionViewDataSource, 
         if results.count>0 {
             //delete old movies shown
             //movies = []
-            let allResults: [NSDictionary] = results["results"] as [NSDictionary]
+            let allResults: [NSDictionary] = results["results"] as! [NSDictionary]
             // Load in result into movie datastructure
             for result: NSDictionary in allResults {
                 let name: String? = result["title"] as? String
@@ -168,8 +168,8 @@ class DiscoverListViewController: UIViewController, UICollectionViewDataSource, 
     }
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        var movieViewController: MovieViewController = segue.destinationViewController as MovieViewController
-        let sendingCell: UICollectionViewCell = sender as UICollectionViewCell
+        var movieViewController: MovieViewController = segue.destinationViewController as! MovieViewController
+        let sendingCell: UICollectionViewCell = sender as! UICollectionViewCell
         let movieIndex = moviesCollectionView!.indexPathForCell(sendingCell)!.row
         var selectedMovie = self.movies[movieIndex]
         movieViewController.movie = selectedMovie

@@ -80,7 +80,7 @@ class DiscoverYearViewController: UIViewController, UIPickerViewDataSource, UIPi
     
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        var resultView = segue.destinationViewController as DiscoverListViewController
+        var resultView = segue.destinationViewController as! DiscoverListViewController
         resultView.selectedGenreIDs = self.selectedGenreIDs
         resultView.minYear = Int(self.yearSlider.lowerValue)
         resultView.maxYear = Int(self.yearSlider.upperValue)

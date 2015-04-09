@@ -52,9 +52,9 @@ class CastViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     func showNameAndPortrait(){
         if let cast = self.cast {
-            self.title = cast.name
+            self.title = cast.name?.description
             if let url = cast.imageURL {
-                self.portrait!.sd_setImageWithURL(NSURL(string: url), placeholderImage: UIImage(named: "default.jpeg"))
+                self.portrait!.sd_setImageWithURL(NSURL(string: url as String), placeholderImage: UIImage(named: "default.jpeg"))
             }else {
                 self.portrait!.image = UIImage(named: "profilepic.png")
             }
@@ -102,13 +102,13 @@ class CastViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let kCellIdentifier: String = "ApperanceCell"
-        var cell: UITableViewCell = tableView.dequeueReusableCellWithIdentifier(kCellIdentifier) as UITableViewCell
+        var cell: UITableViewCell = tableView.dequeueReusableCellWithIdentifier(kCellIdentifier) as! UITableViewCell
 
         let movie = self.movies[indexPath.row]
-        let movieImage: UIImageView = cell.viewWithTag(700) as UIImageView
-        let movieLabel: UILabel = cell.viewWithTag(710) as UILabel
-        let yearLabel: UILabel = cell.viewWithTag(720) as UILabel
-        let roleLabel: UILabel = cell.viewWithTag(730) as UILabel
+        let movieImage: UIImageView = cell.viewWithTag(700) as! UIImageView
+        let movieLabel: UILabel = cell.viewWithTag(710) as! UILabel
+        let yearLabel: UILabel = cell.viewWithTag(720) as! UILabel
+        let roleLabel: UILabel = cell.viewWithTag(730) as! UILabel
         
         movieLabel.text = movie.movie.title
         
@@ -116,7 +116,7 @@ class CastViewController: UIViewController, UITableViewDataSource, UITableViewDe
         if let date = movie.movie.year {
             var trimmedYear : NSString = date
             trimmedYear = trimmedYear.substringToIndex(4)
-            yearLabel.text = trimmedYear
+            yearLabel.text = trimmedYear as String
         }
         
         movieImage.image = UIImage(named: "default.jpeg")
@@ -130,13 +130,13 @@ class CastViewController: UIViewController, UITableViewDataSource, UITableViewDe
     // send new data to next view
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if (segue.identifier == "MoreMovies"){
-            var moreMoviesViewController: CastMoreMoviesViewController = segue.destinationViewController as CastMoreMoviesViewController
+            var moreMoviesViewController: CastMoreMoviesViewController = segue.destinationViewController as! CastMoreMoviesViewController
             moreMoviesViewController.movies = self.movies
             if let name = self.cast?.name{
-                moreMoviesViewController.name = name
+                moreMoviesViewController.name = name as String
             }
         }else{
-            var movieViewController: MovieViewController = segue.destinationViewController as MovieViewController
+            var movieViewController: MovieViewController = segue.destinationViewController as! MovieViewController
             let movieIndex = appearancesTable!.indexPathForSelectedRow()!.row
             var selectedMovie = self.movies[movieIndex]
             movieViewController.movie = selectedMovie.movie
@@ -147,7 +147,7 @@ class CastViewController: UIViewController, UITableViewDataSource, UITableViewDe
         if(apiType == APItype.PersonAppearances && results.count>0 ){
             //delete old movies shown
             movies = []
-            let allResults: [NSDictionary] = results["cast"] as [NSDictionary]
+            let allResults: [NSDictionary] = results["cast"] as! [NSDictionary]
             // Load in result into movie datastructure
             for result: NSDictionary in allResults {
                 
@@ -168,7 +168,7 @@ class CastViewController: UIViewController, UITableViewDataSource, UITableViewDe
                 newMovie.bgURL = bgURL
                 newMovie.year = year
                 if(newMovie.title != nil && newMovie.title != ""){
-                    movies.append(movie: newMovie, role: result["character"] as String)
+                    movies.append(movie: newMovie, role: result["character"] as! String)
                 }
                 
             }

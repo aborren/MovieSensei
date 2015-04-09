@@ -55,7 +55,7 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
     }
     
     // Searchbar delegate functions
-    func searchBarSearchButtonClicked(searchBar: UISearchBar!){
+    func searchBarSearchButtonClicked(searchBar: UISearchBar){
         netActivityUp()
         doSearchWithString(searchBar.text)
         self.view.endEditing(true)
@@ -63,7 +63,7 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
 
     }
     
-    func searchBar(searchBar: UISearchBar!, textDidChange searchText: String!){
+    func searchBar(searchBar: UISearchBar, textDidChange searchText: String){
         doSearchWithString(searchText)
     }
     
@@ -87,12 +87,12 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
     // send new data to next view
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if(searchTypeSegmentedControl.selectedSegmentIndex == 0){
-            var movieViewController: MovieViewController = segue.destinationViewController as MovieViewController
+            var movieViewController: MovieViewController = segue.destinationViewController as! MovieViewController
             let movieIndex = searchResultTableView!.indexPathForSelectedRow()!.row
             var selectedMovie = self.movies[movieIndex]
             movieViewController.movie = selectedMovie
         }else{
-            var castViewController: CastViewController = segue.destinationViewController as CastViewController
+            var castViewController: CastViewController = segue.destinationViewController as! CastViewController
             let castIndex = searchResultTableView!.indexPathForSelectedRow()!.row
             var selectedCast = self.actors[castIndex]
             castViewController.cast = selectedCast
@@ -118,11 +118,11 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let kCellIdentifier: String = "SearchResultCell"
-        var cell: UITableViewCell = tableView.dequeueReusableCellWithIdentifier(kCellIdentifier) as UITableViewCell
+        var cell: UITableViewCell = tableView.dequeueReusableCellWithIdentifier(kCellIdentifier) as! UITableViewCell
 
-        let image: UIImageView = cell.viewWithTag(100) as UIImageView
-        let nameLabel: UILabel = cell.viewWithTag(130) as UILabel
-        let yearLabel: UILabel = cell.viewWithTag(120) as UILabel
+        let image: UIImageView = cell.viewWithTag(100) as! UIImageView
+        let nameLabel: UILabel = cell.viewWithTag(130) as! UILabel
+        let yearLabel: UILabel = cell.viewWithTag(120) as! UILabel
         
         if(searchTypeSegmentedControl.selectedSegmentIndex == 0){
             let movie = self.movies[indexPath.row]
@@ -131,7 +131,7 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
                 if(!date.isEmpty){
                     var trimmedYear : NSString = date
                     trimmedYear = trimmedYear.substringToIndex(4)
-                    movie.year = trimmedYear
+                    movie.year = trimmedYear as String
                 }
             }
             nameLabel.text = movie.title
@@ -142,11 +142,11 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
             }
         }else{
             let actor = self.actors[indexPath.row]
-            nameLabel.text = actor.name
+            nameLabel.text = actor.name?.description
             yearLabel.text = ""
             image.image = UIImage(named: "profilepic.png")
             if(actor.imageURL != nil){
-                image.sd_setImageWithURL(NSURL(string: actor.imageURL!), placeholderImage: UIImage(named: "default.jpeg"))
+                image.sd_setImageWithURL(NSURL(string: actor.imageURL! as String), placeholderImage: UIImage(named: "default.jpeg"))
             }
         }
 
@@ -157,7 +157,7 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
         if (apiType == APItype.SearchMovie) {
             //delete old movies shown
             movies = []
-            let allResults: [NSDictionary] = results["results"] as [NSDictionary]
+            let allResults: [NSDictionary] = results["results"] as! [NSDictionary]
             
             // Load in result into movie datastructure
             for result: NSDictionary in allResults {
@@ -183,7 +183,7 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
         }else if (apiType == APItype.SearchPerson) {
             //delete old actors shown
             actors = []
-            let allResults: [NSDictionary] = results["results"] as [NSDictionary]
+            let allResults: [NSDictionary] = results["results"] as! [NSDictionary]
             
             // Load in result into cast datastructure
             for result: NSDictionary in allResults {

@@ -34,14 +34,14 @@ class DiscoverGenreViewController: UIViewController, UICollectionViewDataSource,
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        var cell = collectionView.dequeueReusableCellWithReuseIdentifier("GenreCell", forIndexPath: indexPath) as UICollectionViewCell
-        (cell.viewWithTag(11) as UILabel).text = (genres[indexPath.row] as NSDictionary)["name"] as? String
+        var cell = collectionView.dequeueReusableCellWithReuseIdentifier("GenreCell", forIndexPath: indexPath) as! UICollectionViewCell
+        (cell.viewWithTag(11) as! UILabel).text = (genres[indexPath.row] as! NSDictionary)["name"] as? String
         
         
         updateSelectedRows()
         cell.backgroundColor = UIColor.whiteColor()
         for id in selectedGenreIDs{
-            if((genres[indexPath.row] as NSDictionary)["id"] as Int == id){
+            if((genres[indexPath.row] as! NSDictionary)["id"] as! Int == id){
                 cell.backgroundColor = UIColor.lightGrayColor()
             }
         }
@@ -58,9 +58,9 @@ class DiscoverGenreViewController: UIViewController, UICollectionViewDataSource,
     }
     
     func didRecieveAPIResults(results: NSDictionary, apiType: APItype) {
-        genres = results["genres"] as NSMutableArray
+        genres = results["genres"] as! NSMutableArray
         for genre in genres {
-            if(((genre as NSDictionary)["name"] as String!) == "Erotic"){
+            if(((genre as! NSDictionary)["name"] as! String!) == "Erotic"){
                 genres.removeObject(genre)
             }
         }
@@ -70,7 +70,7 @@ class DiscoverGenreViewController: UIViewController, UICollectionViewDataSource,
     func updateSelectedRows(){
         selectedGenreIDs = []
         for selectedGenre in genreCollectionView.indexPathsForSelectedItems() {
-            selectedGenreIDs.append((genres[selectedGenre.row] as NSDictionary)["id"] as Int)
+            selectedGenreIDs.append((genres[selectedGenre.row] as! NSDictionary)["id"] as! Int)
         }
     }
     
@@ -81,7 +81,7 @@ class DiscoverGenreViewController: UIViewController, UICollectionViewDataSource,
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         updateSelectedRows()
-        (segue.destinationViewController as DiscoverYearViewController).selectedGenreIDs = self.selectedGenreIDs
+        (segue.destinationViewController as! DiscoverYearViewController).selectedGenreIDs = self.selectedGenreIDs
         println(selectedGenreIDs)
     }
 

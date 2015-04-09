@@ -118,7 +118,7 @@ class MovieViewController: UIViewController,UICollectionViewDataSource, UICollec
  */
     //For core data button
     func setSelectionButton() {
-        let appDel : AppDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+        let appDel : AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         let context : NSManagedObjectContext = appDel.managedObjectContext!
         
         let request = NSFetchRequest(entityName: "MovieSelection")
@@ -151,7 +151,7 @@ class MovieViewController: UIViewController,UICollectionViewDataSource, UICollec
     }
     
     func addMovie(){
-        let appDel : AppDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+        let appDel : AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         let context : NSManagedObjectContext = appDel.managedObjectContext!
         let entity = NSEntityDescription.entityForName("MovieSelection", inManagedObjectContext: context)
         var movieSelection = MovieSelection(entity: entity!, insertIntoManagedObjectContext: context)
@@ -181,14 +181,14 @@ class MovieViewController: UIViewController,UICollectionViewDataSource, UICollec
     }
 
     func removeMovie(){
-        let appDel : AppDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+        let appDel : AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         let context : NSManagedObjectContext = appDel.managedObjectContext!
         let request = NSFetchRequest(entityName: "MovieSelection")
         request.returnsObjectsAsFaults = false
         request.predicate = NSPredicate(format: "id = %@", movie!.id!.description)             //risky?
         var results : NSArray = context.executeFetchRequest(request, error: nil)!
         if( results.count > 0){
-            context.deleteObject(results[0] as NSManagedObject)
+            context.deleteObject(results[0] as! NSManagedObject)
         }
         setPlusButton()
         context.save(nil)
@@ -229,7 +229,7 @@ class MovieViewController: UIViewController,UICollectionViewDataSource, UICollec
             var tracker: String
             tracker = "\(currentTrailer+1)/\(trailerKeys.count)"
             trailerLabel!.text = tracker
-            trailerView!.cueVideoById(trailerKeys[currentTrailer], startSeconds: 0.0, suggestedQuality: kYTPlaybackQualityLarge)
+            trailerView!.cueVideoById(trailerKeys[currentTrailer], startSeconds: 0.0, suggestedQuality: YTPlaybackQuality.Auto)
         } else {
             noTrailerLabel!.hidden = false
         }
@@ -265,12 +265,12 @@ class MovieViewController: UIViewController,UICollectionViewDataSource, UICollec
     // send new data to next view
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if(segue.identifier == "toCast"){
-            var castViewController: CastViewController = segue.destinationViewController as CastViewController
-            let castIndex = crewCollectionView!.indexPathForCell(sender as UICollectionViewCell)!.row
+            var castViewController: CastViewController = segue.destinationViewController as! CastViewController
+            let castIndex = crewCollectionView!.indexPathForCell(sender as! UICollectionViewCell)!.row
             var selectedCast = self.castMembers[castIndex]
             castViewController.cast = selectedCast
         }else{
-            var movieViewController: MovieViewController = segue.destinationViewController as MovieViewController
+            var movieViewController: MovieViewController = segue.destinationViewController as! MovieViewController
             let movieIndex = similarMoviesTableView!.indexPathForSelectedRow()!.row
             var selectedMovie = self.movies[movieIndex]
             movieViewController.movie = selectedMovie
@@ -318,16 +318,16 @@ class MovieViewController: UIViewController,UICollectionViewDataSource, UICollec
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell
     {
-        var cell = collectionView.dequeueReusableCellWithReuseIdentifier("CrewCell", forIndexPath: indexPath) as UICollectionViewCell
+        var cell = collectionView.dequeueReusableCellWithReuseIdentifier("CrewCell", forIndexPath: indexPath) as! UICollectionViewCell
         let cast: Cast = castMembers[indexPath.row]
-        let portrait: UIImageView = cell.viewWithTag(200) as UIImageView
-        var name: UILabel = cell.viewWithTag(210) as UILabel
-        var character: UILabel = cell.viewWithTag(220) as UILabel
-        name.text = cast.name
-        character.text = cast.character
+        let portrait: UIImageView = cell.viewWithTag(200) as! UIImageView
+        var name: UILabel = cell.viewWithTag(210) as! UILabel
+        var character: UILabel = cell.viewWithTag(220) as! UILabel
+        name.text = cast.name?.description
+        character.text = cast.character?.description
         if let url = cast.imageURL {
             
-            portrait.sd_setImageWithURL(NSURL(string: url), placeholderImage: UIImage(named: "default.jpeg"), completed: { (image, error, cacheType, url) -> Void in
+            portrait.sd_setImageWithURL(NSURL(string: url as String), placeholderImage: UIImage(named: "default.jpeg"), completed: { (image, error, cacheType, url) -> Void in
                 if(cacheType == SDImageCacheType.None){
                     let anim: CATransition = CATransition()
                     anim.duration = 1.2
@@ -364,19 +364,19 @@ class MovieViewController: UIViewController,UICollectionViewDataSource, UICollec
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let kCellIdentifier: String = "SimilarMovieCell"
-        var cell: UITableViewCell = tableView.dequeueReusableCellWithIdentifier(kCellIdentifier) as UITableViewCell
+        var cell: UITableViewCell = tableView.dequeueReusableCellWithIdentifier(kCellIdentifier) as! UITableViewCell
 
         let movie = self.movies[indexPath.row]
-        let movieImage: UIImageView = cell.viewWithTag(800) as UIImageView
-        let movieLabel: UILabel = cell.viewWithTag(830) as UILabel
-        let yearLabel: UILabel = cell.viewWithTag(820) as UILabel
+        let movieImage: UIImageView = cell.viewWithTag(800) as! UIImageView
+        let movieLabel: UILabel = cell.viewWithTag(830) as! UILabel
+        let yearLabel: UILabel = cell.viewWithTag(820) as! UILabel
         
         //trim year (String in Swift is annoying atm
         if let date = movie.year {
             if(!date.isEmpty){
                 var trimmedYear : NSString = date
                 trimmedYear = trimmedYear.substringToIndex(4)
-                movie.year = trimmedYear
+                movie.year = trimmedYear as String
             }
         }
         
@@ -392,11 +392,11 @@ class MovieViewController: UIViewController,UICollectionViewDataSource, UICollec
     func didRecieveAPIResults(results: NSDictionary, apiType: APItype) {
         if(apiType == APItype.MovieAppendedInfo){
             processMovieData(results)
-            let credits = results["credits"] as NSDictionary
+            let credits = results["credits"] as! NSDictionary
             processCastData(credits)
-            let videos = results["videos"] as NSDictionary
+            let videos = results["videos"] as! NSDictionary
             		processVideoData(videos)
-            let similar = results["similar"] as NSDictionary
+            let similar = results["similar"] as! NSDictionary
             processSimilarMoviesData(similar)
             //experimentellt!
            /* let images = results["images"] as NSDictionary
@@ -414,7 +414,7 @@ class MovieViewController: UIViewController,UICollectionViewDataSource, UICollec
         if let genre = genres {
             self.movie!.genre = []
             for g in genre {
-                self.movie!.genre.append(g["name"] as String)
+                self.movie!.genre.append(g["name"] as! String)
             }
         }
         
@@ -463,7 +463,7 @@ class MovieViewController: UIViewController,UICollectionViewDataSource, UICollec
     
     func processVideoData(results: NSDictionary){
         self.trailerKeys = []
-        let videos: NSArray = results["results"] as NSArray
+        let videos: NSArray = results["results"] as! NSArray
         for video in videos {
             if let videoKey = video["key"] as? String {
                 trailerKeys.append(videoKey)
@@ -476,7 +476,7 @@ class MovieViewController: UIViewController,UICollectionViewDataSource, UICollec
         if results.count>0 {
             //delete old movies shown
             movies = []
-            let allResults: [NSDictionary] = results["results"] as [NSDictionary]
+            let allResults: [NSDictionary] = results["results"] as! [NSDictionary]
             
             // Load in result into movie datastructure
             for result: NSDictionary in allResults {
@@ -551,7 +551,7 @@ class MovieViewController: UIViewController,UICollectionViewDataSource, UICollec
     
     func processImageData(results: NSDictionary){
         var imageURLs: [String] = []
-        let backDrops: NSArray = results["backdrops"] as NSArray
+        let backDrops: NSArray = results["backdrops"] as! NSArray
         for backDrop in backDrops {
             if let backDropURL = backDrop["file_path"] as? String {
                 imageURLs.append("http://image.tmdb.org/t/p/w300\(backDropURL)")

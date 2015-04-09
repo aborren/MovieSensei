@@ -33,8 +33,8 @@ class TopListViewController:UIViewController, UICollectionViewDataSource, UIColl
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
-        var movieViewController: MovieViewController = segue.destinationViewController as MovieViewController
-        let movieIndex = MoviesCollectionView!.indexPathForCell(sender as UICollectionViewCell)!.row
+        var movieViewController: MovieViewController = segue.destinationViewController as! MovieViewController
+        let movieIndex = MoviesCollectionView!.indexPathForCell(sender as! UICollectionViewCell)!.row
         var selectedMovie = self.movies[movieIndex]
         movieViewController.movie = selectedMovie
         
@@ -101,10 +101,10 @@ class TopListViewController:UIViewController, UICollectionViewDataSource, UIColl
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        var cell = collectionView.dequeueReusableCellWithReuseIdentifier("TopListCell", forIndexPath: indexPath) as UICollectionViewCell
+        var cell = collectionView.dequeueReusableCellWithReuseIdentifier("TopListCell", forIndexPath: indexPath) as! UICollectionViewCell
         let movie: Movie = movies[indexPath.row]
         //let label : UILabel = cell.viewWithTag(610) as UILabel
-        let poster: UIImageView = cell.viewWithTag(600) as UIImageView
+        let poster: UIImageView = cell.viewWithTag(600) as! UIImageView
         if let url = movie.bgURL {
             //label.text = ""
 
@@ -145,7 +145,7 @@ class TopListViewController:UIViewController, UICollectionViewDataSource, UIColl
         if results.count>0 {
             //delete old movies shown
             //movies = []
-            let allResults: [NSDictionary] = results["results"] as [NSDictionary]
+            let allResults: [NSDictionary] = results["results"] as! [NSDictionary]
             // Load in result into movie datastructure
             for result: NSDictionary in allResults {
                 let name: String? = result["title"] as? String

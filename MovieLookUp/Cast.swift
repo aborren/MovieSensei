@@ -15,14 +15,19 @@ class Cast{
     let character: NSString?
     
     init(){
-        
+        self.name = nil
+        self.id = nil
+        self.imageURL = nil
+        self.character = nil
     }
     
     init(name: NSString?, id: NSNumber?, imageURL: NSString?, character: NSString?){
         self.name = name
         self.id = id
         if let url = imageURL {
-            self.imageURL = "http://image.tmdb.org/t/p/w92" + url
+            self.imageURL = "http://image.tmdb.org/t/p/w92" + (url as String)
+        }else{
+            self.imageURL = nil
         }
         self.character = character
     }
@@ -31,7 +36,10 @@ class Cast{
         self.name = name
         self.id = id
         if let url = imageURL {
-            self.imageURL = "http://image.tmdb.org/t/p/w92" + url
+            self.imageURL = "http://image.tmdb.org/t/p/w92" + (url as String)
+        }else{
+            self.imageURL = nil
         }
+        self.character = nil
     }
 }

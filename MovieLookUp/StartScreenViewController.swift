@@ -17,7 +17,7 @@ class StartScreenViewController: UIViewController {
 /*
         url = [[NSBundle mainBundle] URLForResource:@"variableDuration" withExtension:@"gif"];
         self.variableDurationImageView.image = [UIImage animatedImageWithAnimatedGIFURL:url];*/
-        let url = NSBundle.mainBundle().URLForResource("blink", withExtension: "gif")
+        let url = NSBundle.mainBundle().URLForResource("blink_new", withExtension: "gif")
         self.blinkingSensei.image = UIImage.animatedImageWithAnimatedGIFURL(url)
 
     }
